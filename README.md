@@ -1,4 +1,4 @@
-ranin
+Zanin
 =====
 
-Ranin - a tap n' swipe colours game
+Zanin - a tap n' swipe colours game
