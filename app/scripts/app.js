@@ -4,7 +4,9 @@ angular.module('zaninApp', [
   'ngCookies',
   'ngResource',
   'ngSanitize',
-  'ngRoute'
+  'ngRoute',
+  'ngTouch',
+  'hmTouchEvents'
 ])
   .config(function ($routeProvider) {
     $routeProvider

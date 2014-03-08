@@ -1,3 +1,4 @@
+
 $icon-font-path: "/bower_components/sass-bootstrap/fonts/";
 
 @import 'sass-bootstrap/lib/bootstrap';
@@ -88,4 +89,106 @@ body {
     .jumbotron {
         border-bottom: 0;
     }
+}
+
+
+/*CUSTOM*/
+
+.container {
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
+h4 {
+  margin-top: 25px;
+}
+.row {
+  margin-bottom: 20px;
+}
+.row .row {
+  margin-top: 10px;
+  margin-bottom: 0;
+}
+[class*="col-"] {
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+hr {
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+
+
+
+
+.color{
+  width:100px;
+  height:100px;
+  margin:5px 20px 20px 20px;
+
+}
+.font-black{
+    color:black;
+}
+.font-blue{
+  color:blue;
+}
+
+.font-red{
+  color:red;
+}
+
+.font-green{
+  color:green;
+}
+
+.font-pink{
+  color:pink;
+}
+
+.font-yellow{
+  color:yellow;
+}
+
+.font-orange{
+  color:orange;
+}
+.blue{
+  background-color:blue;
+}
+
+.red{
+  background-color:red;
+}
+
+.green{
+  background-color:green;
+}
+
+.pink{
+  background-color:pink;
+}
+
+.yellow{
+  background-color:yellow;
+}
+
+.orange{
+  background-color:orange;
+}
+
+.mov{
+    margin:20px;
+}
+
+/* FA 4.0.0 and newer */
+.fa {
+  text-rendering: auto;
+}
+
+/* FA 3.2.1 and older */
+[class^="icon-"],
+[class*=" icon-"]  {
+  text-rendering: auto;
 }
