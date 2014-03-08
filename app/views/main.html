@@ -1,36 +1,29 @@
-<div class="header">
-  <ul class="nav nav-pills pull-right">
-    <li class="active"><a ng-href="#">Home</a></li>
-    <li><a ng-href="#">About</a></li>
-    <li><a ng-href="#">Contact</a></li>
-  </ul>
-  <h3 class="text-muted">zanin</h3>
-</div>
+<div class="container">
 
-<div class="jumbotron">
-  <h1>'Allo, 'Allo!</h1>
-  <p class="lead">
-    <img src="images/yeoman.png" alt="I'm Yeoman"><br>
-    Always a pleasure scaffolding your apps.
-  </p>
-  <p><a class="btn btn-lg btn-success" ng-href="#">Splendid!</a></p>
-</div>
+   <span>{{points}}</span>
+   <span>{{timeLeft}}</span>
+   <span>{{lvl}}</span>
+  <div class="row">
+    <div class="col-xs-9 col-md-8">
+      <div class="row">
 
-<div class="row marketing">
-  <h4>HTML5 Boilerplate</h4>
-  <p>
-    HTML5 Boilerplate is a professional front-end template for building fast, robust, and adaptable web apps or sites.
-  </p>
+            <div ng-repeat="color in colors" ng-click="selectedColor(color.color)" hammer-tap="selectedColor(color.color)" ng-dblclick="selectedColorDouble(color.color)"  hammer-doubletap="selectedColorDouble(color.color)" ng-swipe-right="selectedColorSwipeRight(color.color)" ng-swipe-left="selectedColorSwipeLeft(color.color)" class="col-xs-3 color {{color.color}}"></div>
 
-  <h4>Angular</h4>
-  <p>
-    AngularJS is a toolset for building the framework most suited to your application development.
-  </p>
+      </div>
+    </div> 
 
-  <h4>Karma</h4>
-  <p>Spectacular Test Runner for JavaScript.</p>
-</div>
+    <div class="col-xs-3 col-md-4">
+        <div ng-repeat="action in actions">
+        <div class="font-{{action.color}} mov">
+          <i ng-if="action.tap" class="fa fa-circle-o fa-3x"></i>
+          <i ng-if="action.doubleTap" class="fa fa-circle-o fa-3x"></i>
+          <i ng-if="action.swipeLeft" class="fa fa-long-arrow-left fa-3x"></i>
+          <i ng-if="action.swipeRight" class="fa fa-long-arrow-right fa-3x"></i>
+        </div>
+        </div>
+    </div>
+  </div>
 
-<div class="footer">
-  <p>♥ from the Yeoman team</p>
+
+
 </div>
