@@ -1,22 +1,37 @@
 'use strict';
 
 angular.module('zaninApp')
-	.controller('MainCtrl', function ($scope, $interval) {
+	.controller('MainCtrl', function ($scope, $interval, $timeout) {
+
+		var Action = function(g, c){
+			this.gesture = g;
+			this.color = c;
+		};
+
+		var speed = 5000,
+			intervalId,
+			lastGesture,
+			lastColor;
+
+
 		$scope.colors = [
-			{color:'blue'},
-			{color:'red'},
-			{color:'green'},
-			{color:'pink'},
-			{color:'orange'},
-			{color:'yellow'}
+			{color:'blue', side:'left'},
+			{color:'red', side:'left'},
+			{color:'green', side:'right'},
+			{color:'orange', side:'right'}
 		];
+
+		$scope.firstClick = null;
 
 		$scope.gestures = [
 			{g:'tap'},
-			{g:'doubletap'},
-			{g:'swipeleft'},
-			{g:'swiperight'}
+			{g:'doubleTap'}
+			//{g:'swipeLeft'},
+			//{g:'swipeRight'}
 		];
+
+		$scope.actions = [];
+
 
 		$scope.points = 0;
 		$scope.timeLeft = 60;
@@ -49,81 +64,103 @@ angular.module('zaninApp')
 			}
 		}, 1000);
 
-		$scope.actions = [
-			{doubleTap:false, tap:true, swipeLeft:false, swipeRight:false, color:'red'},
-			{doubleTap:false, tap:true, swipeLeft:false, swipeRight:false, color:'black'},
-			{doubleTap:false, tap:false, swipeLeft:false, swipeRight:true, color:'black'},
-			{doubleTap:false, tap:false, swipeLeft:true, swipeRight:false,color:'black'}
-		];
+
+
+		$timeout(function() {
+			
+			$scope.colors = [
+				{color:'blue', side:'right'},
+				{color:'red', side:'right'},
+				{color:'green', side:'left'},
+				{color:'orange', side:'left'}
+			];
+
+		}, 50000);
+
+
+
+		$interval(function() {
+			
+			$scope.gestures = [
+				{g:'tap'},
+				{g:'doubleTap'},
+				{g:'swipeLeft'},
+				{g:'swipeRight'}
+			];
+
+		}, 20000);
+
+
+		function resetActionEraser () {
+
+			$interval.cancel(intervalId);
+
+			var id = $interval(function() {
+				$scope.createNewAction();
+			}, speed);
+
+			intervalId = id;
+
+			return id;
+		}
+
+
+		$scope.init = function(){
+			$scope.actions.push($scope.createRandomAction());
+			$scope.actions.push($scope.createRandomAction());
+			$scope.actions.push($scope.createRandomAction());
+			$scope.actions.push($scope.createRandomAction());
+		};
+
+		$scope.createRandomAction = function(){
+			var actualColor = $scope.colors[Math.floor($scope.colors.length*Math.random())].color;
+			var actualGesture = $scope.gestures[Math.floor($scope.gestures.length*Math.random())].g;
+			return new Action(actualGesture, actualColor);
+		};
 
 		$scope.aciertos = function(){
 			$scope.points++;
-			$scope.timeLeft ++;
-			var actualColor = $scope.colors[Math.floor($scope.colors.length*Math.random())].color;
-			console.log(actualColor);
-			var actualGesture = $scope.gestures[Math.floor($scope.gestures.length*Math.random())].g;
+			$scope.timeLeft++;
+			
+			$scope.createNewAction();
+		};
+
+		$scope.createNewAction = function () {
 			$scope.actions.splice(0, 1);
-			console.log(actualGesture);
-			switch(actualGesture)
-			{
-				case 'tap':
-					$scope.actions.push({doubleTap:true, tap:true, swipeLeft:false, swipeRight:false, color:'black'});
-					break;
-				case 'doubletap':
-					$scope.actions.push({doubleTap:false, tap:true, swipeLeft:false, swipeRight:false, color:'black'});
-					break;
-				case 'swipeleft':
-					$scope.actions.push({doubleTap:false, tap:false, swipeLeft:true, swipeRight:false, color:'black'});
-					break;
-				case 'swiperight':
-					$scope.actions.push({doubleTap:false, tap:false, swipeLeft:false, swipeRight:true, color:'black'});
-					break;
-				default:
-					$scope.actions.push({doubleTap:true, tap:true, swipeLeft:false, swipeRight:false, color:'black'});
-
-			}
-			$scope.actions[0].color = actualColor;
+			$scope.actions.push($scope.createRandomAction());
 		};
 
-		$scope.selectedColor = function(c){
-			if($scope.actions[0].doubleTap === false && $scope.actions[0].tap === true){
-				if(c === $scope.actions[0].color){
-					$scope.aciertos();
-				}else{
-					console.log('no');
-				}
+		var checkColor = function(c){
+
+			//if everything is equal we've got a valid move
+			if(c === $scope.actions[0].color){
+				$scope.aciertos();
+
+				//reset the action auto creation counter
+				resetActionEraser();
+
+			}else{
+				console.log('no');
 			}
 		};
 
-		$scope.selectedColorSwipeLeft = function(c){
-			if($scope.actions[0].swipeLeft === true){
-				if(c === $scope.actions[0].color){
-					$scope.aciertos();
-				}else{
-					console.log('no');
-				}
+
+		$scope.checkGesture = function(c, g){
+
+			//this will avoid double tap/single tap same color bug
+			if(lastGesture === 'doubleTap' && g === 'tap' && lastColor === c){
+				lastGesture = g;
+				lastColor = c;
+				return;
 			}
-		};
 
-		$scope.selectedColorSwipeRight = function(c){
-			if($scope.actions[0].swipeRight === true){
-				if(c === $scope.actions[0].color){
-					$scope.aciertos();
-				}else{
-					console.log('no');
-				}
-			}
-		};
+			lastGesture = g;
+			lastColor = c;
 
-		$scope.selectedColorDouble = function(c){
-			if($scope.actions[0].doubleTap === true){
-				if(c === $scope.actions[0].color){
-					$scope.aciertos();
 
-					//$scope.actions[0].color = actualColor;
-				}else{
-					console.log('no');
-				}
+
+			if($scope.actions[0].gesture === g){
+				checkColor(c);
 			}
 		};
 

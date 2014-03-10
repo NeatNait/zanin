@@ -1,29 +1,30 @@
-asfa<div class="container">
 
-   <span>{{points}}</span>
-   <span>{{timeLeft}}</span>
-   <span>{{lvl}}</span>
   <div class="row">
-    <div class="col-xs-9 col-md-8">
-      <div class="row">
+    <div class="col-xs-5 full-height" ng-init="init()">
 
-            <div ng-repeat="color in colors" ng-click="selectedColor(color.color)" hammer-tap="selectedColor(color.color)" ng-dblclick="selectedColorDouble(color.color)"  hammer-doubletap="selectedColorDouble(color.color)" ng-swipe-right="selectedColorSwipeRight(color.color)" ng-swipe-left="selectedColorSwipeLeft(color.color)" class="col-xs-3 color {{color.color}}"></div>
+      <div ng-repeat="color in colors | filter: {side : 'left'}" hm-doubletap="checkGesture(color.color, 'doubleTap')" hm-tap="checkGesture(color.color, 'tap')"   ng-swipe-right="checkGesture(color.color, 'swipeRight')" ng-swipe-left="checkGesture(color.color, 'swipeLeft')" class="col-xs-12 color {{color.color}}"></div>
 
-      </div>
     </div> 
 
-    <div class="col-xs-3 col-md-4">
-        <div ng-repeat="action in actions">
-        <div class="font-{{action.color}} mov">
-          <i ng-if="action.tap" class="fa fa-circle-o fa-3x"></i>
-          <i ng-if="action.doubleTap" class="fa fa-circle-o fa-3x"></i>
-          <i ng-if="action.swipeLeft" class="fa fa-long-arrow-left fa-3x"></i>
-          <i ng-if="action.swipeRight" class="fa fa-long-arrow-right fa-3x"></i>
+    <div class="col-xs-2 full-height actions">
+      <span>{{points}}</span>
+      <span>{{timeLeft}}</span>
+      <span>{{lvl}}</span>
+      <div ng-repeat="action in actions">
+        <div class="font-{{action.color}} mov mov-{{$index}}">
+          <i ng-if="action.gesture == 'tap'" class="fa fa-circle-o"></i>
+          <i ng-if="action.gesture == 'doubleTap'" class="fa fa-circle-o"></i>
+          <i ng-if="action.gesture == 'doubleTap'" class="fa fa-circle-o"></i>
+          <i ng-if="action.gesture == 'swipeLeft'" class="fa fa-long-arrow-left"></i>
+          <i ng-if="action.gesture == 'swipeRight'" class="fa fa-long-arrow-right"></i>
         </div>
-        </div>
+      </div>
     </div>
-  </div>
 
 
+    <div class="col-xs-5 full-height">
 
-</div>
+      <div ng-repeat="color in colors | filter: {side : 'right'}" hm-tap="checkGesture(color.color, 'tap')"  hm-doubletap="checkGesture(color.color, 'doubleTap')" ng-swipe-right="checkGesture(color.color, 'swipeRight')" ng-swipe-left="checkGesture(color.color, 'swipeLeft')" class="col-xs-12 color right {{color.color}}"></div>
+
+    </div> 
+  </div> 

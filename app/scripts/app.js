@@ -6,6 +6,7 @@ angular.module('zaninApp', [
   'ngSanitize',
   'ngRoute',
   'ngTouch',
+  //'ngAnimate',
   'hmTouchEvents'
 ])
   .config(function ($routeProvider) {
