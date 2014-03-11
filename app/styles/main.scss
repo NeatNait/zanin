@@ -5,6 +5,21 @@ $icon-font-path: "/bower_components/sass-bootstrap/fonts/";
 
 @import 'sass-bootstrap/lib/bootstrap';
 
+
+
+
+$black  : #111;
+$blue   : #196DFF;
+$red    : #C11515;
+$green  : #27ae61;
+$pink   : pink;
+$yellow : #FFAB19;
+$orange : #FFAB19;
+
+$body-color : #242424;
+
+
+
 .browsehappy {
     margin: 0.1.5em 0;
     background: #ccc;
@@ -126,53 +141,53 @@ hr {
 
 
 .font-black{
-    color:black;
+  color:$black;
 }
 .font-blue{
-  color:blue;
+  color:$blue;
 }
 
 .font-red{
-  color:red;
+  color:$red;
 }
 
 .font-green{
-  color:green;
+  color:$green;
 }
 
 .font-pink{
-  color:pink;
+  color:$pink;
 }
 
 .font-yellow{
-  color:yellow;
+  color:$yellow;
 }
 
 .font-orange{
-  color:orange;
+  color:$orange;
 }
 .blue{
-  background-color:blue;
+  background-color:$blue;
 }
 
 .red{
-  background-color:red;
+  background-color:$red;
 }
 
 .green{
-  background-color:green;
+  background-color:$green;
 }
 
 .pink{
-  background-color:pink;
+  background-color:$pink;
 }
 
 .yellow{
-  background-color:yellow;
+  background-color:$yellow;
 }
 
 .orange{
-  background-color:orange;
+  background-color:$orange;
 }
 
 .mov{
@@ -196,6 +211,7 @@ html,body, .row, .containerNO, .full-height{
     height:100%;
     margin:0;
     padding:0;
+    background: $body-color;
 }
 .color{
   height:50%;
@@ -393,27 +409,40 @@ div{
 }
 
 .mov{
-  -webkit-transition: all 2s ease;
-     -moz-transition: all 2s ease;
-      -ms-transition: all 2s ease;
-       -o-transition: all 2s ease;
-          transition: all 2s ease;
+//  transition: all 2s ease;
 }
 
 
-.color, .color.ng-enter{
+/*.color, .color.ng-enter{
   animation: bounceIn 1s cubic-bezier(.17, .67, .83, .67);
   transform: scale(0);
   animation-fill-mode: forwards;
-}
-.actions .ng-enter {
+}*/
+.action.ng-enter {
   animation: bounceIn 1s cubic-bezier(.17, .67, .83, .67);
 }
 
+.action.ng-leave{
+  animation: bounceOut .5s cubic-bezier(.17, .67, .83, .67);
+
+}
+/*
+.action.ng-leave ~ .action{
+  animation: trans .3s cubic-bezier(.17, .67, .83, .67);
+  
+}*/
+
+@keyframes trans{
+  to{
+    transform: translateY(-4.8em);
+  }
+}
+
+/*
 .color.ng-leave{
   transform: scale(0);
 }
-/*
+
 .ng-leave {
   animation: bounceOut 1s cubic-bezier(.17, .67, .83, .67);
   
@@ -430,3 +459,44 @@ div{
 .color.right:nth-of-type(2){
   animation-delay: .4s;
 }
+
+
+.color:active{
+
+}
+
+.color{
+  color:transparent;
+  font-size:5em;
+  line-height:1.6em;
+}
+.push, .pushed{
+  animation: test2 1s ease alternate;
+
+}
+
+
+
+@keyframes test{
+  0%{
+    color:transparent;
+  }
+  50%{
+    color:white;
+  }
+  100%{
+    color:transparent;
+  }
+}
+
+
+@keyframes test2{
+  50%{
+    opacity:.8;
+  }
+}
+
+.super-remove-active{
+  //animation: bounceIn .5s cubic-bezier(.17, .67, .83, .67);
+}
+

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('zaninApp')
-	.controller('MainCtrl', function ($scope, $interval, $timeout) {
+	.controller('MainCtrl', function ($scope, $interval, $timeout, $animate) {
 
 		var Action = function(g, c){
 			this.gesture = g;
@@ -18,7 +18,7 @@ angular.module('zaninApp')
 			{color:'blue', side:'left'},
 			{color:'red', side:'left'},
 			{color:'green', side:'right'},
-			{color:'orange', side:'right'}
+			{color:'yellow', side:'right'}
 		];
 
 		$scope.firstClick = null;
@@ -72,10 +72,10 @@ angular.module('zaninApp')
 				{color:'blue', side:'right'},
 				{color:'red', side:'right'},
 				{color:'green', side:'left'},
-				{color:'orange', side:'left'}
+				{color:'yellow', side:'left'}
 			];
 
-		}, 4000);
+		}, 40000);
 
 
 
@@ -139,6 +139,15 @@ angular.module('zaninApp')
 				//reset the action auto creation counter
 				resetActionEraser();
 
+				//$scope.colorOk =
+				$animate.addClass(angular.element('.'+c), 'pushed', function (){
+					$animate.removeClass(angular.element('.'+c), 'pushed');
+
+					console.log(c);
+					console.log('end');
+				});
+
+
 			}else{
 				console.log('no');
 			}
@@ -156,8 +165,6 @@ angular.module('zaninApp')
 
 			lastGesture = g;
 			lastColor = c;
-
-
 
 			if($scope.actions[0].gesture === g){
 				checkColor(c);
