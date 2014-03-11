@@ -75,7 +75,7 @@ angular.module('zaninApp')
 				{color:'orange', side:'left'}
 			];
 
-		}, 50000);
+		}, 4000);
 
 
 

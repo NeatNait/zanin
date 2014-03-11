@@ -204,7 +204,7 @@ html,body, .row, .containerNO, .full-height{
 div{
     text-align:center;
 }
-
+/*
 .mov-0{
     height:2em;
 
@@ -382,11 +382,51 @@ div{
              transform: scale(1); }
 }
 
+*/
+.mov.ng-enter{
+    font-size: 52em;
+}
 
-.color.ng-enter{
-    border:5px solid black;
+.mov.ng-leave{
+    font-size: 5em;
+
+}
+
+.mov{
+  -webkit-transition: all 2s ease;
+     -moz-transition: all 2s ease;
+      -ms-transition: all 2s ease;
+       -o-transition: all 2s ease;
+          transition: all 2s ease;
+}
+
+
+.color, .color.ng-enter{
+  animation: bounceIn 1s cubic-bezier(.17, .67, .83, .67);
+  transform: scale(0);
+  animation-fill-mode: forwards;
+}
+.actions .ng-enter {
+  animation: bounceIn 1s cubic-bezier(.17, .67, .83, .67);
 }
 
 .color.ng-leave{
-    border:5px solid pink;
+  transform: scale(0);
+}
+/*
+.ng-leave {
+  animation: bounceOut 1s cubic-bezier(.17, .67, .83, .67);
+  
+}*/
+
+.color.left:nth-of-type(2){
+  animation-delay: .2s;
+}
+
+.color.right{
+  animation-delay: .3s;
+}
+
+.color.right:nth-of-type(2){
+  animation-delay: .4s;
 }
