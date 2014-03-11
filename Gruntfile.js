@@ -361,7 +361,7 @@ module.exports = function (grunt) {
       },
       pages: {
         options: {
-          remote: 'git@github.com:NeatNait/zanin.git',
+          remote: 'https://github.com/NeatNait/zanin.git',
           branch: 'gh-pages'
         }
       },
