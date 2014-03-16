@@ -36,16 +36,16 @@ angular.module('zaninApp')
 		$scope.points = 0;
 		$scope.timeLeft = 60;
 		$scope.totalTimePlayed = 0;
-		$scope.lvl = 'Level 1';
+		//$scope.lvl = 'Level 1';
 		$scope.level = 1;
 		$scope.combo = 0;
 		$scope.maxlvl = 20;
 		$scope.ratelvl = 2;
-		$scope.ratetime = 2;
+		$scope.ratetime = 1;
 		$scope.points = $scope.ratelvl;
 		$scope.maxenergy = 5;
 		$scope.energy = 0;
-		$scope.timeincrease = 0.5;
+		$scope.timeincrease = 1;
 
 
 		$interval(function() {
@@ -161,8 +161,8 @@ angular.module('zaninApp')
 		};
 
 		$scope.aciertos = function(){
-			$scope.points += 1 * $scope.level;
-			$scope.timeLeft += $scope.level * ($scope.energy+1) * $scope.timeincrease;
+			$scope.points += 1 * $scope.level;			
+			$scope.timeLeft += ($scope.energy+1) * $scope.timeincrease;
 			$scope.combo++;
 			if($scope.energy < $scope.maxenergy) $scope.energy++;
 			
@@ -213,7 +213,7 @@ angular.module('zaninApp')
 
 		$scope.checkGesture = function(c, g){
 
-			console.log(lastGesture + ' - ' + g);
+			console.log(lastGesture + ' - ' + g + ' - ' + $scope.actions[0].gesture);
 
 			//this will avoid double tap/single tap same color bug
 			if(lastGesture === 'doubleTap' && g === 'tap' && lastColor === c){
@@ -228,7 +228,7 @@ angular.module('zaninApp')
 			}
 			else{
 				//Problema doble tap. Al hacer doble tap, como primero hay un tap, lo entiende como error
-				if(lastGesture === 'tap' && g === 'tap'){}
+				if(lastGesture === 'tap' && g === 'tap' && $scope.actions[0].gesture === 'doubleTap'){}
 				else{
 					$scope.fallos();
 				}
