@@ -58,7 +58,7 @@ angular.module('zaninApp')
 			}			
 
 			var $value = Math.floor(getBaseLog($scope.ratelvl,$scope.points));
-			console.log('valor - ' + $value + ' - ' + $scope.points + ' - ' + getBaseLog($scope.ratelvl,$scope.points))  ;
+			//console.log('valor - ' + $value + ' - ' + $scope.points + ' - ' + getBaseLog($scope.ratelvl,$scope.points))  ;
 
 			if($value <= $scope.maxlvl) 
 				$scope.level = $value;
@@ -175,6 +175,8 @@ angular.module('zaninApp')
 			//Change for a function
 			$scope.energy = 0;
 
+			//console.log('Fallo');
+
 			
 			//$scope.createNewAction();
 		};
@@ -197,13 +199,13 @@ angular.module('zaninApp')
 				$animate.addClass(angular.element('.'+c), 'pushed', function (){
 					$animate.removeClass(angular.element('.'+c), 'pushed');
 
-					console.log(c);
-					console.log('end');
+					//console.log(c);
+					//console.log('end');
 				});
 
 
 			}else{
-				console.log('no');
+				//console.log('no');
 				$scope.fallos();
 			}
 		};
@@ -211,23 +213,30 @@ angular.module('zaninApp')
 
 		$scope.checkGesture = function(c, g){
 
+			console.log(lastGesture + ' - ' + g);
+
 			//this will avoid double tap/single tap same color bug
 			if(lastGesture === 'doubleTap' && g === 'tap' && lastColor === c){
 				lastGesture = g;
-				lastColor = c;
+				lastColor = c;				
 				return;
 			}
 
-			lastGesture = g;
-			lastColor = c;
 
 			if($scope.actions[0].gesture === g){
 				checkColor(c);
 			}
 			else{
 				//Problema doble tap. Al hacer doble tap, como primero hay un tap, lo entiende como error
-				$scope.fallos();
+				if(lastGesture === 'tap' && g === 'tap'){}
+				else{
+					$scope.fallos();
+				}
 			}
+
+			lastGesture = g;
+			lastColor = c;
+
 		};
 
   });
