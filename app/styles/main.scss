@@ -401,7 +401,7 @@ div{
 }
 
 */
-.mov.ng-enter{
+/*.mov.ng-enter{
     font-size: 52em;
 }
 
@@ -413,20 +413,20 @@ div{
 .mov{
 //  transition: all 2s ease;
 }
-
+*/
 /*.color, .color.ng-enter{
   animation: bounceIn 1s cubic-bezier(.17, .67, .83, .67);
   transform: scale(0);
   animation-fill-mode: forwards;
 }*/
-.action.ng-enter {
+/*.action.ng-enter {
   animation: bounceIn 1s cubic-bezier(.17, .67, .83, .67);
-}
-
+}*/
+/*
 .action.ng-leave{
   animation: bounceOut .5s cubic-bezier(.17, .67, .83, .67);
 
-}
+}*/
 /*
 .action.ng-leave ~ .action{
   animation: trans .3s cubic-bezier(.17, .67, .83, .67);
@@ -559,6 +559,6 @@ right:0;
   }
 }
 
-.ng-leave{
+/*.ng-leave{
   animation: bounceOut .5s cubic-bezier(.17, .67, .83, .67);
-}
+}*/

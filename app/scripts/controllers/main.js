@@ -42,9 +42,10 @@ angular.module('zaninApp')
 			$scope.level = 1;
 			$scope.combo = 0;
 			$scope.maxlvl = 20;
-			$scope.ratelvl = 2;
+			$scope.baselvl = 2;
+			$scope.ratePoints = 1.2;
 			$scope.ratetime = 1;
-			$scope.points = $scope.ratelvl;
+			$scope.points = $scope.baselvl;
 			$scope.maxenergy = 5;
 			$scope.energy = 0;
 			$scope.timeincrease = 1;
@@ -73,8 +74,8 @@ angular.module('zaninApp')
 				return Math.log(y) / Math.log(x);
 			}
 
-			var $value = Math.floor(getBaseLog($scope.ratelvl,$scope.points));
-			//console.log('valor - ' + $value + ' - ' + $scope.points + ' - ' + getBaseLog($scope.ratelvl,$scope.points))  ;
+			var $value = Math.floor(getBaseLog($scope.baselvl,$scope.points));
+			//console.log('valor - ' + $value + ' - ' + $scope.points + ' - ' + getBaseLog($scope.baselvl,$scope.points))  ;
 
 			if($value <= $scope.maxlvl) {
 				$scope.level = $value;
@@ -99,27 +100,7 @@ angular.module('zaninApp')
 				$scope.timeLeft -=  Math.floor($scope.level/$scope.ratetime);
 			}
 
-			/*
-	        else {
-
-				$scope.totalTimePlayed++;
-
-				if($scope.totalTimePlayed < 30) {
-					$scope.timeLeft--;
-					$scope.lvl = 'Level 1';			
-				}else if($scope.totalTimePlayed < 60){
-					$scope.timeLeft--;
-					$scope.timeLeft--;
-					$scope.lvl = 'Level 2';			
-				}else if($scope.totalTimePlayed < 90){
-					$scope.timeLeft -= 3;
-					$scope.lvl = 'Level 3';			
-				}else if($scope.totalTimePlayed < 120){
-					$scope.timeLeft -= 4;
-					$scope.lvl = 'Level 4';			
-				}
-			}
-			*/
+			
 		}, 1000);
 
 
@@ -172,7 +153,7 @@ angular.module('zaninApp')
 		};
 
 		$scope.aciertos = function(){
-			$scope.points += 1 * $scope.level;
+			$scope.points += Math.floor($scope.ratePoints * $scope.level);
 			$scope.timeLeft += ($scope.energy+1) * $scope.timeincrease;
 			$scope.combo++;
 			if($scope.energy < $scope.maxenergy) {
@@ -245,9 +226,8 @@ angular.module('zaninApp')
 
 				}
 				else{
-					//$scope.fallos();
+					$scope.fallos();
 				}
-				$scope.fallos();
 			}
 
 			lastGesture = g;

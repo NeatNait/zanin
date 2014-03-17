@@ -27,8 +27,8 @@
         <div class="fa fa-pause circle" ng-click="init()"></div>
       </div>
 
-      <div class="bar" style="-webkit-transform: translateY({{100-timeLeft}}%);"></div>
-      <div class="bar right" style="-webkit-transform: translateY({{100-timeLeft}}%);"></div>
+      <div class="bar" style="-webkit-transform: translateY({{timeLeft > 100 ? 0 : 100-timeLeft}}%);"></div>
+      <div class="bar right" style="-webkit-transform: translateY({{timeLeft > 100 ? 0 : 100-timeLeft}}%);"></div>
     </div>
 
 
