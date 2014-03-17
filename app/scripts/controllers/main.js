@@ -14,39 +14,55 @@ angular.module('zaninApp')
 			lastColor;
 
 
-		$scope.colors = [
-			{color:'blue', side:'left'},
-			{color:'red', side:'left'},
-			{color:'green', side:'right'},
-			{color:'yellow', side:'right'}
-		];
+		$scope.init = function(){
 
-		$scope.firstClick = null;
+			$scope.colors = [
+				{color:'blue', side:'left'},
+				{color:'red', side:'left'},
+				{color:'green', side:'right'},
+				{color:'yellow', side:'right'}
+			];
 
-		$scope.gestures = [
-			{g:'tap'},
-			{g:'doubleTap'}
-			//{g:'swipeLeft'},
-			//{g:'swipeRight'}
-		];
+			$scope.firstClick = null;
 
-		$scope.actions = [];
+			$scope.gestures = [
+				{g:'tap'},
+				{g:'doubleTap'}
+				//{g:'swipeLeft'},
+				//{g:'swipeRight'}
+			];
+
+			$scope.actions = [];
 
 
-		$scope.points = 0;
-		$scope.timeLeft = 60;
-		$scope.totalTimePlayed = 0;
-		//$scope.lvl = 'Level 1';
-		$scope.level = 1;
-		$scope.combo = 0;
-		$scope.maxlvl = 20;
-		$scope.ratelvl = 2;
-		$scope.ratetime = 1;
-		$scope.points = $scope.ratelvl;
-		$scope.maxenergy = 5;
-		$scope.energy = 0;
-		$scope.timeincrease = 1;
+			$scope.points = 0;
+			$scope.timeLeft = 101;
+			$scope.totalTimePlayed = 0;
+			//$scope.lvl = 'Level 1';
+			$scope.level = 1;
+			$scope.combo = 0;
+			$scope.maxlvl = 20;
+			$scope.ratelvl = 2;
+			$scope.ratetime = 1;
+			$scope.points = $scope.ratelvl;
+			$scope.maxenergy = 5;
+			$scope.energy = 0;
+			$scope.timeincrease = 1;
 
+
+			$scope.actions.push($scope.createRandomAction());
+			$scope.actions.push($scope.createRandomAction());
+			$scope.actions.push($scope.createRandomAction());
+			$scope.actions.push($scope.createRandomAction());
+
+		};
+
+
+		$scope.load = function (wait) {
+			$timeout(function() {
+				$scope.init();
+			}, wait);
+		};
 
 		$interval(function() {
 			//Comprobar Nivel
@@ -55,13 +71,14 @@ angular.module('zaninApp')
 				
 			function getBaseLog(x, y){
 				return Math.log(y) / Math.log(x);
-			}			
+			}
 
 			var $value = Math.floor(getBaseLog($scope.ratelvl,$scope.points));
 			//console.log('valor - ' + $value + ' - ' + $scope.points + ' - ' + getBaseLog($scope.ratelvl,$scope.points))  ;
 
-			if($value <= $scope.maxlvl) 
+			if($value <= $scope.maxlvl) {
 				$scope.level = $value;
+			}
 			
 			
 		//}
@@ -78,9 +95,8 @@ angular.module('zaninApp')
 			* todo se basa en un nivel máximo.
 			*/
 
-			else{								
-				$scope.timeLeft -=  Math.floor($scope.level/$scope.ratetime);	
-
+			else{
+				$scope.timeLeft -=  Math.floor($scope.level/$scope.ratetime);
 			}
 
 			/*
@@ -147,12 +163,7 @@ angular.module('zaninApp')
 		}
 
 
-		$scope.init = function(){
-			$scope.actions.push($scope.createRandomAction());
-			$scope.actions.push($scope.createRandomAction());
-			$scope.actions.push($scope.createRandomAction());
-			$scope.actions.push($scope.createRandomAction());
-		};
+
 
 		$scope.createRandomAction = function(){
 			var actualColor = $scope.colors[Math.floor($scope.colors.length*Math.random())].color;
@@ -161,15 +172,17 @@ angular.module('zaninApp')
 		};
 
 		$scope.aciertos = function(){
-			$scope.points += 1 * $scope.level;			
+			$scope.points += 1 * $scope.level;
 			$scope.timeLeft += ($scope.energy+1) * $scope.timeincrease;
 			$scope.combo++;
-			if($scope.energy < $scope.maxenergy) $scope.energy++;
+			if($scope.energy < $scope.maxenergy) {
+				$scope.energy++;
+			}
 			
 			$scope.createNewAction();
 		};
 
-		$scope.fallos = function(){			
+		$scope.fallos = function(){
 			$scope.combo = 0;
 			
 			//Change for a function
@@ -198,7 +211,6 @@ angular.module('zaninApp')
 				//$scope.colorOk =
 				$animate.addClass(angular.element('.'+c), 'pushed', function (){
 					$animate.removeClass(angular.element('.'+c), 'pushed');
-
 					//console.log(c);
 					//console.log('end');
 				});
@@ -210,6 +222,7 @@ angular.module('zaninApp')
 			}
 		};
 
+	
 
 		$scope.checkGesture = function(c, g){
 
@@ -218,7 +231,7 @@ angular.module('zaninApp')
 			//this will avoid double tap/single tap same color bug
 			if(lastGesture === 'doubleTap' && g === 'tap' && lastColor === c){
 				lastGesture = g;
-				lastColor = c;				
+				lastColor = c;
 				return;
 			}
 
@@ -228,10 +241,13 @@ angular.module('zaninApp')
 			}
 			else{
 				//Problema doble tap. Al hacer doble tap, como primero hay un tap, lo entiende como error
-				if(lastGesture === 'tap' && g === 'tap' && $scope.actions[0].gesture === 'doubleTap'){}
-				else{
-					$scope.fallos();
+				if(lastGesture === 'tap' && g === 'tap' && $scope.actions[0].gesture === 'doubleTap'){
+
 				}
+				else{
+					//$scope.fallos();
+				}
+				$scope.fallos();
 			}
 
 			lastGesture = g;

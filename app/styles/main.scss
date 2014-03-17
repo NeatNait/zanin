@@ -9,11 +9,11 @@ $icon-font-path: "/bower_components/sass-bootstrap/fonts/";
 
 
 $black  : #111;
-$blue   : #196DFF;
-$red    : #C11515;
-$green  : #27ae61;
+$blue   : #44C1EB;
+$red    : #E74A43;
+$green  : #33cc99;
 $pink   : pink;
-$yellow : #FFAB19;
+$yellow : #FFC634;
 $orange : #FFAB19;
 
 $body-color : #242424;
@@ -31,6 +31,8 @@ $body-color : #242424;
 body {
     padding-top: 20px;
     padding-bottom: 20px;
+    color:white;
+    overflow: hidden;
 }
 
 /* Everything but the jumbotron gets side spacing for mobile first views */
@@ -412,7 +414,6 @@ div{
 //  transition: all 2s ease;
 }
 
-
 /*.color, .color.ng-enter{
   animation: bounceIn 1s cubic-bezier(.17, .67, .83, .67);
   transform: scale(0);
@@ -471,7 +472,7 @@ div{
   line-height:1.6em;
 }
 .push, .pushed{
-  animation: test2 1s ease alternate;
+  animation: test 1s ease alternate;
 
 }
 
@@ -500,3 +501,35 @@ div{
   //animation: bounceIn .5s cubic-bezier(.17, .67, .83, .67);
 }
 
+
+
+.circle{
+  border-radius: 50%;
+  border: 3px solid white;
+  height: 3em;
+  width: 3em;
+  line-height: 2.5em;
+  bottom:.1em;
+  margin:auto;
+}
+
+.menu{
+  padding:8px;
+  position: absolute;
+  bottom:0;
+  width:100%;
+}
+
+
+.bar{
+  position: absolute;
+  bottom: 0;
+  background: white;
+  height:100%;
+  width:3px;
+  transition: transform 1s linear;
+}
+
+.bar.right{
+right:0;
+}

@@ -1,8 +1,8 @@
 
   <div class="row">
-    <div class="col-xs-5 full-height colors" ng-init="init()">
+    <div class="col-xs-5 full-height colors" ng-init="load(1000)">
 
-      <div ng-repeat="color in colors | filter: {side : 'left'}" hm-doubletap="checkGesture(color.color, 'doubleTap')" hm-tap="checkGesture(color.color, 'tap')"   ng-swipe-right="checkGesture(color.color, 'swipeRight')" ng-swipe-left="checkGesture(color.color, 'swipeLeft')" class="col-xs-12 color left {{color.color}}" ng-class="{push: colorOk == color.color}">+</div>
+      <div ng-repeat="color in colors | filter: {side : 'left'}" hm-doubletap="checkGesture(color.color, 'doubleTap')" hm-tap="checkGesture(color.color, 'tap')"   ng-swipe-right="checkGesture(color.color, 'swipeRight')" ng-swipe-left="checkGesture(color.color, 'swipeLeft')" class="col-xs-12 color left {{color.color}}" ng-class="{push: colorOk == color.color}">+3"</div>
 
     </div> 
 
@@ -22,12 +22,19 @@
           <i ng-if="action.gesture == 'swipeRight'" class="fa fa-long-arrow-right"></i>
         </div>
       </div>
+
+      <div class="menu">
+        <div class="fa fa-pause circle" ng-click="init()"></div>
+      </div>
+
+      <div class="bar" style="-webkit-transform: translateY({{100-timeLeft}}%);"></div>
+      <div class="bar right" style="-webkit-transform: translateY({{100-timeLeft}}%);"></div>
     </div>
 
 
     <div class="col-xs-5 full-height colors right">
 
-      <div ng-repeat="color in colors | filter: {side : 'right'}" hm-tap="checkGesture(color.color, 'tap')"  hm-doubletap="checkGesture(color.color, 'doubleTap')" ng-swipe-right="checkGesture(color.color, 'swipeRight')" ng-swipe-left="checkGesture(color.color, 'swipeLeft')" class="col-xs-12 color right {{color.color}}" ng-class="{push: colorOk == color.color}">+</div>
+      <div ng-repeat="color in colors | filter: {side : 'right'}" hm-tap="checkGesture(color.color, 'tap')"  hm-doubletap="checkGesture(color.color, 'doubleTap')" ng-swipe-right="checkGesture(color.color, 'swipeRight')" ng-swipe-left="checkGesture(color.color, 'swipeLeft')" class="col-xs-12 color right {{color.color}}" ng-class="{push: colorOk == color.color}">+3"</div>
 
     </div> 
   </div> 
