@@ -15,6 +15,10 @@ angular.module('zaninApp', [
         templateUrl: 'views/main.html',
         controller: 'MainCtrl'
       })
+      .when('/splash', {
+        templateUrl: 'views/splash.html',
+        controller: 'SplashCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });

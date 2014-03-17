@@ -533,3 +533,32 @@ div{
 .bar.right{
 right:0;
 }
+
+.white{
+  background-color:white;
+      background: url(../images/zanin.png) no-repeat center center fixed;
+  
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.start{
+  padding:8px;
+  position: absolute;
+  bottom:2.2em;
+  width:100%;
+  color:#111;
+  animation: presionaYa 1.5s ease alternate infinite;
+}
+
+@keyframes presionaYa{
+  to{
+    transform: scale(0.95);
+  }
+}
+
+.ng-leave{
+  animation: bounceOut .5s cubic-bezier(.17, .67, .83, .67);
+}
