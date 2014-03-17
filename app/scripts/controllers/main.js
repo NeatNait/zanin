@@ -46,7 +46,7 @@ angular.module('zaninApp')
 			$scope.ratePoints = 1.2;
 			$scope.ratetime = 1;
 			$scope.points = $scope.baselvl;
-			$scope.maxenergy = 5;
+			$scope.maxenergy = 7;
 			$scope.energy = 0;
 			$scope.timeincrease = 1;
 

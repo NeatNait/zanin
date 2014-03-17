@@ -12,12 +12,12 @@ angular.module('zaninApp', [
   .config(function ($routeProvider) {
     $routeProvider
       .when('/', {
-        templateUrl: 'views/main.html',
-        controller: 'MainCtrl'
-      })
-      .when('/splash', {
         templateUrl: 'views/splash.html',
         controller: 'SplashCtrl'
+      })
+      .when('/game', {
+        templateUrl: 'views/main.html',
+        controller: 'MainCtrl'
       })
       .otherwise({
         redirectTo: '/'
