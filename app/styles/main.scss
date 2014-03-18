@@ -209,19 +209,21 @@ hr {
 }
 
 
-html,body, .row, .containerNO, .full-height{
+html,body, .row, .container-view, .full-height{
     height:100%;
     margin:0;
     padding:0;
     background: $body-color;
+    overflow: hidden;
+    text-align:center;
 }
 .color{
   height:50%;
 }
 
-div{
+/*div{
     text-align:center;
-}
+}*/
 /*
 .mov-0{
     height:2em;
@@ -443,11 +445,16 @@ div{
 .color.ng-leave{
   transform: scale(0);
 }
-
-.ng-leave {
+*/
+.splash-view.ng-leave {
   animation: bounceOut 1s cubic-bezier(.17, .67, .83, .67);
   
-}*/
+}
+
+.game-view.ng-leave {
+  animation: bounceOutUp 1s cubic-bezier(.17, .67, .83, .67);
+  
+}
 
 .color.left:nth-of-type(2){
   animation-delay: .2s;
@@ -513,7 +520,23 @@ div{
   margin:auto;
 }
 
-.menu{
+.circle.combo-1{
+  border-color:$red;
+}
+
+.circle.combo-2{
+  border-color:$yellow;
+}
+
+.circle.combo-3{
+  border-color:$blue;
+}
+
+.circle.combo-4{
+  border-color:$green;
+}
+
+.game-view .menu{
   padding:8px;
   position: absolute;
   bottom:0;
@@ -534,9 +557,9 @@ div{
 right:0;
 }
 
-.white{
+.splash-logo{
   background-color:white;
-      background: url(../images/zanin.png) no-repeat center center fixed;
+  background: url(../images/zanin.png) no-repeat center center fixed;
   
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -544,7 +567,13 @@ right:0;
   background-size: cover;
 }
 
+.menu-view .menu{
+  background: $red;
+  text-align: left;
+}
+
 .start{
+  text-align:center;
   padding:8px;
   position: absolute;
   bottom:2.2em;
