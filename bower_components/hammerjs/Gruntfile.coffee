@@ -19,7 +19,7 @@ module.exports = (grunt) ->
         options:
           banner: '<%= meta.banner %>'
         src: [
-          'src/hammer.prefix'
+          'src/intro.js'
           'src/core.js'
           'src/setup.js'
           'src/utils.js'
@@ -28,8 +28,7 @@ module.exports = (grunt) ->
           'src/pointerevent.js'
           'src/detection.js'
           'src/gestures/*.js'
-          'src/export.js'
-          'src/hammer.suffix']
+          'src/outro.js']
         dest: 'hammer.js'
 
     # minify the sourcecode
@@ -45,7 +44,23 @@ module.exports = (grunt) ->
     # check for optimisations and errors
     jshint:
       options:
-        jshintrc: true
+        curly: true
+        expr: true
+        newcap: true
+        quotmark: 'single'
+        regexdash: true
+        trailing: true
+        undef: true
+        unused: true
+        maxerr: 100
+        eqnull: true
+        sub: false
+        browser: true
+        node: true
+        strict: true
+        laxcomma: true
+        globals:
+          define: false
       dist:
         src: ['hammer.js']
 
@@ -53,7 +68,7 @@ module.exports = (grunt) ->
     watch:
       scripts:
         files: ['src/**/*.js']
-        tasks: ['concat','uglify']
+        tasks: ['concat']
         options:
           interrupt: true
 
@@ -61,12 +76,36 @@ module.exports = (grunt) ->
     connect:
       server:
         options:
+          directory: "."
           hostname: "0.0.0.0"
-          port: 8000
-
+      
     # tests
     qunit:
       all: ['tests/**/*.html']
+
+    # saucelabs tests
+    'saucelabs-qunit':
+      all:
+        options:
+          username: 'hammerjs-ci'
+          key: '2ede6d02-65b3-4ba9-aec8-44a787af0c81'
+          build: process.env.TRAVIS_JOB_ID || 'dev'
+          concurrency: 3
+
+          urls: [
+            'http://0.0.0.0:8000/tests/utils.html',
+            'http://0.0.0.0:8000/tests/mouseevents.html',
+            'http://0.0.0.0:8000/tests/mousetouchevents.html',
+            'http://0.0.0.0:8000/tests/touchevents.html',
+            'http://0.0.0.0:8000/tests/pointerevents_mouse.html',
+            'http://0.0.0.0:8000/tests/pointerevents_touch.html'
+          ]
+          browsers: [
+            { browserName: 'chrome' }
+            { browserName: 'firefox' }
+            { browserName: 'internet explorer', platform: 'Windows 7', version: '9' }
+            { browserName: 'internet explorer', platform: 'Windows 8', version: '10'}
+          ]
 
 
   # Load tasks
@@ -76,10 +115,11 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks 'grunt-contrib-jshint'
   grunt.loadNpmTasks 'grunt-contrib-connect'
   grunt.loadNpmTasks 'grunt-contrib-qunit'
+  grunt.loadNpmTasks 'grunt-saucelabs'
 
 
   # Default task(s).
   grunt.registerTask 'default', ['connect','watch']
   grunt.registerTask 'build', ['concat','uglify','test']
   grunt.registerTask 'test', ['jshint','qunit']
-  grunt.registerTask 'test-travis', ['build','jshint']
+  grunt.registerTask 'test-travis', ['build','jshint','connect','saucelabs-qunit']

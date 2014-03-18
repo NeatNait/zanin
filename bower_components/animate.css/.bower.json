@@ -11,5 +11,6 @@
   },
   "_source": "git://github.com/daneden/animate.css.git",
   "_target": "~3.1.0",
-  "_originalSource": "animate.css"
+  "_originalSource": "animate.css",
+  "_direct": true
 }
