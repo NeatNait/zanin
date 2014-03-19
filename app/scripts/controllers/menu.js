@@ -13,7 +13,7 @@ angular.module('zaninApp')
 		//if theres no previous game 
 		if($rootScope.oldPoints === undefined){
 			$rootScope.oldPoints = 0;
-		} 
+		}
 
 		var el = document.querySelector('#points');
 
