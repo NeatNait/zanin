@@ -20,6 +20,5 @@
   },
   "_source": "git://github.com/monospaced/angular-hammer.git",
   "_target": "~1.0.3",
-  "_originalSource": "angular-hammer",
-  "_direct": true
+  "_originalSource": "angular-hammer"
 }
