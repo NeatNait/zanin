@@ -103,6 +103,10 @@ angular.module('zaninApp')
 				
 				$rootScope.game = {};
 				$rootScope.game.points = $scope.points;
+
+				if($scope.highestCombo < $scope.combo){
+					$scope.highestCombo = $scope.combo;
+				}
 				$rootScope.game.highestCombo = $scope.highestCombo;
 
 				$location.path('/menu');

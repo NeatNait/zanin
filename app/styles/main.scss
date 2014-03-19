@@ -1,6 +1,9 @@
 $fa-font-path: "../bower_components/components-font-awesome/fonts" !default;
 @import "../bower_components/components-font-awesome/scss/font-awesome.scss";
 
+//@import "../bower_components/odometer/sass/odometer-theme-default.sass";
+@import "../bower_components/odometer/themes/odometer-theme-default.css";
+
 $icon-font-path: "/bower_components/sass-bootstrap/fonts/";
 
 @import 'sass-bootstrap/lib/bootstrap';
@@ -591,3 +594,7 @@ right:0;
 /*.ng-leave{
   animation: bounceOut .5s cubic-bezier(.17, .67, .83, .67);
 }*/
+
+.odometer{
+  font-size: 60px;
+}
