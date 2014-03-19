@@ -1,0 +1,18 @@
+{
+  "name": "angular-chartjs-directive",
+  "main": "./chartjs-directive.js",
+  "dependencies": {
+    "angular": "~1.0.4"
+  },
+  "homepage": "https://github.com/earlonrails/angular-chartjs-directive",
+  "_release": "d6ba9a1113",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "d6ba9a11130e61ba379103908be83f47bb661b6c"
+  },
+  "_source": "git://github.com/earlonrails/angular-chartjs-directive.git",
+  "_target": "*",
+  "_originalSource": "angular-chartjs-directive",
+  "_direct": true
+}
