@@ -1,6 +1,6 @@
 
   <div class="row" >
-    <div class="col-xs-12 full-height menu" ng-click="go('game')">
+    <div class="col-xs-12 full-height menu" >
     	<div class="col-xs-8 col-xs-offset-2">
     		<br>
     		<br>
@@ -14,9 +14,13 @@
         <h1>Highest Combo: {{game.highestCombo}}</h1>
 
     	</div>
+      <div class="col-xs-12">
+        <chart value="clicksChart" id="clicks-chart" type="Doughnut" width="300" height="300"></chart>
+      </div>
 
       <div class="start">
-        NEW GAME
+        <span ng-click="go('game')">NEW GAME</span> | <span ng-click="go('chart')">STATS</span>
       </div>
+
     </div> 
   </div> 

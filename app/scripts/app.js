@@ -7,7 +7,8 @@ angular.module('zaninApp', [
   'ngRoute',
   'ngTouch',
   'ngAnimate',
-  'hmTouchEvents'
+  'hmTouchEvents',
+  'chartjs-directive'
 ])
   .config(function ($routeProvider) {
     $routeProvider
@@ -22,6 +23,10 @@ angular.module('zaninApp', [
       .when('/menu', {
         templateUrl: 'views/menu.html',
         controller: 'MenuCtrl'
+      })
+      .when('/chart', {
+        templateUrl: 'views/chart.html',
+        controller: 'ChartCtrl'
       })
       .otherwise({
         redirectTo: '/'

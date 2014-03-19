@@ -9,6 +9,9 @@ angular.module('zaninApp')
 			$location.path( path );
 		};
 
+
+		//console.log($rootScope.game);
+
 		//TODO change to oldGame
 		//if theres no previous game 
 		if($rootScope.oldPoints === undefined){
@@ -33,4 +36,15 @@ angular.module('zaninApp')
 			$rootScope.oldPoints = $rootScope.game.points;
 		}
 
+
+		/*
+		var data = [],
+			taps = $rootScope.game.taps;
+
+		for (var tap in taps) {
+	  		data.push({value:taps[tap].count, color: taps[tap].color});
+		}
+
+  		$scope.clicksChart = {"data": data, "options": {} };
+		*/
   });

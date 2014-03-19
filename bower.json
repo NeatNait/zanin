@@ -16,7 +16,8 @@
     "angular-animate": "~1.2.14",
     "animate.css": "~3.1.0",
     "components-font-awesome": "~4.0.3",
-    "odometer": "~0.4.6"
+    "odometer": "~0.4.6",
+    "angular-chartjs-directive": "*"
   },
   "devDependencies": {
     "angular-mocks": "1.2.6",

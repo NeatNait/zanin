@@ -17,7 +17,35 @@ angular.module('zaninApp')
 
 		$scope.path = 'game';
 
+
+
 		$scope.init = function(){
+
+
+			$scope.game = {
+				taps:{
+					red:{
+						count:0,
+						color:'#E74A43'
+					},
+					blue:{
+						count:0,
+						color:'#44C1EB'
+					},
+					yellow:{
+						count:0,
+						color:'#FFC634'
+					},
+					green:{
+						count:0,
+						color:'#33cc99'
+					},
+					misses:{
+						count:0,
+						color:'#4D5360'
+					}
+				}
+			};
 
 			$scope.colors = [
 				{color:'blue', side:'left'},
@@ -101,7 +129,7 @@ angular.module('zaninApp')
 				//TODO change to this
 				//$scope.game = {points:}
 				
-				$rootScope.game = {};
+				$rootScope.game = $scope.game;
 				$rootScope.game.points = $scope.points;
 
 				if($scope.highestCombo < $scope.combo){
@@ -175,14 +203,15 @@ angular.module('zaninApp')
 			return new Action(actualGesture, actualColor);
 		};
 
-		$scope.aciertos = function(){
+		$scope.aciertos = function(c){
 			$scope.points += Math.floor($scope.ratePoints * $scope.level);
 			$scope.timeLeft += ($scope.energy+1) * $scope.timeincrease;
 			$scope.combo++;
 			if($scope.energy < $scope.maxenergy) {
 				$scope.energy++;
 			}
-			
+			$scope.game.taps[c].count++
+			console.log($scope.game.taps[c].color + ':' + $scope.game.taps[c].count);
 			$scope.createNewAction();
 		};
 
@@ -196,7 +225,8 @@ angular.module('zaninApp')
 			//Change for a function
 			$scope.energy = 0;
 
-			//console.log('Fallo');
+			$scope.game.taps.misses.count++;
+			console.log($scope.game.taps.misses.count);
 
 			
 			//$scope.createNewAction();
@@ -211,7 +241,7 @@ angular.module('zaninApp')
 
 			//if everything is equal we've got a valid move
 			if(c === $scope.actions[0].color){
-				$scope.aciertos();
+				$scope.aciertos(c);
 
 				//reset the action auto creation counter
 				resetActionEraser();
