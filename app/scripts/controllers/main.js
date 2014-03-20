@@ -23,6 +23,8 @@ angular.module('zaninApp')
 
 
 			$scope.game = {
+				start:new Date(),
+				end:false,
 				taps:{
 					red:{
 						count:0,
@@ -44,7 +46,8 @@ angular.module('zaninApp')
 						count:0,
 						color:'#4D5360'
 					}
-				}
+				},
+				combos:[]
 			};
 
 			$scope.colors = [
@@ -66,18 +69,18 @@ angular.module('zaninApp')
 			$scope.actions = [];
 
 			//TODO change to game object
-			$scope.points = 0;
+			$scope.game.points = 0;
 			$scope.timeLeft = 5;
 			$scope.totalTimePlayed = 0;
 			//$scope.lvl = 'Level 1';
 			$scope.level = 1;
 			$scope.combo = 0;
-			$scope.highestCombo = 0;
+			$scope.game.highestCombo = 0;
 			$scope.maxlvl = 20;
 			$scope.baselvl = 2;
 			$scope.ratePoints = 1.2;
 			$scope.ratetime = 1;
-			$scope.points = $scope.baselvl;
+			$scope.game.points = $scope.baselvl;
 			$scope.maxenergy = 7;
 			$scope.energy = 0;
 			$scope.timeincrease = 1;
@@ -110,8 +113,8 @@ angular.module('zaninApp')
 				return Math.log(y) / Math.log(x);
 			}
 
-			var $value = Math.floor(getBaseLog($scope.baselvl,$scope.points));
-			//console.log('valor - ' + $value + ' - ' + $scope.points + ' - ' + getBaseLog($scope.baselvl,$scope.points))  ;
+			var $value = Math.floor(getBaseLog($scope.baselvl,$scope.game.points));
+			//console.log('valor - ' + $value + ' - ' + $scope.game.points + ' - ' + getBaseLog($scope.baselvl,$scope.game.points))  ;
 
 			if($value <= $scope.maxlvl) {
 				$scope.level = $value;
@@ -129,13 +132,9 @@ angular.module('zaninApp')
 				//TODO change to this
 				//$scope.game = {points:}
 				
-				$rootScope.game = $scope.game;
-				$rootScope.game.points = $scope.points;
 
-				if($scope.highestCombo < $scope.combo){
-					$scope.highestCombo = $scope.combo;
-				}
-				$rootScope.game.highestCombo = $scope.highestCombo;
+
+				gameEnd();
 
 				$location.path('/menu');
 
@@ -154,6 +153,7 @@ angular.module('zaninApp')
 			
 		}, 1000);
 
+	
 
 
 		$timeout(function() {
@@ -204,33 +204,65 @@ angular.module('zaninApp')
 		};
 
 		$scope.aciertos = function(c){
-			$scope.points += Math.floor($scope.ratePoints * $scope.level);
+			$scope.game.points += Math.floor($scope.ratePoints * $scope.level);
 			$scope.timeLeft += ($scope.energy+1) * $scope.timeincrease;
 			$scope.combo++;
 			if($scope.energy < $scope.maxenergy) {
 				$scope.energy++;
 			}
-			$scope.game.taps[c].count++
-			console.log($scope.game.taps[c].color + ':' + $scope.game.taps[c].count);
+			$scope.game.taps[c].count++;
+			//console.log($scope.game.taps[c].color + ':' + $scope.game.taps[c].count);
 			$scope.createNewAction();
 		};
 
 		$scope.fallos = function(){
 
-			if($scope.highestCombo < $scope.combo){
-				$scope.highestCombo = $scope.combo;
-			}
+			updateComboHistory();
 
 			$scope.combo = 0;
 			//Change for a function
 			$scope.energy = 0;
 
 			$scope.game.taps.misses.count++;
-			console.log($scope.game.taps.misses.count);
+			//console.log($scope.game.taps.misses.count);
 
 			
 			//$scope.createNewAction();
 		};
+
+		function gameEnd(){
+
+
+			//TODO delete point var and use only game.points
+			//TODO check if this has been done hahahah
+			//$scope.game.points = $scope.game.points;
+
+			updateComboHistory();
+
+			$scope.game.end = new Date();
+			$scope.game.timePlayed = $scope.game.end - $scope.game.start;
+
+			//let the game object be accesible for any controller
+			$rootScope.game = $scope.game;
+
+			console.log($scope.game);
+
+		}
+
+		function updateComboHistory(){
+
+			if($scope.game.highestCombo < $scope.combo){
+				$scope.game.highestCombo = $scope.combo;
+			}
+
+			$scope.game.combos.push({combo:$scope.combo, lost:new Date()});
+
+			console.log($scope.game);
+			console.log($scope.game.combos);
+
+			//$rootScope.game.game.highestCombo = $scope.game.highestCombo;
+
+		}
 
 		$scope.createNewAction = function () {
 			$scope.actions.splice(0, 1);

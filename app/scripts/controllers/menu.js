@@ -27,6 +27,7 @@ angular.module('zaninApp')
 		});
 
 		//update points with actual game points after 2sec
+		//allowing the view to fully charge and stay black for a while
 		$timeout(function(){
 			od.update($rootScope.game.points);
 		}, 2000);
@@ -42,9 +43,25 @@ angular.module('zaninApp')
 			taps = $rootScope.game.taps;
 
 		for (var tap in taps) {
-	  		data.push({value:taps[tap].count, color: taps[tap].color});
+			data.push({value:taps[tap].count, color: taps[tap].color});
 		}
 
-  		$scope.clicksChart = {"data": data, "options": {} };
+		$scope.clicksChart = {"data": data, "options": {} };
 		*/
+
+
+		//helper for printing time from miliseconds
+		$scope.msToTime = function (ms) {
+			var milliseconds = parseInt((ms%1000)/100),
+				seconds = parseInt((ms/1000)%60),
+				minutes = parseInt((ms/(1000*60))%60),
+				hours = parseInt((ms/(1000*60*60))%24);
+
+			hours = (hours < 10) ? '0' + hours : hours;
+			minutes = (minutes < 10) ? '0' + minutes : minutes;
+			seconds = (seconds < 10) ? '0' + seconds : seconds;
+
+			//return hours + ':' + minutes + ':' + seconds + '.' + milliseconds;
+			return minutes + '\' '  + seconds + '\'\' ' + milliseconds + '\'\'\'';
+		};
   });
