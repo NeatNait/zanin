@@ -12,7 +12,9 @@ angular.module('zaninApp')
 			intervalId,
 			endGameIntervalId,
 			lastGesture,
-			lastColor;
+			lastColor,
+			pointsToChange,
+			pointsInterval;
 
 
 		$scope.path = 'game';
@@ -70,7 +72,7 @@ angular.module('zaninApp')
 
 			//TODO change to game object
 			$scope.game.points = 0;
-			$scope.timeLeft = 5;
+			$scope.timeLeft = 5222;
 			$scope.totalTimePlayed = 0;
 			//$scope.lvl = 'Level 1';
 			$scope.level = 1;
@@ -79,11 +81,13 @@ angular.module('zaninApp')
 			$scope.maxlvl = 20;
 			$scope.baselvl = 2;
 			$scope.ratePoints = 1.2;
-			$scope.ratetime = 1;
+			$scope.ratetime = 0.7;
 			$scope.game.points = $scope.baselvl;
 			$scope.maxenergy = 7;
 			$scope.energy = 0;
 			$scope.timeincrease = 1;
+			pointsToChange = 300;
+			pointsInterval = 300;
 
 
 			$scope.actions.push($scope.createRandomAction());
@@ -120,6 +124,10 @@ angular.module('zaninApp')
 				$scope.level = $value;
 			}
 			
+			if($scope.game.points > pointsToChange){
+				pointsToChange += pointsInterval;
+				changeRandomSide();
+			}
 			
 		//}
 
@@ -156,7 +164,7 @@ angular.module('zaninApp')
 	
 
 
-		$timeout(function() {
+		/*$timeout(function() {
 			
 			$scope.colors = [
 				{color:'blue', side:'right'},
@@ -165,9 +173,14 @@ angular.module('zaninApp')
 				{color:'yellow', side:'left'}
 			];
 
-		}, 40000);
+		}, 40000);*/
 
 
+		function changeRandomSide(){
+			$scope.colors.sort(function() { return 0.5 - Math.random(); });
+		}
+
+		
 
 		$interval(function() {
 			
@@ -257,8 +270,8 @@ angular.module('zaninApp')
 
 			$scope.game.combos.push({combo:$scope.combo, lost:new Date()});
 
-			console.log($scope.game);
-			console.log($scope.game.combos);
+			//console.log($scope.game);
+			//console.log($scope.game.combos);
 
 			//$rootScope.game.game.highestCombo = $scope.game.highestCombo;
 
@@ -293,7 +306,8 @@ angular.module('zaninApp')
 		};
 
 	
-		var prevEvent;
+		var prevEvent,
+			checkDouble = 0;
 			//tapTimeOut;
 
 		/*var checkMove = function(g, c){
@@ -313,7 +327,6 @@ angular.module('zaninApp')
 			//$event.stopImmediatePropagation();
 
 			//var gesture = g;
-			//console.log(lastGesture + ' - ' + g + ' - ' + $scope.actions[0].gesture);
 
 
 			/*if(prevEvent !== undefined){
@@ -376,24 +389,49 @@ angular.module('zaninApp')
 			//console.log(lastGesture + ' - ' + g + ' - ' + $scope.actions[0].gesture);
 
 			//this will avoid double tap/single tap same color bug
-			if(lastGesture === 'doubleTap' && g === 'tap' && lastColor === c){
+			
+
+			//console.log(lastGesture + ' - ' + g + ' - ' + $scope.actions[0].gesture);
+
+			if(g === 'tap' && $scope.actions[0].gesture === 'doubleTap'){
+				if(checkDouble){
+					$scope.fallos();
+					checkDouble = 0;
+					return;
+				}
+				checkDouble++;
+				return;
+			}
+
+			if(checkDouble && g !== 'doubleTap'){
+				$scope.fallos();
+				checkDouble = 0;
+				return;
+			}
+
+			checkDouble = 0;
+
+			/*if(lastGesture === 'doubleTap' && g === 'tap' && lastColor === c){
 				lastGesture = g;
 				lastColor = c;
 				return;
-			}
+			}*/
 
 			if($scope.actions[0].gesture === g){
 				checkColor(c);
 			}
+			
 			else{
 				//Problema doble tap. Al hacer doble tap, como primero hay un tap, lo entiende como error
-				if(lastGesture === 'tap' && g === 'tap' && $scope.actions[0].gesture === 'doubleTap'){
-				}
-				else{
-					$scope.fallos();
-				}
+			//	if(lastGesture === 'tap' && g === 'tap' && $scope.actions[0].gesture === 'doubleTap'){
+			//	}
+			//	else{
+				$scope.fallos();
+			//	}
 			}
+			
 
+			
 			lastGesture = g;
 			lastColor = c;
 			prevEvent = $event;

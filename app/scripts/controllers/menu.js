@@ -9,6 +9,10 @@ angular.module('zaninApp')
 			$location.path( path );
 		};
 
+		if($rootScope.game === undefined){
+			$rootScope.game = {};
+		}
+
 
 		//console.log($rootScope.game);
 

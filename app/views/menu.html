@@ -12,12 +12,10 @@
         <div id="points">0</div>
 
         <h1>Highest Combo: {{game.highestCombo}}</h1>
-        <h3>Time Played: {{msToTime(98989)}} {{game.timePlayed}}</h3>
+        <h3>Time Played: {{msToTime(game.timePlayed)}} {{}}</h3>
 
     	</div>
-      <div class="col-xs-12">
-        <chart value="clicksChart" id="clicks-chart" type="Doughnut" width="300" height="300"></chart>
-      </div>
+
 
       <div class="start">
         <span ng-click="go('game')">NEW GAME</span> | <span ng-click="go('chart')">STATS</span>
