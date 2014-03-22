@@ -72,7 +72,7 @@ angular.module('zaninApp')
 
 			//TODO change to game object
 			$scope.game.points = 0;
-			$scope.timeLeft = 5222;
+			$scope.timeLeft = 5;
 			$scope.totalTimePlayed = 0;
 			//$scope.lvl = 'Level 1';
 			$scope.level = 1;
