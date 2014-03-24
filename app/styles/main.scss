@@ -616,7 +616,7 @@ html,body, .row, .container-view, .full-height{
 
 .splash-logo{
   background-color:white;
-  background: image-url('/images/zanin.png', false, true) no-repeat center center fixed;
+  background: url('..'+image-url('zanin.png', true, true)) no-repeat center center fixed;
   background-size: cover;
 }
 
