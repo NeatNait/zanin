@@ -19,10 +19,14 @@ angular.module('zaninApp')
 
 		$scope.path = 'game';
 
+		var sound = new Howl({
+		  urls: ['audio/loop.wav'],
+		  loop: true
+		});
 
+		sound.play();
 
 		$scope.init = function(){
-
 
 			$scope.game = {
 				start:new Date(),
@@ -72,7 +76,7 @@ angular.module('zaninApp')
 
 			//TODO change to game object
 			$scope.game.points = 0;
-			$scope.timeLeft = 5;
+			$scope.timeLeft = 0;
 			$scope.totalTimePlayed = 0;
 			//$scope.lvl = 'Level 1';
 			$scope.level = 1;
@@ -89,6 +93,10 @@ angular.module('zaninApp')
 			pointsToChange = 300;
 			pointsInterval = 300;
 
+
+			$timeout(function () {
+				start();
+			},2000);
 
 			$scope.actions.push($scope.createRandomAction());
 			$scope.actions.push($scope.createRandomAction());
@@ -108,58 +116,64 @@ angular.module('zaninApp')
 			//}, wait);
 		};
 
-		endGameIntervalId = $interval(function() {
-			//Comprobar Nivel
-			//Función logarítmica en función de los aciertos, con el máximo en MAXLVL
-			//$scope.level = function(){
+
+		function start () {
+
+			$scope.timeLeft = 5;
+
+			endGameIntervalId = $interval(function() {
+				//Comprobar Nivel
+				//Función logarítmica en función de los aciertos, con el máximo en MAXLVL
+				//$scope.level = function(){
+					
+				function getBaseLog(x, y){
+					return Math.log(y) / Math.log(x);
+				}
+
+				var $value = Math.floor(getBaseLog($scope.baselvl,$scope.game.points));
+				//console.log('valor - ' + $value + ' - ' + $scope.game.points + ' - ' + getBaseLog($scope.baselvl,$scope.game.points))  ;
+
+				if($value <= $scope.maxlvl) {
+					$scope.level = $value;
+				}
 				
-			function getBaseLog(x, y){
-				return Math.log(y) / Math.log(x);
-			}
-
-			var $value = Math.floor(getBaseLog($scope.baselvl,$scope.game.points));
-			//console.log('valor - ' + $value + ' - ' + $scope.game.points + ' - ' + getBaseLog($scope.baselvl,$scope.game.points))  ;
-
-			if($value <= $scope.maxlvl) {
-				$scope.level = $value;
-			}
-			
-			if($scope.game.points > pointsToChange){
-				pointsToChange += pointsInterval;
-				changeRandomSide();
-			}
-			
-		//}
-
-			if($scope.timeLeft <= 0){
-				$scope.lvl = 'GAME OVER';
-				$scope.level = 'GAME OVER';
-				$scope.timeLeft = 0;
-				$interval.cancel(endGameIntervalId);
-
-				//TODO change to this
-				//$scope.game = {points:}
+				if($scope.game.points > pointsToChange){
+					pointsToChange += pointsInterval;
+					changeRandomSide();
+				}
 				
+			//}
 
+				if($scope.timeLeft <= 0){
+					//$scope.lvl = 'GAME OVER';
+					//$scope.level = 'GAME OVER';
+					$scope.timeLeft = 0;
+					$interval.cancel(endGameIntervalId);
 
-				gameEnd();
+					//TODO change to this
+					//$scope.game = {points:}
+					
+					sound.fade(1,0,1000);
 
-				$location.path('/menu');
+					gameEnd();
 
-			}
+					$location.path('/menu');
 
-			/*
-			* Función para la puntuación de Zanin
-			* En función de los puntos, aumenta la difultad, hasta un máximo			
-			* todo se basa en un nivel máximo.
-			*/
+				}
 
-			else{
-				$scope.timeLeft -=  Math.floor($scope.level/$scope.ratetime);
-			}
+				/*
+				* Función para la puntuación de Zanin
+				* En función de los puntos, aumenta la difultad, hasta un máximo			
+				* todo se basa en un nivel máximo.
+				*/
 
-			
-		}, 1000);
+				else{
+					$scope.timeLeft -=  Math.floor($scope.level/$scope.ratetime);
+				}
+
+				
+			}, 1000);
+		}
 
 	
 

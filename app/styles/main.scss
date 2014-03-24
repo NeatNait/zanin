@@ -457,10 +457,60 @@ html,body, .row, .container-view, .full-height{
 }
 
 .game-view.ng-leave {
-  animation: bounceOutUp 1s cubic-bezier(.17, .67, .83, .67);
+  animation: fadeOut 2s ease;
+  animation-delay: 0s;
+}
+
+.game-view.ng-leave .right{
+  animation: slideOutRight 5s ease;
+  animation-fill-mode: forwards;
+}
+.game-view.ng-leave .left{
+  animation: slideOutLeft 5s ease;
+  animation-fill-mode: forwards;
+}
+
+.game-view.ng-enter {
+  //animation: slideInRight 5s ease;
   
 }
 
+/*.game-view.ng-enter .right{
+  animation: slideInRight 5s ease;
+  animation-fill-mode: forwards;
+}*/
+.colors{
+  animation: slideInLeft 2s ease;
+  animation-fill-mode: forwards;
+}
+
+.colors.right{
+  animation: slideInRight 2s ease;
+  animation-fill-mode: forwards;
+}
+
+
+/*.action{
+  animation: fadeIn 1s ease;
+
+}*/
+/*.actions{
+  opacity: 0;
+}*/
+/*.actions{
+  animation: slideInDown 1s ease;
+  animation-fill-mode: forwards;
+}*/
+
+
+.actions-cnt, .circle{
+  opacity: 0;
+  animation: fadeIn 1s ease;
+  animation-delay: 2s;
+  animation-fill-mode: forwards; 
+}
+
+/*
 .color.left:nth-of-type(2){
   animation-delay: .2s;
 }
@@ -472,7 +522,7 @@ html,body, .row, .container-view, .full-height{
 .color.right:nth-of-type(2){
   animation-delay: .4s;
 }
-
+*/
 
 .color:active{
 
@@ -556,10 +606,12 @@ html,body, .row, .container-view, .full-height{
   height:100%;
   width:3px;
   transition: transform 1s linear;
+  animation-delay: 0s;
+  z-index:999;
 }
 
 .bar.right{
-right:0;
+  right:0px;
 }
 
 .splash-logo{

@@ -34,7 +34,7 @@ angular.module('zaninApp')
 		//allowing the view to fully charge and stay black for a while
 		$timeout(function(){
 			od.update($rootScope.game.points);
-		}, 2000);
+		}, 3000);
 
 		//set previous game points
 		if($rootScope.game !== undefined){
