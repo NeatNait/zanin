@@ -1,14 +1,9 @@
 'use strict';
 
 angular.module('zaninApp')
-	.controller('ChartCtrl', function ($rootScope, $scope, $interval, $timeout, $animate, $location) {
+	.controller('ChartCtrl', function ($rootScope, $scope, $interval, $timeout, $animate) {
 
 		$scope.path = 'chart';
-
-		$scope.go = function ( path ) {
-			$location.path( path );
-		};
-
 
 		var data = [],
 			taps = $rootScope.game.taps;

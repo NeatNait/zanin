@@ -28,7 +28,17 @@ angular.module('zaninApp', [
         templateUrl: 'views/chart.html',
         controller: 'ChartCtrl'
       })
+      .when('/records', {
+        templateUrl: 'views/records.html',
+        controller: 'RecordsCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });
+  })
+  .run(function($rootScope, $location) {
+    $rootScope.go = function ( path, side ) {
+      $rootScope.side = side;
+      $location.path( path );
+    };
   });

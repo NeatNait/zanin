@@ -38,6 +38,8 @@ body {
     padding-bottom: 20px;
     color:white;
     overflow: hidden;
+    background: $body-color;
+
 }
 
 /* Everything but the jumbotron gets side spacing for mobile first views */
@@ -218,7 +220,6 @@ html,body, .row, .container-view, .full-height{
     height:100%;
     margin:0;
     padding:0;
-    background: $body-color;
     overflow: hidden;
     text-align:center;
 }
@@ -456,6 +457,23 @@ html,body, .row, .container-view, .full-height{
   
 }
 
+
+.left.ng-enter{
+  animation: slideInLeft 1s ease;
+  animation-delay:1s;
+}
+
+.left.ng-leave {
+  animation: slideOutRight 1s ease;
+}
+/*.ng-leave.right {
+  animation: slideOutRight 1s ease;
+}
+
+.ng-leave.left {
+  animation: slideOutLeft 1s ease;
+}
+*/
 .game-view.ng-leave {
   animation: fadeOut 2s ease;
   animation-delay: 0s;
@@ -620,6 +638,14 @@ html,body, .row, .container-view, .full-height{
   background-size: cover;
 }
 
+.splash-view{
+  color:#111;
+}
+
+.chart-view{
+  background-color: $blue;
+}
+
 .menu-view .menu{
   background: $red;
   text-align: left;
@@ -629,15 +655,18 @@ html,body, .row, .container-view, .full-height{
   text-align:center;
   padding:8px;
   position: absolute;
-  bottom:2.2em;
+  bottom:2em;
   width:100%;
-  color:white;
-  animation: presionaYa 1.5s ease alternate infinite;
+  font-size: 1.2em;
+  animation: presionaYa 1s ease alternate infinite;
 }
 
 @keyframes presionaYa{
+  from{
+    transform: scale(1);
+  }
   to{
-    transform: scale(0.95);
+    transform: scale(0.8);
   }
 }
 

@@ -1,13 +1,10 @@
 'use strict';
 
 angular.module('zaninApp')
-	.controller('MenuCtrl', function ($rootScope, $scope, $interval, $timeout, $animate, $location) {
+	.controller('MenuCtrl', function ($rootScope, $scope, $interval, $timeout, $animate) {
 
-		$scope.path = 'menu';
+		$rootScope.path = 'menu';
 
-		$scope.go = function ( path ) {
-			$location.path( path );
-		};
 
 		if($rootScope.game === undefined){
 			$rootScope.game = {};

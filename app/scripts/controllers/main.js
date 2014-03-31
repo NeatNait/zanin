@@ -8,9 +8,9 @@ angular.module('zaninApp')
 			this.color = c;
 		};
 
-		var speed = 5000,
-			intervalId,
-			endGameIntervalId,
+
+		
+		var	endGameIntervalId,
 			lastGesture,
 			lastColor,
 			pointsToChange,
@@ -208,6 +208,10 @@ angular.module('zaninApp')
 		}, 20000);
 
 
+		//TODO reset action at x interval
+		/*
+		//var speed = 5000,
+		//	intervalId,
 		function resetActionEraser () {
 
 			$interval.cancel(intervalId);
@@ -219,8 +223,7 @@ angular.module('zaninApp')
 			intervalId = id;
 
 			return id;
-		}
-
+		}*/
 
 
 
@@ -303,7 +306,7 @@ angular.module('zaninApp')
 				$scope.aciertos(c);
 
 				//reset the action auto creation counter
-				resetActionEraser();
+				//resetActionEraser();
 
 				//$scope.colorOk =
 				$animate.addClass(angular.element('.'+c), 'pushed', function (){
