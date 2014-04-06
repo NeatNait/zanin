@@ -16,11 +16,7 @@
     </div> 
 
     <div class="col-xs-2 full-height actions">
-      <span>{{game.points}}</span>
-      <span>{{timeLeft}}</span>
-      <span>{{level}}</span>      
-      
-      <br>
+      <span>{{game.points}}</span><br>
       <br>
       
       <div class="circle combo-{{ getComboClass() }}">{{combo}}</div>
@@ -28,7 +24,7 @@
       <br>
 
       <div class="actions-cnt">
-        <div ng-repeat="action in actions" class="action">
+        <div ng-repeat="action in actions" class="action" ng-class="{init:!loaded}">
           <div class="font-{{action.color}} mov mov-{{$index}}">
             <i ng-if="action.gesture == 'tap'" class="fa fa-circle-o"></i>
             <i ng-if="action.gesture == 'doubleTap'" class="fa fa-circle-o"></i>

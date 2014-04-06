@@ -24,7 +24,7 @@ angular.module('zaninApp')
 		  loop: true
 		});
 
-		sound.play();
+		//sound.play();
 
 		$scope.init = function(){
 
@@ -55,6 +55,9 @@ angular.module('zaninApp')
 				},
 				combos:[]
 			};
+
+
+			$scope.loaded = false;
 
 			$scope.colors = [
 				{color:'blue', side:'left'},
@@ -119,7 +122,14 @@ angular.module('zaninApp')
 
 		function start () {
 
-			$scope.timeLeft = 5;
+			$scope.timeLeft = 50000;
+			
+
+			//FIXME detect load animation end
+			$timeout(function(){
+				$scope.loaded = true;
+			},2000);
+
 
 			endGameIntervalId = $interval(function() {
 				//Comprobar Nivel

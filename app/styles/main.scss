@@ -507,6 +507,10 @@ html,body, .row, .container-view, .full-height{
   animation-fill-mode: forwards;
 }
 
+/*.ng-enter{
+  animation: bounceIn 1s ease;
+}*/
+
 
 /*.action{
   animation: fadeIn 1s ease;
@@ -521,13 +525,57 @@ html,body, .row, .container-view, .full-height{
 }*/
 
 
-.actions-cnt, .circle{
+.circle{
   opacity: 0;
   animation: fadeIn 1s ease;
   animation-delay: 2s;
-  animation-fill-mode: forwards; 
+  animation-fill-mode: forwards;
 }
 
+$delay : 2s;
+
+.action.init{
+  transform: translateY(2000px);
+  animation: slideInUp 1s ease;
+  animation-delay: $delay;
+  animation-fill-mode: forwards;
+}
+
+.action.init:nth-of-type(2){
+    -webkit-animation-delay: $delay + 0.2s;
+       -moz-animation-delay: $delay + 0.2s;
+        -ms-animation-delay: $delay + 0.2s;
+         -o-animation-delay: $delay + 0.2s;
+            animation-delay: $delay + 0.2s;
+}
+
+.action.init:nth-of-type(3){
+    -webkit-animation-delay: $delay + 0.3s;
+       -moz-animation-delay: $delay + 0.3s;
+        -ms-animation-delay: $delay + 0.3s;
+         -o-animation-delay: $delay + 0.3s;
+            animation-delay: $delay + 0.3s;
+}
+
+.action.init:nth-of-type(4){
+    -webkit-animation-delay: $delay + 0.4s;
+       -moz-animation-delay: $delay + 0.4s;
+        -ms-animation-delay: $delay + 0.4s;
+         -o-animation-delay: $delay + 0.4s;
+            animation-delay: $delay + 0.4s;
+}
+
+
+.mov-0{
+  animation: pulse 1s ease infinite;
+}
+
+
+@keyframes slideInUp{
+  to{
+    transform: translateY(0);
+  }
+}
 /*
 .color.left:nth-of-type(2){
   animation-delay: .2s;
