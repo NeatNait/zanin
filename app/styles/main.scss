@@ -9,7 +9,7 @@ $fa-font-path: "../bower_components/components-font-awesome/fonts" !default;
 $icon-font-path: "/bower_components/sass-bootstrap/fonts/";
 
 @import 'sass-bootstrap/lib/bootstrap';
-
+@import url('http://fonts.googleapis.com/css?family=Varela+Round');
 
 
 
@@ -39,7 +39,10 @@ body {
     color:white;
     overflow: hidden;
     background: $body-color;
-
+    font-family: 'Varela Round',sans-serif;
+}
+h1,h2,h3,h4,h5,h6{
+  font-family: 'Varela Round',sans-serif;
 }
 
 /* Everything but the jumbotron gets side spacing for mobile first views */
@@ -175,6 +178,7 @@ hr {
 .font-orange{
   color:$orange;
 }
+
 .blue{
   background-color:$blue;
 }
@@ -532,6 +536,12 @@ html,body, .row, .container-view, .full-height{
   animation-fill-mode: forwards;
 }
 
+.action:nth-of-type(4){
+  transform: translateY(2000px);
+  animation: slideInUp .4s ease;
+  animation-fill-mode: forwards;
+}
+
 $delay : 2s;
 
 .action.init{
@@ -566,6 +576,8 @@ $delay : 2s;
 }
 
 
+
+
 .mov-0{
   animation: pulse 1s ease infinite;
 }
@@ -597,7 +609,7 @@ $delay : 2s;
 .color{
   color:transparent;
   font-size:5em;
-  line-height:1.6em;
+  line-height:1.9em;
 }
 .push, .pushed{
   animation: test 1s ease alternate;
@@ -682,7 +694,7 @@ $delay : 2s;
 
 .splash-logo{
   background-color:white;
-  background: url('..'+image-url('zanin.png', true, true)) no-repeat center center fixed;
+  background: url('..'+image-url('zanin.png', true, true)) no-repeat bottom center fixed;
   background-size: cover;
 }
 
@@ -699,14 +711,19 @@ $delay : 2s;
   text-align: left;
 }
 
-.start{
+.splash-view .menu{
   text-align:center;
   padding:8px;
   position: absolute;
-  bottom:2em;
+  bottom:0em;
   width:100%;
-  font-size: 1.2em;
-  animation: presionaYa 1s ease alternate infinite;
+//  font-size: 1.2em;
+}
+
+.start{
+  animation: colorRotate 8s linear infinite;
+  font-family: 'Varela Round',sans-serif;
+  font-size:1.5em;
 }
 
 @keyframes presionaYa{
@@ -714,7 +731,26 @@ $delay : 2s;
     transform: scale(1);
   }
   to{
-    transform: scale(0.8);
+    transform: scale(0.9);
+  }
+}
+
+@keyframes colorRotate{
+  0%{
+    color:$blue;
+    //transform: scale(1);
+  }
+  25%{
+    color:$red;
+    //transform: scale(0.9);
+  }
+  50%{
+    color:$yellow;
+    //transform: scale(1);
+  }
+  100%{
+    color:$green;
+    //transform: scale(0.9);
   }
 }
 
@@ -726,8 +762,31 @@ $delay : 2s;
   font-size: 60px;
 }
 
+.odometer-value{
+  //font-family: 'Varela Round',sans-serif;
+}
+
 #clicks-chart canvas{
   width: 100% !important;
   max-width: 800px;
   height: auto !important;
+}
+
+
+.tutorial{
+  //color:#666;
+  font-size:.9em;
+}
+.tutorial .fa{
+  font-size:2.5em;
+  margin-bottom: .2em;
+}
+
+.tutorial-view {
+  padding-top:2.5em;
+}
+
+.tutorial-view h1, h2 {
+  font-family: 'Varela Round',sans-serif;
+  font-weight: 900;
 }

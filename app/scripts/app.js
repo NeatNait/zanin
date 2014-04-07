@@ -32,6 +32,14 @@ angular.module('zaninApp', [
         templateUrl: 'views/records.html',
         controller: 'RecordsCtrl'
       })
+      .when('/tutorial', {
+        templateUrl: 'views/tutorial.html',
+        controller: 'TutorialCtrl'
+      })
+      .when('/tutorial', {
+        templateUrl: 'views/tutorial.html',
+        controller: 'TutorialCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });
@@ -40,5 +48,6 @@ angular.module('zaninApp', [
     $rootScope.go = function ( path, side ) {
       $rootScope.side = side;
       $location.path( path );
+      
     };
   });

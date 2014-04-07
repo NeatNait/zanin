@@ -101,7 +101,12 @@ angular.module('zaninApp')
 				start();
 			},2000);
 
-			$scope.actions.push($scope.createRandomAction());
+
+			//FIXME 1st action must be a dobletap to avoid the animation bug
+			var color = $scope.colors[Math.floor($scope.colors.length*Math.random())].color;
+			var gesture = $scope.gestures[1].g;
+			var action = new Action(gesture, color);
+			$scope.actions.push(action);
 			$scope.actions.push($scope.createRandomAction());
 			$scope.actions.push($scope.createRandomAction());
 			$scope.actions.push($scope.createRandomAction());
@@ -419,6 +424,9 @@ angular.module('zaninApp')
 			
 
 			//console.log(lastGesture + ' - ' + g + ' - ' + $scope.actions[0].gesture);
+
+			//FIXME detect animation end
+			$scope.loaded = true;
 
 			if(g === 'tap' && $scope.actions[0].gesture === 'doubleTap'){
 				if(checkDouble){

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('zaninApp')
-	.controller('ChartCtrl', function ($rootScope, $scope, $interval, $timeout, $animate) {
+	.controller('ChartCtrl', function ($rootScope, $scope, $interval, $timeout) {
 
 		$scope.path = 'chart';
 

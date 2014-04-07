@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('zaninApp')
-	.controller('MenuCtrl', function ($rootScope, $scope, $interval, $timeout, $animate) {
+	.controller('MenuCtrl', function ($rootScope, $scope, $interval, $timeout) {
 
 		$rootScope.path = 'menu';
 
