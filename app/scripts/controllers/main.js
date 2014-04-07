@@ -122,7 +122,7 @@ angular.module('zaninApp')
 
 		function start () {
 
-			$scope.timeLeft = 50000;
+			$scope.timeLeft = 5;
 			
 
 			//FIXME detect load animation end
