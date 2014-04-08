@@ -694,7 +694,7 @@ $delay : 2s;
 
 .splash-logo{
   background-color:white;
-  background: url('..'+image-url('zanin.png', true, true)) no-repeat bottom center fixed;
+  background: url('..'+image-url('zanin.png', true, true)) no-repeat center center fixed;
   background-size: cover;
 }
 
