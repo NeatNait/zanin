@@ -44,6 +44,11 @@ angular.module('zaninApp', [
         redirectTo: '/'
       });
   })
+  .config(['$httpProvider', function($httpProvider) {
+        $httpProvider.defaults.useXDomain = true;
+        delete $httpProvider.defaults.headers.common['X-Requested-With'];
+    }
+  ])
   .run(function($rootScope, $location) {
     $rootScope.go = function ( path, side ) {
       $rootScope.side = side;

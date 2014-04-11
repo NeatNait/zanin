@@ -1,7 +1,8 @@
 'use strict';
 
 angular.module('zaninApp')
-	.controller('MenuCtrl', function ($rootScope, $scope, $interval, $timeout) {
+	.controller('MenuCtrl', function ($rootScope, $scope, $interval, $timeout, GameStat) {
+
 
 		$rootScope.path = 'menu';
 
