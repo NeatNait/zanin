@@ -1,11 +1,16 @@
   <div class="row" >
     <div class="col-xs-12 full-height menu" ng-swipe-right="go('menu','left')">
       <br>
+      <input class="" ng-model="userName" type="text">
+
+      <input class="btn" type="buttom" value="change name" ng-click="updateUser()">
       <div class="col-xs-6 col-xs-offset-3">
-        records
-        <div ng-repeat="r in records">
-        	{{r.name}}
-        	{{r.Name}}
+        records {{gameStats.length}}
+        <div ng-repeat="g in gameStats | orderBy: '-data.points'">
+          <div ng-if="g.data.points > 0">
+            <span ng-if="g.user === user._id">me</span>
+            {{g.data.points}}
+          </div>
         </div>
       </div>
     </div> 
