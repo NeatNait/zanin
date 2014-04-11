@@ -8,7 +8,8 @@ angular.module('zaninApp', [
   'ngTouch',
   'ngAnimate',
   'hmTouchEvents',
-  'chartjs-directive'
+  'chartjs-directive',
+  'LocalStorageModule'
 ])
   .config(function ($routeProvider) {
     $routeProvider
@@ -44,6 +45,12 @@ angular.module('zaninApp', [
         redirectTo: '/'
       });
   })
+  /*
+    change default prefix for local storage
+  */
+  .config(['localStorageServiceProvider', function(localStorageServiceProvider){
+    localStorageServiceProvider.setPrefix('neatnait.zanin');
+  }])
   /*.config(['$httpProvider', function($httpProvider) {
         $httpProvider.defaults.useXDomain = true;
         delete $httpProvider.defaults.headers.common['X-Requested-With'];
@@ -56,3 +63,5 @@ angular.module('zaninApp', [
       
     };
   });
+
+

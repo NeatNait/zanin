@@ -18,7 +18,8 @@
     "components-font-awesome": "~4.0.3",
     "odometer": "~0.4.6",
     "angular-chartjs-directive": "*",
-    "howler": "~1.1.18"
+    "howler": "~1.1.18",
+    "angular-local-storage": "~0.0.1"
   },
   "devDependencies": {
     "angular-mocks": "1.2.6",

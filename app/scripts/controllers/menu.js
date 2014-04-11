@@ -1,16 +1,19 @@
 'use strict';
 
 angular.module('zaninApp')
-	.controller('MenuCtrl', function ($rootScope, $scope, $interval, $timeout, GameStat) {
+	.controller('MenuCtrl', function ($rootScope, $scope, $interval, $timeout, GameStat, localStorageService) {
 
 
 		$rootScope.path = 'menu';
 
 
 
+		// Start fresh
+		//localStorageService.clearAll();
+		//localStorageService.add('Favorite Sport','Ultimate Frisbee');
 
 
-
+		var userId = localStorageService.get('userId');
 
 
 		if($rootScope.game === undefined){
@@ -48,7 +51,7 @@ angular.module('zaninApp')
 
 		var gameStat = new GameStat();
 
-		gameStat.user = 'test1';
+		gameStat.user = userId;
 		gameStat.data = $rootScope.game;
 
 		//console.log('sook here');
