@@ -7,6 +7,12 @@ angular.module('zaninApp')
 		$rootScope.path = 'menu';
 
 
+
+
+
+
+
+
 		if($rootScope.game === undefined){
 			$rootScope.game = {};
 		}
@@ -38,6 +44,18 @@ angular.module('zaninApp')
 		if($rootScope.game !== undefined){
 			$rootScope.oldPoints = $rootScope.game.points;
 		}
+
+
+		var gameStat = new GameStat();
+
+		gameStat.user = 'test1';
+		gameStat.data = $rootScope.game;
+
+		//console.log('sook here');
+		//console.log(gameStat);
+
+		gameStat.$save();
+
 
 
 		/*

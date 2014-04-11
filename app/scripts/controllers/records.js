@@ -6,9 +6,9 @@ angular.module('zaninApp')
 		$rootScope.path = 'rercords';
 		$scope.test = '';
 
-		/*GameStat.get({}, function(gameStat) {
+		GameStat.query({}, function(gameStat) {
 	    	console.log(gameStat);
-	  	});*/
+	  	});
 
 		//one result
 		/*GameStat.query({parkId:'5346741fa9346a0000aef4de'}, function(records) {
@@ -32,10 +32,20 @@ angular.module('zaninApp')
 			// POST: /user/123/record/456?amount=9.99&charge=true {id:456, number:'1234', name:'J. Smith'}
      	});*/
 
+		var gameStat = new GameStat();
+
+		gameStat.user = 'sook';
+
+		console.log('sook here');
+		console.log(gameStat);
+
+		gameStat.$save();
+
 		/*GameStat.query({}, function(gameStat) {
 //		GameStat.get({userId:123}, function(gameStat) {
 			console.log(gameStat);
-			//gameStat[0].Name = 'test';
+			gameStat[0].user = 'test';
+			gameStat[0].$save();
 			//gameStat[0].$charge();
 		});*/
 
