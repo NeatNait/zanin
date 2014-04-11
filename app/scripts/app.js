@@ -48,9 +48,10 @@ angular.module('zaninApp', [
   /*
     change default prefix for local storage
   */
-  .config(['localStorageServiceProvider', function(localStorageServiceProvider){
+  //FIXME crashes on minifiying
+  /*.config(['localStorageServiceProvider', function(localStorageServiceProvider){
     localStorageServiceProvider.setPrefix('neatnait.zanin');
-  }])
+  }])*/
   /*.config(['$httpProvider', function($httpProvider) {
         $httpProvider.defaults.useXDomain = true;
         delete $httpProvider.defaults.headers.common['X-Requested-With'];
