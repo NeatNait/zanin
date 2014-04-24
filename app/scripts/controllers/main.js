@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('zaninApp')
-	.controller('MainCtrl', function ($rootScope, $scope, $interval, $timeout, $animate, $location) {
+	.controller('MainCtrl', function ($rootScope, $scope, $interval, $timeout, $animate, $location, GameStat, localStorageService) {
 
 		var Action = function(g, c){
 			this.gesture = g;
@@ -16,6 +16,7 @@ angular.module('zaninApp')
 			pointsToChange,
 			pointsInterval;
 
+		var userId = localStorageService.get('userId');
 
 		$scope.path = 'game';
 
@@ -290,7 +291,18 @@ angular.module('zaninApp')
 			//let the game object be accesible for any controller
 			$rootScope.game = $scope.game;
 
-			console.log($scope.game);
+
+
+			var gameStat = new GameStat();
+
+			gameStat.user = userId;
+			gameStat.data = $scope.game;
+
+			//console.log('sook here');
+			//console.log(gameStat);
+
+			gameStat.$save();
+			//console.log($scope.game);
 
 		}
 
