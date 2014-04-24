@@ -2,8 +2,8 @@
 angular.module('zaninApp')
   .factory('GameStat', ['$resource', function($resource){
     var resource = $resource('http://gamestats-neatnait.rhcloud.com/api/gamestat/:gameStatId',
-    	{gameStatId:'@id'}, {
-    	charge: {method:'POST', params:{charge:true}}
+      {gameStatId:'@id'}, {
+      charge: {method:'POST', params:{charge:true}}
     });
 
     return resource;

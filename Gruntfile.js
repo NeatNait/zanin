@@ -25,6 +25,20 @@ module.exports = function (grunt) {
       dist: 'dist'
     },
 
+
+    phonegap: {
+      config: {
+        root: 'dist',
+        config: 'config.xml',
+        cordova: '.cordova',
+        path: 'phonegap',
+        plugins: [],
+        platforms: ['ios', 'android'],
+        verbose: false
+      }
+    },
+
+
     // Watches files for changes and runs tasks based on the changed files
     watch: {
       js: {
@@ -427,6 +441,12 @@ module.exports = function (grunt) {
     'rev',
     'usemin',
     'htmlmin'
+  ]);
+
+  grunt.registerTask('platform-build', [
+    //'default',
+    'build',
+    'phonegap:build'
   ]);
 
   grunt.registerTask('default', [

@@ -14,13 +14,14 @@ angular.module('zaninApp')
 
 		console.log(userId);
 
-		if(userId == null){
+		if(userId === null){
 			var u = new User();
 
 			u.$save(function(u, putResponseHeaders) {
 				//u => saved user object
 				//putResponseHeaders => $http header getter
 				console.log(u);
+				console.log(putResponseHeaders);
 				localStorageService.add('userId',u._id);
 
 			});

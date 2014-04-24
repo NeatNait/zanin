@@ -8,10 +8,10 @@ angular.module('zaninApp')
 
 		console.log(123);
 		GameStat.query({}, function(gameStats) {
-	    	console.log(gameStats);
+			console.log(gameStats);
 
-	    	$scope.gameStats =  gameStats;
-	  	});
+			$scope.gameStats =  gameStats;
+		});
 
 		$scope.user = User.get({userId:localStorageService.get('userId')}, function(u) {
 			$scope.userName = u.name;
@@ -24,7 +24,7 @@ angular.module('zaninApp')
 			//u.$save();
 			$scope.user.$update();
 
-		}
+		};
 		
 		//one result
 		/*GameStat.query({parkId:'5346741fa9346a0000aef4de'}, function(records) {
@@ -46,7 +46,7 @@ angular.module('zaninApp')
 			// our custom method is mapped as well.
 			//record.$charge({amount:9.99});
 			// POST: /user/123/record/456?amount=9.99&charge=true {id:456, number:'1234', name:'J. Smith'}
-     	});*/
+		});*/
 
 		/*var gameStat = new GameStat();
 
