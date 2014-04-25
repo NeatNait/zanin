@@ -1,5 +1,7 @@
 
   <div class="row">
+  <!-- TODO new game on pinch event would look awesome
+  <div class="row" hm-pinchin="go('game','');"-->
     <div class="col-xs-12 full-height menu" ng-swipe-right="go('chart', 'left')">
     	<div class="col-xs-8 col-xs-offset-2">
     		<br>
@@ -15,7 +17,39 @@
         <h3>time played: {{msToTime(game.timePlayed)}}</h3>
         <br>
         <br>
+        <p class="button play">
+          <i class="fa fa-play"></i>
+          <span>NEW GAME</span>
+        </p>
+
+        <p class="button play">
+          NEW GAME
+        </p>
+
+        <p class="button play">
+          NEW GAME
+        </p>
+
+
+        <p class="button play small">
+          NEW GAME
+        </p>
+
+        <br>
+        <br>
+
       <div class="starts text-centered">
+        
+        <button type="button" class="btn btn-default">Default</button>
+        <button type="button" class="btn btn-primary">Primary</button>
+        
+        <a href="" class="btn btn-default" role="button">Link</a>
+        <a href="" class="btn btn-primary" role="button">Primary link</a>
+        <a href="" class="btn btn-default active" role="button">Link</a>
+        <a href="" class="btn btn-primary active" role="button">Primary link</a>
+
+
+
         <span ng-click="go('game')">NEW GAME</span> | <span ng-click="go('chart')">STATS</span>
       </div>
     	</div>

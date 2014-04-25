@@ -7,22 +7,13 @@ angular.module('zaninApp')
 		$rootScope.path = 'menu';
 
 
-
-		// Start fresh
-		//localStorageService.clearAll();
-		//localStorageService.add('Favorite Sport','Ultimate Frisbee');
-
-
-
-
 		if($rootScope.game === undefined){
+			//avoid NaN menu
+			//$rootScope.go('splash', '');
 			$rootScope.game = {};
 		}
 
-
-		//console.log($rootScope.game);
-
-		//TODO change to oldGame
+		//TODO : change to oldGame
 		//if theres no previous game 
 		if($rootScope.oldPoints === undefined){
 			$rootScope.oldPoints = 0;

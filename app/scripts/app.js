@@ -48,7 +48,7 @@ angular.module('zaninApp', [
   /*
     change default prefix for local storage
   */
-  //FIXME crashes on minifiying
+  //FIXME : crashes on minifiying
   /*.config(['localStorageServiceProvider', function(localStorageServiceProvider){
     localStorageServiceProvider.setPrefix('neatnait.zanin');
   }])*/

@@ -1,0 +1,32 @@
+{
+	"folders":
+	[
+		{
+			"follow_symlinks": true,
+			"path": "."
+		}
+	],
+	"settings": {
+        "todoreview": {
+            "exclude_folders": [
+                "*.git*",
+                "*dist*",
+                "*phonegap*",
+                "*bower_components*",
+    			"*node_modules*"
+            ],
+            "exclude_files": [
+			    "*.md",
+			    "*.sublime-workspace"
+			],
+            "patterns": {
+			    "TODO": "TODO[\\s]*?:+(?P<todo>.*)$",
+			    "NOTE": "NOTE[\\s]*?:+(?P<note>.*)$",
+			    "FIXME": "FIX ?ME[\\s]*?:+(?P<fixme>.*)$",
+			    "CHANGED": "CHANGED[\\s]*?:+(?P<changed>.*)$"
+			}
+        }
+    }
+}
+
+

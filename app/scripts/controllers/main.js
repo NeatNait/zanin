@@ -3,9 +3,11 @@
 angular.module('zaninApp')
 	.controller('MainCtrl', function ($rootScope, $scope, $interval, $timeout, $animate, $location, GameStat, localStorageService) {
 
+
+		//TODO :  create a factory for Actions
 		var Action = function(g, c){
 			this.gesture = g;
-			this.color = c;
+			this.color   = c;
 		};
 
 
@@ -20,6 +22,7 @@ angular.module('zaninApp')
 
 		$scope.path = 'game';
 
+		//FIXME : sound not working correctly
 		var sound = new Howl({
 		  urls: ['audio/loop.wav'],
 		  loop: true
@@ -29,6 +32,7 @@ angular.module('zaninApp')
 
 		$scope.init = function(){
 
+			//TODO : create a factory or service for the entire game object
 			$scope.game = {
 				start:new Date(),
 				end:false,
@@ -78,7 +82,7 @@ angular.module('zaninApp')
 
 			$scope.actions = [];
 
-			//TODO change to game object
+			//TODO : change to game object
 			$scope.game.points = 0;
 			$scope.timeLeft = 0;
 			$scope.totalTimePlayed = 0;
@@ -98,12 +102,13 @@ angular.module('zaninApp')
 			pointsInterval = 300;
 
 
+			//animation end delay
 			$timeout(function () {
 				start();
 			},2000);
 
 
-			//FIXME 1st action must be a dobletap to avoid the animation bug
+			//FIXME : 1st action must be a dobletap to avoid the animation bug
 			var color = $scope.colors[Math.floor($scope.colors.length*Math.random())].color;
 			var gesture = $scope.gestures[1].g;
 			var action = new Action(gesture, color);
@@ -131,7 +136,7 @@ angular.module('zaninApp')
 			$scope.timeLeft = 5;
 			
 
-			//FIXME detect load animation end
+			//FIXME : detect load animation end
 			$timeout(function(){
 				$scope.loaded = true;
 			},2000);
@@ -146,7 +151,7 @@ angular.module('zaninApp')
 					return Math.log(y) / Math.log(x);
 				}
 
-				var $value = Math.floor(getBaseLog($scope.baselvl,$scope.game.points));
+				var $value = Math.floor(getBaseLog($scope.baselvl, $scope.game.points));
 				//console.log('valor - ' + $value + ' - ' + $scope.game.points + ' - ' + getBaseLog($scope.baselvl,$scope.game.points))  ;
 
 				if($value <= $scope.maxlvl) {
@@ -161,16 +166,12 @@ angular.module('zaninApp')
 			//}
 
 				if($scope.timeLeft <= 0){
-					//$scope.lvl = 'GAME OVER';
-					//$scope.level = 'GAME OVER';
+
 					$scope.timeLeft = 0;
 					$interval.cancel(endGameIntervalId);
 
-					//TODO change to this
-					//$scope.game = {points:}
-					
+					//FIXME : sound not working					
 					sound.fade(1,0,1000);
-
 					gameEnd();
 
 					$location.path('/menu');
@@ -180,7 +181,7 @@ angular.module('zaninApp')
 				/*
 				* Función para la puntuación de Zanin
 				* En función de los puntos, aumenta la difultad, hasta un máximo			
-				* todo se basa en un nivel máximo.
+				* NOTE : se basa en un nivel máximo.
 				*/
 
 				else{
@@ -224,7 +225,7 @@ angular.module('zaninApp')
 		}, 20000);
 
 
-		//TODO reset action at x interval
+		//TODO : reset action at x interval
 		/*
 		//var speed = 5000,
 		//	intervalId,
@@ -278,16 +279,13 @@ angular.module('zaninApp')
 
 		function gameEnd(){
 
-
-			//TODO delete point var and use only game.points
-			//TODO check if this has been done hahahah
-			//$scope.game.points = $scope.game.points;
-
 			updateComboHistory();
 
 			$scope.game.end = new Date();
 			$scope.game.timePlayed = $scope.game.end - $scope.game.start;
 
+			//FIXME : remove starting 2 extra points
+			$scope.game.points -= 2;
 			//let the game object be accesible for any controller
 			$rootScope.game = $scope.game;
 
@@ -298,9 +296,7 @@ angular.module('zaninApp')
 			gameStat.user = userId;
 			gameStat.data = $scope.game;
 
-			//console.log('sook here');
-			//console.log(gameStat);
-
+			//persist to server
 			gameStat.$save();
 			//console.log($scope.game);
 
@@ -364,7 +360,7 @@ angular.module('zaninApp')
 			}
 		};*/
 
-		//TODO break into multiple functions again
+		//TODO : break into multiple functions again
 		$scope.checkGesture = function($event, c, g){
 			//$event.stopPropagation();
 			//$event.preventDefault();
@@ -437,7 +433,7 @@ angular.module('zaninApp')
 
 			//console.log(lastGesture + ' - ' + g + ' - ' + $scope.actions[0].gesture);
 
-			//FIXME detect animation end
+			//FIXME : detect animation end
 			$scope.loaded = true;
 
 			if(g === 'tap' && $scope.actions[0].gesture === 'doubleTap'){

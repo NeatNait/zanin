@@ -8,9 +8,13 @@ $fa-font-path: "../bower_components/components-font-awesome/fonts" !default;
 
 $icon-font-path: "/bower_components/sass-bootstrap/fonts/";
 
+
+@import 'variablesCustomBootstrap';
 @import 'sass-bootstrap/lib/bootstrap';
 //@import url('http://fonts.googleapis.com/css?family=Varela+Round');
 @import "../fonts/VarelaRound.scss";
+
+
 
 
 $black  : #111;
@@ -789,4 +793,53 @@ $delay : 2s;
 .tutorial-view h1, h2 {
   font-family: 'Varela Round',sans-serif;
   font-weight: 900;
+}
+
+
+.btn {
+  border-width: 2px;
+}
+
+.btn.btn-default{
+  background: transparent;
+}
+
+
+.button.play{
+  //$size:140px;
+  $size:7.5em;
+
+  width:$size;
+  height:$size;
+  display: inline-block;
+  //border:8px solid white;
+  border:.5em solid white;
+  border-radius: 50%;
+  text-align: center;
+ 
+  //line-height: 86px;
+  padding-top:15px;
+  color:white;
+
+  font-size: 1.35em;
+  //line-height: 97px;
+
+  & i{
+    font-size: $size*0.5;
+    padding-left: 8px;
+    display: block;
+
+  }
+
+  & span{
+    font-size: .8em;
+  }
+}
+
+.button.play.small{
+    $size:7.5em;
+  font-size: 1em;
+
+  width:$size;
+  height:$size;
 }

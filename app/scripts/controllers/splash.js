@@ -9,7 +9,7 @@ angular.module('zaninApp')
 			$location.path( '/'+path );
 		};
 
-		//TODO change to full user object
+		//TODO : change to full user object
 		var userId = localStorageService.get('userId');
 
 		console.log(userId);
