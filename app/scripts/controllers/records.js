@@ -3,7 +3,7 @@
 angular.module('zaninApp')
 	//.controller('RecordsCtrl', function ($scope, $rootScope, GameStat) {
 	.controller('RecordsCtrl', function ($scope, $rootScope, GameStat, User, localStorageService) {
-		$rootScope.path = 'rercords';
+		$rootScope.path = 'records';
 		$scope.test = '';
 
 		console.log(123);

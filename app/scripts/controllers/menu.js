@@ -27,11 +27,11 @@ angular.module('zaninApp')
 		  format: 'd'
 		});
 
-		//update points with actual game points after 2sec
+		//update points with actual game points after xsec
 		//allowing the view to fully charge and stay black for a while
 		$timeout(function(){
 			od.update($rootScope.game.points);
-		}, 3000);
+		}, 4000);
 
 		//set previous game points
 		if($rootScope.game !== undefined){

@@ -465,13 +465,26 @@ html,body, .row, .container-view, .full-height{
   
 }
 
+.menu-view.ng-leave{
+  animation: slideOutUp 1s ease;
+}
 
-.left.ng-enter{
+.menu-view.ng-enter{
+  animation: slideInDown 1s ease;
+  animation-delay:2s;
+
+}
+/*.up.ng-leave{
+  animation: slideOutUp 1s ease;
+  animation-delay:1s;
+}*/
+
+.menu-view.left.ng-enter, .left.ng-enter{
   animation: slideInLeft 1s ease;
   animation-delay:1s;
 }
 
-.left.ng-leave {
+.menu-view.left.ng-leave, .left.ng-leave {
   animation: slideOutRight 1s ease;
 }
 /*.ng-leave.right {
@@ -533,7 +546,7 @@ html,body, .row, .container-view, .full-height{
 }*/
 
 
-.circle{
+.circle, .ui{
   opacity: 0;
   animation: fadeIn 1s ease;
   animation-delay: 2s;
@@ -710,9 +723,12 @@ $delay : 2s;
   background-color: $blue;
 }
 
+.menu-view .menu, .records-view .menu{
+  text-align: left;
+}
+
 .menu-view .menu{
   background: $red;
-  text-align: left;
 }
 
 .splash-view .menu{
@@ -818,14 +834,14 @@ $delay : 2s;
   text-align: center;
  
   //line-height: 86px;
-  padding-top:15px;
+  padding-top:.8em;
   color:white;
 
   font-size: 1.35em;
   //line-height: 97px;
 
   & i{
-    font-size: $size*0.5;
+    font-size: $size*0.45;
     padding-left: 8px;
     display: block;
 
@@ -837,9 +853,24 @@ $delay : 2s;
 }
 
 .button.play.small{
-    $size:7.5em;
-  font-size: 1em;
+  
+  $size:5.5em;
 
   width:$size;
   height:$size;
+  
+  font-size: .9em;
+  position: relative;
+  top: -38px;
+  right: -100px;
+
+  & i{
+    font-size: $size*0.55;
+    padding-left: 0;
+  }
+
+  & i.fa-arrow-right{
+    padding-left: .1em;
+  }
 }
+
