@@ -13,10 +13,13 @@ angular.module('zaninApp')
 
 		
 		var	endGameIntervalId,
+			lastPileGesture,
 			lastGesture,
 			lastColor,
 			pointsToChange,
-			pointsInterval;
+			pointsInterval,
+			warnInterval,
+			pointsToGesture;
 
 		var userId = localStorageService.get('userId');
 
@@ -65,7 +68,8 @@ angular.module('zaninApp')
 			$scope.loaded = false;
 
 			$scope.colors = [
-				{color:'blue', side:'left'},
+				{color:'blue', side:'left'}
+				,
 				{color:'red', side:'left'},
 				{color:'green', side:'right'},
 				{color:'yellow', side:'right'}
@@ -98,8 +102,11 @@ angular.module('zaninApp')
 			$scope.maxenergy = 7;
 			$scope.energy = 0;
 			$scope.timeincrease = 1;
+			$scope.warnToChange = 0;
 			pointsToChange = 300;
 			pointsInterval = 300;
+			warnInterval = 10;
+			pointsToGesture = 400;
 
 
 			//animation end delay
@@ -131,6 +138,36 @@ angular.module('zaninApp')
 		};
 
 
+		function setLevel(){
+			function getBaseLog(x, y){
+					return Math.log(y) / Math.log(x);
+				}
+
+				var $value = Math.floor(getBaseLog($scope.baselvl, $scope.game.points));
+				//console.log('valor - ' + $value + ' - ' + $scope.game.points + ' - ' + getBaseLog($scope.baselvl,$scope.game.points))  ;
+
+				if($value <= $scope.maxlvl) {
+					$scope.level = $value;
+				}
+		}
+
+		//changes the color order
+		function changeColors(){
+			if($scope.game.points > pointsToChange){
+					pointsToChange += pointsInterval;
+					changeRandomSide();
+				}
+		}
+
+		//sets $scope.warnToChange var from 0 to warnInterval, depending on how
+		//close points to change is to pointsInterval (1 far 10 close)
+		function setWarnToChange(){
+			
+			$scope.warnToChange = warnInterval - (Math.floor((pointsToChange - $scope.game.points) / pointsInterval * warnInterval));	
+			if($scope.warnToChange > warnInterval)
+				$scope.warnToChange = 0;
+		}
+
 		function start () {
 
 			$scope.timeLeft = 5;
@@ -147,21 +184,9 @@ angular.module('zaninApp')
 				//Función logarítmica en función de los aciertos, con el máximo en MAXLVL
 				//$scope.level = function(){
 					
-				function getBaseLog(x, y){
-					return Math.log(y) / Math.log(x);
-				}
-
-				var $value = Math.floor(getBaseLog($scope.baselvl, $scope.game.points));
-				//console.log('valor - ' + $value + ' - ' + $scope.game.points + ' - ' + getBaseLog($scope.baselvl,$scope.game.points))  ;
-
-				if($value <= $scope.maxlvl) {
-					$scope.level = $value;
-				}
 				
-				if($scope.game.points > pointsToChange){
-					pointsToChange += pointsInterval;
-					changeRandomSide();
-				}
+				
+				
 				
 			//}
 
@@ -212,7 +237,8 @@ angular.module('zaninApp')
 		}
 
 		
-
+		//FIXME cambiar a puntos
+		/*
 		$interval(function() {
 			
 			$scope.gestures = [
@@ -223,7 +249,18 @@ angular.module('zaninApp')
 			];
 
 		}, 20000);
+		*/
 
+		function includeGestures(){
+
+			$scope.gestures = [
+				{g:'tap'},
+				{g:'doubleTap'},
+				{g:'swipeLeft'},
+				{g:'swipeRight'}
+			];
+
+		}
 
 		//TODO : reset action at x interval
 		/*
@@ -260,6 +297,13 @@ angular.module('zaninApp')
 			$scope.game.taps[c].count++;
 			//console.log($scope.game.taps[c].color + ':' + $scope.game.taps[c].count);
 			$scope.createNewAction();
+
+			setWarnToChange();
+			setLevel();
+			changeColors();
+
+			if($scope.game.points > pointsToGesture)
+				includeGestures();
 		};
 
 		$scope.fallos = function(){
@@ -362,89 +406,34 @@ angular.module('zaninApp')
 
 		//TODO : break into multiple functions again
 		$scope.checkGesture = function($event, c, g){
-			//$event.stopPropagation();
-			//$event.preventDefault();
-			//$event.stopImmediatePropagation();
-
-			//var gesture = g;
-
-
-			/*if(prevEvent !== undefined){
-				console.log($event.timeStamp - prevEvent.timeStamp);
-			}*/
-
-			/*
-			//ignore extra tap event at the end of doubleTap
-			if(prevEvent && ($event.timeStamp - prevEvent.timeStamp < 20) ){
-				$timeout.cancel(tapTimeOut);
-
-				lastGesture = g;
-				lastColor = c;
-				prevEvent = $event;
-
-				return;
-			}
-
-			//if the time between to taps is smaller than 300ms and the 
-			//actual gesture is doubleTap cancel the tap event timeout
-			if(lastGesture === 'tap' && g === 'doubleTap' && prevEvent && ($event.timeStamp - prevEvent.timeStamp < 300) ){
-
-				$timeout.cancel(tapTimeOut);
-
-				lastGesture = g;
-				lastColor = c;
-				prevEvent = $event;
-
-				checkMove('doubleTap', c);
-
-				return;
-			}
-
-			//only if its a tap
-			if(g==='tap'){
-				//create a timeout for triggering the tap event
-				tapTimeOut = $timeout(function () {
-					console.log('tap');
-					checkMove('tap', c);
-				},300);
-			}
-			//its a swipe
-			else{
-				checkMove(g, c);
-			}
-
-			lastGesture = g;
-			lastColor = c;
-			prevEvent = $event;
-			*/
-
-
-
-			/*if(prevEvent && ($event.timeStamp - prevEvent.timeStamp < 20) ){
-				//gesture = 'doubletap';
-				return;
-			}*/
-
-			//console.log($event);
-			//console.log(lastGesture + ' - ' + g + ' - ' + $scope.actions[0].gesture);
-
-			//this will avoid double tap/single tap same color bug
 			
-
-			//console.log(lastGesture + ' - ' + g + ' - ' + $scope.actions[0].gesture);
 
 			//FIXME : detect animation end
 			$scope.loaded = true;
+			console.log("Gesto-" + g + "-Pila-"+$scope.actions[0].gesture+"-PilaAnt-"+lastPileGesture + "-CheckDouble"+checkDouble);
 
-			if(g === 'tap' && $scope.actions[0].gesture === 'doubleTap'){
+			//fixes Tap-doubletap with just two taps error
+			if(g === 'doubleTap' && 
+				lastPileGesture === 'tap' && 
+				$scope.actions[0].gesture === 'doubleTap') {
+				console.log("Paso por aquí");
+
+				g = 'tap';
+				
+			}
+			lastPileGesture = $scope.actions[0].gesture;
+
+			
+			if(g === 'tap' && $scope.actions[0].gesture === 'doubleTap'){				
 				if(checkDouble){
 					$scope.fallos();
 					checkDouble = 0;
 					return;
-				}
+				}				
 				checkDouble++;
 				return;
 			}
+
 
 			if(checkDouble && g !== 'doubleTap'){
 				$scope.fallos();
@@ -476,7 +465,8 @@ angular.module('zaninApp')
 
 			
 			lastGesture = g;
-			lastColor = c;
+			lastColor = c;			
+			
 			prevEvent = $event;
 		};
 
