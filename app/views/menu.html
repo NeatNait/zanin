@@ -1,0 +1,37 @@
+  <div class="row">
+  <!-- TODO new game on pinch event would look awesome
+  <div class="row" hm-pinchin="go('game','');"-->
+    <div class="col-xs-12 full-height menu" ng-swipe-right="go('chart', 'left')">
+    	<div class="col-xs-6 col-xs-offset-1">
+    		<br>
+    		<br>
+	    	<!--h1>Points: {{game.points}}</h1>
+
+        <!--TODO add 0 at left to complete XXXX format-->
+        <!--div class="zero">0</div><div class="zero">0</div-->
+        <!--div ng-if="testNumber < 10"><h1>asdfasdf</h1></div-->
+        <div id="points">0</div>
+
+        <h2>highest combo<br> {{game.highestCombo}}</h2>
+        <h3>time played<br> {{msToTime(game.timePlayed)}}</h3>
+        
+    	</div>
+
+      <div class="col-xs-5">
+              
+        <br>
+        <br>
+        <p ng-click="go('game', 'up')" class="button play">
+          <i class="fa fa-play"></i>
+          <span>NEW GAME</span>
+        </p>
+
+        <p ng-click="go('records', 'left')" class="button play small">
+          <i class="fa fa-trophy"></i>
+        </p>
+
+
+      </div>
+
+    </div> 
+  </div> 

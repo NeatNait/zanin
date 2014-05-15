@@ -1,0 +1,32 @@
+  <div class="row" >
+    <div class="col-xs-12 full-height menu" ng-swipe-right="go('menu','left')">
+      <!--input class="" ng-model="userName" type="text">
+
+      <input class="btn" type="buttom" value="change name" ng-click="updateUser()"-->
+      <div class="col-xs-6 col-xs-offset-1">
+        records {{gameStats.length}}
+        <div ng-repeat="g in gameStats | orderBy: '-data.points'">
+          <div ng-if="g.data.points > 0">
+            <span ng-if="g.user === user._id">me</span>
+            {{g.data.points}}
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-5">
+              
+        <br>
+        <br>
+        <p ng-click="go('game', 'up')" class="button play">
+          <i class="fa fa-play"></i>
+          <span>NEW GAME</span>
+        </p>
+
+        <p ng-click="go('menu', 'left')" class="button play small">
+          <i class="fa fa-arrow-right"></i>
+        </p>
+
+
+      </div>
+
+    </div> 
+  </div> 
