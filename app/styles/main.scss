@@ -659,6 +659,18 @@ $delay : 2s;
 }
 
 
+.actions{
+  padding-top:1.3em;
+}
+
+.actions .score{
+  font-size: 17px;
+  
+}
+
+.actions .combo{
+  margin-top:.5em;
+}
 
 .circle{
   border-radius: 50%;
@@ -668,6 +680,38 @@ $delay : 2s;
   line-height: 2.5em;
   bottom:.1em;
   margin:auto;
+}
+
+
+.warning-balls{
+  text-align: left;
+  margin: auto;
+  width: 58px;
+  height: 20px;
+  animation: bounce 2s ease;
+  animation-delay: 0;
+margin-top:.5em;
+  margin-bottom: 1.3em;
+  /*&.red{
+    //background:red;
+    &.circle{
+      background:$body-color;
+    }
+  }*/
+
+  &.flash{
+    animation: flash .7s ease infinite;
+  }
+}
+.circle.small{
+  height: 10px;
+  width: 10px;
+  display: inline-block;
+  margin-left:5px;
+}
+
+.circle.solid{
+  background: white;
 }
 
 .circle.combo-1{
