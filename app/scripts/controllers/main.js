@@ -130,8 +130,8 @@ angular.module('zaninApp')
 			return Math.ceil($scope.combo/20);
 		};
 
-		$scope.load = function () {
-			//$timeout(function() {
+		$scope.load = function ()
+		{			//$timeout(function() {
 			$scope.init();
 			//}, wait);
 		};
@@ -142,29 +142,30 @@ angular.module('zaninApp')
 					return Math.log(y) / Math.log(x);
 				}
 
-				var $value = Math.floor(getBaseLog($scope.baselvl, $scope.game.points));
+			var $value = Math.floor(getBaseLog($scope.baselvl, $scope.game.points));
 				//console.log('valor - ' + $value + ' - ' + $scope.game.points + ' - ' + getBaseLog($scope.baselvl,$scope.game.points))  ;
 
-				if($value <= $scope.maxlvl) {
-					$scope.level = $value;
-				}
+			if($value <= $scope.maxlvl) {
+				$scope.level = $value;
+			}
 		}
 
 		//changes the color order
 		function changeColors(){
 			if($scope.game.points > pointsToChange){
-					pointsToChange += pointsInterval;
-					changeRandomSide();
-				}
+				pointsToChange += pointsInterval;
+				changeRandomSide();
+			}
 		}
 
 		//sets $scope.warnToChange var from 0 to warnInterval, depending on how
 		//close points to change is to pointsInterval (1 far 10 close)
 		function setWarnToChange(){
 			
-			$scope.warnToChange = warnInterval - (Math.floor((pointsToChange - $scope.game.points) / pointsInterval * warnInterval));	
-			if($scope.warnToChange > warnInterval)
+			$scope.warnToChange = warnInterval - (Math.floor((pointsToChange - $scope.game.points) / pointsInterval * warnInterval));
+			if($scope.warnToChange > warnInterval){
 				$scope.warnToChange = 0;
+			}
 		}
 
 		function start () {
@@ -301,8 +302,9 @@ angular.module('zaninApp')
 			setLevel();
 			changeColors();
 
-			if($scope.game.points > pointsToGesture)
+			if($scope.game.points > pointsToGesture){
 				includeGestures();
+			}
 		};
 
 		$scope.fallos = function(){
@@ -409,13 +411,13 @@ angular.module('zaninApp')
 
 			//FIXME : detect animation end
 			$scope.loaded = true;
-			console.log("Gesto-" + g + "-Pila-"+$scope.actions[0].gesture+"-PilaAnt-"+lastPileGesture + "-CheckDouble"+checkDouble);
+			//console.log("Gesto-" + g + "-Pila-"+$scope.actions[0].gesture+"-PilaAnt-"+lastPileGesture + "-CheckDouble"+checkDouble);
 
 			//fixes Tap-doubletap with just two taps error
-			if(g === 'doubleTap' && 
-				lastPileGesture === 'tap' && 
+			if(g === 'doubleTap' &&
+				lastPileGesture === 'tap' &&
 				$scope.actions[0].gesture === 'doubleTap') {
-				console.log("Paso por aquí");
+				//console.log("Paso por aquí");
 
 				g = 'tap';
 				
@@ -423,12 +425,12 @@ angular.module('zaninApp')
 			lastPileGesture = $scope.actions[0].gesture;
 
 			
-			if(g === 'tap' && $scope.actions[0].gesture === 'doubleTap'){				
+			if(g === 'tap' && $scope.actions[0].gesture === 'doubleTap'){
 				if(checkDouble){
 					$scope.fallos();
 					checkDouble = 0;
 					return;
-				}				
+				}
 				checkDouble++;
 				return;
 			}
@@ -464,8 +466,7 @@ angular.module('zaninApp')
 
 			
 			lastGesture = g;
-			lastColor = c;			
-			
+			lastColor = c;
 			prevEvent = $event;
 		};
 

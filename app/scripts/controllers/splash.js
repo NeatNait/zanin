@@ -15,10 +15,10 @@ angular.module('zaninApp')
 		var userId = localStorageService.get('userId');
 
 
-		console.log("userID: " + userId);
+		console.log('userID: ' + userId);
 
 		if(userId === null){
-			var u = new User();			
+			var u = new User();
 			$scope.nextView = '\'tutorial\'';
 
 			u.$save(function(u, putResponseHeaders) {
