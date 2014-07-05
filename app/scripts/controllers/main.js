@@ -68,8 +68,7 @@ angular.module('zaninApp')
 			$scope.loaded = false;
 
 			$scope.colors = [
-				{color:'blue', side:'left'}
-				,
+				{color:'blue', side:'left'},
 				{color:'red', side:'left'},
 				{color:'green', side:'right'},
 				{color:'yellow', side:'right'}
