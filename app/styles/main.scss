@@ -232,7 +232,7 @@ html,body, .row, .container-view, .full-height{
     text-align:center;
 }
 .color{
-  height:50%;
+  height:50%;  
 }
 
 /*div{
@@ -627,6 +627,7 @@ $delay : 2s;
   color:transparent;
   font-size:5em;
   line-height:1.9em;
+  transition: opacity .5s ease;
 }
 .push, .pushed{
   animation: test 1s ease alternate;
@@ -690,19 +691,14 @@ $delay : 2s;
   height: 20px;
   animation: bounce 2s ease;
   animation-delay: 0;
-margin-top:.5em;
+  margin-top:.5em;
   margin-bottom: 1.3em;
-  /*&.red{
-    //background:red;
-    &.circle{
-      background:$body-color;
-    }
-  }*/
 
   &.flash{
     animation: flash .7s ease infinite;
   }
 }
+
 .circle.small{
   height: 10px;
   width: 10px;
@@ -744,13 +740,25 @@ margin-top:.5em;
   background: white;
   height:100%;
   width:3px;
-  transition: transform 1s linear;
+  //FIXME : animation bar gap
+  transition: transform 1s linear, opacity 1.5s ease;
   animation-delay: 0s;
   z-index:999;
 }
 
 .bar.right{
   right:0px;
+}
+
+/* FIX de barras en la carga*/
+.bar.init{  
+  transform: translateY(100%)!important;
+}
+
+.bar.flash{
+  animation-iteration-count: infinite;
+  animation-duration: 1.5s;
+  opacity: 0;
 }
 
 .splash-logo{
@@ -844,11 +852,11 @@ margin-top:.5em;
 }
 
 
-.tutorial{
+.tutorial-view .tutorial{
   //color:#666;
   font-size:.9em;
 }
-.tutorial .fa{
+.tutorial-view  .tutorial .fa{
   font-size:2.5em;
   margin-bottom: .2em;
 }
@@ -948,3 +956,39 @@ margin-top:.5em;
 .ng-enter .button{
   transform:scale(0) rotate(180deg);
 }
+
+
+
+/*tutorial*/
+.tutorial .color{
+  //opacity: 0.5;
+}
+
+.color.dimmed{
+  opacity: 0.5;  
+}
+
+.tutorial .instructions{
+  position: fixed;
+  bottom: 0;
+  z-index: 10000000;
+  width: 100%;
+  background-color: $body-color;
+
+}
+
+.tutorial .instructions.ng-enter{
+  animation: bounceInUp 2s ease;
+}
+
+.tutorial .mov{
+  opacity: 0;
+}
+
+.tutorial .mov.mov-0{
+  opacity: 1;
+}
+
+
+
+

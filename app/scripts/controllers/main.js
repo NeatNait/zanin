@@ -33,6 +33,9 @@ angular.module('zaninApp')
 
 		//sound.play();
 
+		$scope.tutorial = true;
+
+
 		$scope.init = function(){
 
 			//TODO : create a factory or service for the entire game object
@@ -67,12 +70,7 @@ angular.module('zaninApp')
 
 			$scope.loaded = false;
 
-			$scope.colors = [
-				{color:'blue', side:'left'},
-				{color:'red', side:'left'},
-				{color:'green', side:'right'},
-				{color:'yellow', side:'right'}
-			];
+			
 
 			$scope.firstClick = null;
 
@@ -89,7 +87,6 @@ angular.module('zaninApp')
 			$scope.game.points = 0;
 			$scope.timeLeft = 0;
 			$scope.totalTimePlayed = 0;
-			//$scope.lvl = 'Level 1';
 			$scope.level = 1;
 			$scope.combo = 0;
 			$scope.game.highestCombo = 0;
@@ -111,29 +108,178 @@ angular.module('zaninApp')
 			//animation end delay
 			$timeout(function () {
 				start();
-			},2000);
 
+			}, 2000);
 
-			//FIXME : 1st action must be a dobletap to avoid the animation bug
-			var color = $scope.colors[Math.floor($scope.colors.length*Math.random())].color;
-			var gesture = $scope.gestures[1].g;
-			var action = new Action(gesture, color);
-			$scope.actions.push(action);
-			$scope.actions.push($scope.createRandomAction());
-			$scope.actions.push($scope.createRandomAction());
-			$scope.actions.push($scope.createRandomAction());
+			$scope.timeLeft = 5;
 
 		};
 
+		//FIXME : 1st action must be a dobletap to avoid the animation bug
+		$scope.gameInit = function(){
+
+			
+
+			$scope.colors = [
+				{color:'blue', side:'left'},
+				{color:'red', side:'left'},
+				{color:'green', side:'right'},
+				{color:'yellow', side:'right'}
+			];
+
+			var color = $scope.colors[Math.floor($scope.colors.length*Math.random())].color;
+			var gesture = $scope.gestures[1].g;
+			var action = new Action(gesture, color);
+			$scope.actions=[];
+			$scope.actions.push(action);
+			
+			$scope.actions.push($scope.createRandomAction());
+			$scope.actions.push($scope.createRandomAction());
+			$scope.actions.push($scope.createRandomAction());
+		};
+
+		$scope.tutorialInit = function(){
+
+			/* Tutorial Step 1*/
+
+			$scope.timeLeft = 5000;
+			$scope.step = 1;
+			tutorialGoToStep($scope.step);
+
+			$scope.$on('acierto', function() {
+				$scope.step++;
+				tutorialGoToStep($scope.step);
+			});
+
+			
+			
+			/* Tutorial Step 2 */
+
+			/*
+			$scope.actions.push($scope.createRandomAction());
+			$scope.actions.push($scope.createRandomAction());
+			$scope.actions.push($scope.createRandomAction());
+			*/
+		};
+
+		var tutorialGoToStep = function(step){
+			switch(step){
+				case 1:
+					$scope.colors = [
+						{color:'blue', side:'left', dimmed:false},
+						{color:'red', side:'left', dimmed:false},
+						{color:'green', side:'right', dimmed:false},
+						{color:'yellow', side:'right', dimmed:false}
+					];
+					// Animación
+					$timeout(function () {
+						$scope.colors = [
+							{color:'blue', side:'left', dimmed:false},
+							{color:'red', side:'left', dimmed:true},
+							{color:'green', side:'right', dimmed:true},
+							{color:'yellow', side:'right', dimmed:true}
+						];
+					}, 3500);
+								
+													
+
+					$scope.actions.push(new Action('doubleTap', $scope.colors[0].color));
+					$scope.actions.push(new Action('tap', $scope.colors[0].color));
+					$scope.actions.push(new Action('swipeLeft', $scope.colors[0].color));
+					$scope.actions.push(new Action('swipeRight', $scope.colors[0].color));
+					$scope.actions.push(new Action('tap', $scope.colors[1].color));
+					$scope.actions.push(new Action('tap', $scope.colors[2].color));
+					$scope.actions.push(new Action('doubleTap', $scope.colors[3].color));
+					$scope.actions.push(new Action('swipeLeft', $scope.colors[0].color));
+					$scope.actions.push(new Action('swipeRight', $scope.colors[0].color));
+
+					$scope.instructionText = 'Toca una vez el color azul';
+
+					break;
+				case 2:
+					$scope.instructionText = 'Toca dos veces el color azul';
+					break;
+				case 3:
+					$scope.instructionText = 'Arrastra a la izquierda en el azul';
+					break;
+				case 4:
+					$scope.instructionText = 'Arrastra a la derecha en el azul';
+					break;
+				case 5:
+					$scope.colors = [
+						{color:'blue', side:'left', dimmed:true},
+						{color:'red', side:'left', dimmed:false},
+						{color:'green', side:'right', dimmed:true},
+						{color:'yellow', side:'right', dimmed:true}
+					];
+					$scope.instructionText = 'Rojo';
+					break;
+				case 6:
+					$scope.colors = [
+						{color:'blue', side:'left', dimmed:true},
+						{color:'red', side:'left', dimmed:true},
+						{color:'green', side:'right', dimmed:false},
+						{color:'yellow', side:'right', dimmed:true}
+					];
+					$scope.instructionText = 'Verde';
+					break;
+				case 7:
+					$scope.colors = [
+						{color:'blue', side:'left', dimmed:true},
+						{color:'red', side:'left', dimmed:true},
+						{color:'green', side:'right', dimmed:true},
+						{color:'yellow', side:'right', dimmed:false}
+					];
+					$scope.instructionText = 'Amarillo';
+					break;
+				case 8:
+					$scope.actions = [];
+					$scope.colors = [
+						{color:'blue', side:'left', dimmed:true},
+						{color:'red', side:'left', dimmed:true},
+						{color:'green', side:'right', dimmed:true},
+						{color:'yellow', side:'right', dimmed:true}
+					];
+					$scope.instructionText = 'Esto es el tiempo que te queda. Que no desaparezcan !!';
+					$scope.timeLeft = 100;
+					$timeout(function () {
+						$scope.instructionText = 'Gana tiempo acertando';
+					}, 5000);
+
+					$timeout(function () {
+						$scope.instructionText = 'Ahora, continúa tu partida :-)';
+						$scope.step++;
+					}, 7500);
+
+					$timeout(function () {
+						$scope.tutorial = false;
+						$scope.gameInit();
+						$scope.timeLeft = 50;
+					}, 10000);
+
+					break;
+				default:
+					$scope.instructionText = 'Zanin!';
+			}
+			
+			
+			
+		};
 
 		$scope.getComboClass = function (){
 			return Math.ceil($scope.combo/20);
 		};
 
 		$scope.load = function ()
-		{			//$timeout(function() {
+		{
 			$scope.init();
-			//}, wait);
+			
+			if($scope.tutorial){
+				$scope.tutorialInit();
+			} else{
+				$scope.gameInit();
+			}
+
 		};
 
 
@@ -170,13 +316,13 @@ angular.module('zaninApp')
 
 		function start () {
 
-			$scope.timeLeft = 5;
+			//$scope.timeLeft = 5;
 			
 
 			//FIXME : detect load animation end
 			$timeout(function(){
 				$scope.loaded = true;
-			},2000);
+			}, 2000);
 
 
 			endGameIntervalId = $interval(function() {
@@ -305,6 +451,8 @@ angular.module('zaninApp')
 			if($scope.game.points > pointsToGesture){
 				includeGestures();
 			}
+
+			$scope.$broadcast('acierto', c);
 		};
 
 		$scope.fallos = function(){
