@@ -84,7 +84,7 @@ angular.module('zaninApp')
 			$scope.actions = [];
 
 			//TODO : change to game object
-			$scope.game.points = 0;
+			//$scope.game.points = 0;
 			$scope.timeLeft = 0;
 			$scope.totalTimePlayed = 0;
 			$scope.level = 1;
@@ -478,7 +478,7 @@ angular.module('zaninApp')
 			$scope.game.timePlayed = $scope.game.end - $scope.game.start;
 
 			//FIXME : remove starting 2 extra points
-			$scope.game.points -= 2;
+			$scope.game.points -= $scope.baselvl;
 			//let the game object be accesible for any controller
 			$rootScope.game = $scope.game;
 
