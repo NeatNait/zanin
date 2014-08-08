@@ -3,10 +3,13 @@
 	[
 		{
 			"follow_symlinks": true,
-			"path": "."
+			"path": ".",
+      "folder_exclude_patterns": [".tmp" , ".sass-cache"]
 		}
 	],
 	"settings": {
+		"tab_size": 2,
+		"translate_tabs_to_spaces": true,
         "todoreview": {
             "exclude_folders": [
                 "*.git*",
@@ -19,12 +22,12 @@
 			    "*.md",
 			    "*.sublime-workspace"
 			],
-            "patterns": {
-			    "TODO": "TODO[\\s]*?:+(?P<todo>.*)$",
-			    "NOTE": "NOTE[\\s]*?:+(?P<note>.*)$",
-			    "FIXME": "FIX ?ME[\\s]*?:+(?P<fixme>.*)$",
-			    "CHANGED": "CHANGED[\\s]*?:+(?P<changed>.*)$"
-			}
+          "patterns": {
+            "TODO": "TODO[\\s]*?:+(?P<todo>.*)$",
+            "NOTE": "NOTE[\\s]*?:+(?P<note>.*)$",
+            "FIXME": "FIX ?ME[\\s]*?:+(?P<fixme>.*)$",
+            "CHANGED": "CHANGED[\\s]*?:+(?P<changed>.*)$"
+			     }
         }
     }
 }
