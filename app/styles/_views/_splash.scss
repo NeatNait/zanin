@@ -1,0 +1,29 @@
+/* _splash.scss */
+
+
+.splash-view{
+
+  color:#111;
+
+  .splash-logo{
+    background-color:white;
+    background: url('..'+image-url('zanin.png', true, true)) no-repeat center center fixed;
+    background-size: cover;
+  }
+
+  .menu{
+    text-align:center;
+    padding:8px;
+    position: absolute;
+    bottom:0em;
+    width:100%;
+  }
+
+  .start{
+    animation: colorRotate 8s linear infinite;
+    font-family: 'Varela Round',sans-serif;
+    font-size:1.5em;
+  }
+
+}
+

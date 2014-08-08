@@ -1,0 +1,236 @@
+/* _animations.scss */
+
+
+.splash-view.ng-leave {
+  animation: bounceOut 1s cubic-bezier(.17, .67, .83, .67);
+  
+}
+
+.menu-view.ng-leave{
+  animation: slideOutUp 1s ease;
+}
+
+.menu-view.ng-enter{
+  animation: slideInDown 1s ease;
+  animation-delay:2s;
+
+}
+/*.up.ng-leave{
+  animation: slideOutUp 1s ease;
+  animation-delay:1s;
+}*/
+
+.menu-view.left.ng-enter, .left.ng-enter{
+  animation: slideInLeft 1s ease;
+  animation-delay:1s;
+}
+
+.menu-view.left.ng-leave, .left.ng-leave {
+  animation: slideOutRight 1s ease;
+}
+/*.ng-leave.right {
+  animation: slideOutRight 1s ease;
+}
+
+.ng-leave.left {
+  animation: slideOutLeft 1s ease;
+}
+*/
+.game-view.ng-leave {
+  animation: fadeOut 2s ease;
+  animation-delay: 0s;
+}
+
+.game-view.ng-leave .right{
+  animation: slideOutRight 5s ease;
+  animation-fill-mode: forwards;
+}
+.game-view.ng-leave .left{
+  animation: slideOutLeft 5s ease;
+  animation-fill-mode: forwards;
+}
+
+.game-view.ng-enter {
+  //animation: slideInRight 5s ease;
+  
+}
+
+/*.game-view.ng-enter .right{
+  animation: slideInRight 5s ease;
+  animation-fill-mode: forwards;
+}*/
+.colors{
+  animation: slideInLeft 2s ease;
+  animation-fill-mode: forwards;
+}
+
+.colors.right{
+  animation: slideInRight 2s ease;
+  animation-fill-mode: forwards;
+}
+
+/*.ng-enter{
+  animation: bounceIn 1s ease;
+}*/
+
+
+/*.action{
+  animation: fadeIn 1s ease;
+
+}*/
+/*.actions{
+  opacity: 0;
+}*/
+/*.actions{
+  animation: slideInDown 1s ease;
+  animation-fill-mode: forwards;
+}*/
+
+
+.action:nth-of-type(4){
+  transform: translateY(2000px);
+  animation: slideInUp .4s ease;
+  animation-fill-mode: forwards;
+}
+
+$delay : 2s;
+
+.action.init{
+  transform: translateY(2000px);
+  animation: slideInUp 1s ease;
+  animation-delay: $delay;
+  animation-fill-mode: forwards;
+}
+
+.action.init:nth-of-type(2){
+    -webkit-animation-delay: $delay + 0.2s;
+       -moz-animation-delay: $delay + 0.2s;
+        -ms-animation-delay: $delay + 0.2s;
+         -o-animation-delay: $delay + 0.2s;
+            animation-delay: $delay + 0.2s;
+}
+
+.action.init:nth-of-type(3){
+    -webkit-animation-delay: $delay + 0.3s;
+       -moz-animation-delay: $delay + 0.3s;
+        -ms-animation-delay: $delay + 0.3s;
+         -o-animation-delay: $delay + 0.3s;
+            animation-delay: $delay + 0.3s;
+}
+
+.action.init:nth-of-type(4){
+    -webkit-animation-delay: $delay + 0.4s;
+       -moz-animation-delay: $delay + 0.4s;
+        -ms-animation-delay: $delay + 0.4s;
+         -o-animation-delay: $delay + 0.4s;
+            animation-delay: $delay + 0.4s;
+}
+
+
+
+.push, .pushed{
+  animation: push 1s ease alternate;
+
+}
+
+
+
+@keyframes push{
+  0%{
+    color:transparent;
+  }
+  50%{
+    color:white;
+  }
+  100%{
+    color:transparent;
+  }
+}
+
+
+@keyframes push2{
+  50%{
+    opacity:.8;
+  }
+}
+
+.ng-enter .button{
+  transform:scale(0) rotate(180deg);
+}
+
+@keyframes playButtons{
+  0%{
+    transform: translateY(0em);
+  }
+  100%{
+    transform: translateY(.5em);
+    /*box-shadow: 0px 10px 5px 0px rgba(17, 17, 17, 0.26);*/
+
+  }
+}
+
+
+.circle, .ui{
+  opacity: 0;
+  animation: fadeIn 1s ease;
+  animation-delay: 2s;
+  animation-fill-mode: forwards;
+}
+
+
+.mov-0{
+  animation: pulse 1s ease infinite;
+}
+
+
+@keyframes slideInUp{
+  to{
+    transform: translateY(0);
+  }
+}
+
+
+//delay for every color
+/*
+.color.left:nth-of-type(2){
+  animation-delay: .2s;
+}
+
+.color.right{
+  animation-delay: .3s;
+}
+
+.color.right:nth-of-type(2){
+  animation-delay: .4s;
+}
+*/
+
+
+
+@keyframes presionaYa{
+  from{
+    transform: scale(1);
+  }
+  to{
+    transform: scale(0.9);
+  }
+}
+
+@keyframes colorRotate{
+  0%{
+    color:$blue;
+    //transform: scale(1);
+  }
+  25%{
+    color:$red;
+    //transform: scale(0.9);
+  }
+  50%{
+    color:$yellow;
+    //transform: scale(1);
+  }
+  100%{
+    color:$green;
+    //transform: scale(0.9);
+  }
+}

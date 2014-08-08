@@ -1,0 +1,30 @@
+/* _menu.scss */
+
+.menu-view{
+
+  background: $red;
+  text-shadow: 0px 0px 15px rgba(17, 17, 17, 0.26);
+
+  h3{
+    margin-top: 10px;
+
+    span{
+      font-size: 1.3em;
+      font-family: "Helvetica Neue", sans-serif;
+      font-weight: bold;
+    }
+  }
+
+  .menu{
+    text-align:left;
+  }
+
+  .odometer{
+    font-size: 60px;
+  }
+
+  .odometer-value{
+    //font-family: 'Varela Round',sans-serif;
+  }
+
+}

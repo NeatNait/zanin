@@ -1,0 +1,30 @@
+/* _tutorial-mode.scss */
+
+.tutorial-mode{
+
+  .color.dimmed{
+    opacity: 0.5;  
+  }
+
+  .instructions{
+    position: fixed;
+    bottom: 0;
+    z-index: 10000000;
+    width: 100%;
+    background-color: $body-color;
+
+  }
+
+  .instructions.ng-enter{
+    animation: bounceInUp 2s ease;
+  }
+
+  .mov{
+    opacity: 0;
+  }
+
+  .mov.mov-0{
+    opacity: 1;
+  }
+
+}
