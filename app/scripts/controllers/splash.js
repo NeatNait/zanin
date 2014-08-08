@@ -33,8 +33,9 @@ angular.module('zaninApp')
 		}
 
 		else{
+			$scope.nextView = '\'tutorial\'';
 
-			$scope.nextView = '\'game\'';
+//			$scope.nextView = '\'game\'';
 		}
 
   });

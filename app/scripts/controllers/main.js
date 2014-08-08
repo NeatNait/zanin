@@ -43,6 +43,7 @@ angular.module('zaninApp')
 				start:new Date(),
 				end:false,
 				taps:{
+					globalCount:0,
 					red:{
 						count:0,
 						color:'#E74A43'
@@ -84,7 +85,7 @@ angular.module('zaninApp')
 			$scope.actions = [];
 
 			//TODO : change to game object
-			//$scope.game.points = 0;
+			$scope.game.points = 0;
 			$scope.timeLeft = 0;
 			$scope.totalTimePlayed = 0;
 			$scope.level = 1;
@@ -193,17 +194,17 @@ angular.module('zaninApp')
 					$scope.actions.push(new Action('swipeLeft', $scope.colors[0].color));
 					$scope.actions.push(new Action('swipeRight', $scope.colors[0].color));
 
-					$scope.instructionText = 'Toca una vez el color azul';
+					$scope.instructionText = 'Double tap blue, seems like a good idea';
 
 					break;
 				case 2:
-					$scope.instructionText = 'Toca dos veces el color azul';
+					$scope.instructionText = 'Now single tap blue. There will be no return';
 					break;
 				case 3:
-					$scope.instructionText = 'Arrastra a la izquierda en el azul';
+					$scope.instructionText = 'Now something new. Let\'s swipe left over blue';
 					break;
 				case 4:
-					$scope.instructionText = 'Arrastra a la derecha en el azul';
+					$scope.instructionText = 'It\'s time to swipe right blue. Yep blue again.';
 					break;
 				case 5:
 					$scope.colors = [
@@ -212,7 +213,7 @@ angular.module('zaninApp')
 						{color:'green', side:'right', dimmed:true},
 						{color:'yellow', side:'right', dimmed:true}
 					];
-					$scope.instructionText = 'Rojo';
+					$scope.instructionText = 'And zanin created colors! Tap red';
 					break;
 				case 6:
 					$scope.colors = [
@@ -221,7 +222,7 @@ angular.module('zaninApp')
 						{color:'green', side:'right', dimmed:false},
 						{color:'yellow', side:'right', dimmed:true}
 					];
-					$scope.instructionText = 'Verde';
+					$scope.instructionText = 'A wild new color appeared! Tap green';
 					break;
 				case 7:
 					$scope.colors = [
@@ -230,7 +231,7 @@ angular.module('zaninApp')
 						{color:'green', side:'right', dimmed:true},
 						{color:'yellow', side:'right', dimmed:false}
 					];
-					$scope.instructionText = 'Amarillo';
+					$scope.instructionText = 'Last but not least. Double tap yellow';
 					break;
 				case 8:
 					$scope.actions = [];
@@ -240,14 +241,14 @@ angular.module('zaninApp')
 						{color:'green', side:'right', dimmed:true},
 						{color:'yellow', side:'right', dimmed:true}
 					];
-					$scope.instructionText = 'Esto es el tiempo que te queda. Que no desaparezcan !!';
+					$scope.instructionText = 'Those bars show your remaining time. They come to zero and game\'s over';
 					$scope.timeLeft = 100;
 					$timeout(function () {
-						$scope.instructionText = 'Gana tiempo acertando';
+						$scope.instructionText = 'The higher the combo, the faster you\'ll gain time';
 					}, 5000);
 
 					$timeout(function () {
-						$scope.instructionText = 'Ahora, continúa tu partida :-)';
+						$scope.instructionText = 'Now it\'s your time to zanin!';
 						$scope.step++;
 					}, 7500);
 
@@ -441,6 +442,8 @@ angular.module('zaninApp')
 				$scope.energy++;
 			}
 			$scope.game.taps[c].count++;
+			$scope.game.taps.globalCount++;
+
 			//console.log($scope.game.taps[c].color + ':' + $scope.game.taps[c].count);
 			$scope.createNewAction();
 
@@ -476,9 +479,11 @@ angular.module('zaninApp')
 
 			$scope.game.end = new Date();
 			$scope.game.timePlayed = $scope.game.end - $scope.game.start;
+			$scope.game.tapsPerSecond = $scope.game.taps.globalCount / ($scope.game.timePlayed / 1000);
 
 			//FIXME : remove starting 2 extra points
-			$scope.game.points -= $scope.baselvl;
+			//$scope.game.points -= $scope.baselvl;
+			$scope.game.points -= 2;
 			//let the game object be accesible for any controller
 			$rootScope.game = $scope.game;
 

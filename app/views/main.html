@@ -1,5 +1,5 @@
 
-  <div class="row" ng-class="{tutorial:tutorial}">
+  <div class="row" ng-class="{'tutorial-mode':tutorial}">
     
     <div ng-show="tutorial" class="instructions">
       {{instructionText}}
@@ -26,7 +26,7 @@
         FIXME : add ui class, aware update bug
       -->
 
-      <div class="score">{{game.points - 2}}</div>
+      <div class="score ui">{{game.points - 2}}</div>
 
       <!--div class="circle combo combo-{{ getComboClass() }}">{{combo}}</div-->
       <div class="circle combo">{{combo}}</div>
