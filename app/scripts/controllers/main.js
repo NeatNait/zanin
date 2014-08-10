@@ -10,7 +10,6 @@ angular.module('zaninApp')
 			this.color   = c;
 		};
 
-
 		
 		var	endGameIntervalId,
 			lastPileGesture,
@@ -33,7 +32,7 @@ angular.module('zaninApp')
 
 		//sound.play();
 
-		$scope.tutorial = true;
+		$scope.tutorial = false;
 
 
 		$scope.init = function(){
@@ -70,9 +69,6 @@ angular.module('zaninApp')
 
 
 			$scope.loaded = false;
-
-			
-
 			$scope.firstClick = null;
 
 			$scope.gestures = [
@@ -85,17 +81,17 @@ angular.module('zaninApp')
 			$scope.actions = [];
 
 			//TODO : change to game object
+			$scope.baselvl = 2;
 			$scope.game.points = 0;
+			//$scope.game.points = $scope.baselvl;
 			$scope.timeLeft = 0;
 			$scope.totalTimePlayed = 0;
 			$scope.level = 1;
 			$scope.combo = 0;
 			$scope.game.highestCombo = 0;
 			$scope.maxlvl = 20;
-			$scope.baselvl = 2;
 			$scope.ratePoints = 1.2;
 			$scope.ratetime = 0.7;
-			$scope.game.points = $scope.baselvl;
 			$scope.maxenergy = 7;
 			$scope.energy = 0;
 			$scope.timeincrease = 1;
@@ -118,8 +114,6 @@ angular.module('zaninApp')
 
 		//FIXME : 1st action must be a dobletap to avoid the animation bug
 		$scope.gameInit = function(){
-
-			
 
 			$scope.colors = [
 				{color:'blue', side:'left'},
@@ -153,7 +147,6 @@ angular.module('zaninApp')
 			});
 
 			
-			
 			/* Tutorial Step 2 */
 
 			/*
@@ -181,8 +174,6 @@ angular.module('zaninApp')
 							{color:'yellow', side:'right', dimmed:true}
 						];
 					}, 3500);
-								
-													
 
 					$scope.actions.push(new Action('doubleTap', $scope.colors[0].color));
 					$scope.actions.push(new Action('tap', $scope.colors[0].color));
@@ -201,10 +192,10 @@ angular.module('zaninApp')
 					$scope.instructionText = 'Now single tap blue. There will be no return';
 					break;
 				case 3:
-					$scope.instructionText = 'Now something new. Let\'s swipe left over blue';
+					$scope.instructionText = 'Let\'s try something new. Swipe left over blue';
 					break;
 				case 4:
-					$scope.instructionText = 'It\'s time to swipe right blue. Yep blue again.';
+					$scope.instructionText = 'It\'s time to swipe right blue. Yep, blue again';
 					break;
 				case 5:
 					$scope.colors = [
@@ -241,22 +232,32 @@ angular.module('zaninApp')
 						{color:'green', side:'right', dimmed:true},
 						{color:'yellow', side:'right', dimmed:true}
 					];
-					$scope.instructionText = 'Those bars show your remaining time. They come to zero and game\'s over';
-					$scope.timeLeft = 100;
+
+					$scope.instructionText = 'Hit every move and you\'ll gain combo';
+
 					$timeout(function () {
 						$scope.instructionText = 'The higher the combo, the faster you\'ll gain time';
-					}, 5000);
+					}, 4000);
+
+					
+					$timeout(function () {
+						$scope.step++;
+						$scope.instructionText = 'Those bars show your remaining time. They come to zero and game\'s over';
+						$scope.timeLeft = 100;
+					}, 9000);
 
 					$timeout(function () {
 						$scope.instructionText = 'Now it\'s your time to zanin!';
 						$scope.step++;
-					}, 7500);
+					}, 16000);
 
 					$timeout(function () {
 						$scope.tutorial = false;
 						$scope.gameInit();
 						$scope.timeLeft = 50;
-					}, 10000);
+						$scope.step++;
+
+					}, 19000);
 
 					break;
 				default:
@@ -286,10 +287,10 @@ angular.module('zaninApp')
 
 		function setLevel(){
 			function getBaseLog(x, y){
-					return Math.log(y) / Math.log(x);
-				}
+				return Math.log(y) / Math.log(x);
+			}
 
-			var $value = Math.floor(getBaseLog($scope.baselvl, $scope.game.points));
+			var $value = Math.floor(getBaseLog($scope.baselvl, $scope.game.points + $scope.baselvl));
 				//console.log('valor - ' + $value + ' - ' + $scope.game.points + ' - ' + getBaseLog($scope.baselvl,$scope.game.points))  ;
 
 			if($value <= $scope.maxlvl) {
@@ -483,16 +484,14 @@ angular.module('zaninApp')
 
 			//FIXME : remove starting 2 extra points
 			//$scope.game.points -= $scope.baselvl;
-			$scope.game.points -= 2;
 			//let the game object be accesible for any controller
 			$rootScope.game = $scope.game;
-
-
 
 			var gameStat = new GameStat();
 
 			gameStat.user = userId;
 			gameStat.data = $scope.game;
+			//gameStat.data.points -= 2;
 
 			//persist to server
 			gameStat.$save();

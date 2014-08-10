@@ -87,6 +87,8 @@
 }*/
 
 
+
+
 .action:nth-of-type(4){
   transform: translateY(2000px);
   animation: slideInUp .4s ease;
@@ -101,7 +103,6 @@ $delay : 2s;
   animation-delay: $delay;
   animation-fill-mode: forwards;
 }
-
 .action.init:nth-of-type(2){
     -webkit-animation-delay: $delay + 0.2s;
        -moz-animation-delay: $delay + 0.2s;
@@ -175,6 +176,12 @@ $delay : 2s;
   animation: fadeIn 1s ease;
   animation-delay: 2s;
   animation-fill-mode: forwards;
+  &.flash{
+    animation: flash 2s ease infinite;
+  }
+  &.flash-remove{
+    animation-delay: .5s;
+  }
 }
 
 

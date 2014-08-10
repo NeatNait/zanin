@@ -56,6 +56,9 @@ angular.module('zaninApp')
 
 		//helper for printing time from miliseconds
 		$scope.msToTime = function (ms) {
+			if(!ms){
+				ms = 0;
+			}
 			var milliseconds = parseInt((ms%1000)/100),
 				seconds = parseInt((ms/1000)%60),
 				minutes = parseInt((ms/(1000*60))%60),
