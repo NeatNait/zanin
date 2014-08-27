@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('zaninApp')
-	.controller('MenuCtrl', function ($rootScope, $scope, $interval, $timeout) {
+	.controller('MenuCtrl', function ($rootScope, $scope, $interval, $timeout, localStorageService) {
 
 
 		$rootScope.path = 'menu';
@@ -19,11 +19,23 @@ angular.module('zaninApp')
 			$rootScope.oldPoints = 0;
 		}
 
+		var maxRecord = localStorageService.get('maxRecord');
+
+		if(maxRecord === null){
+			maxRecord = 0;
+		}
+
+		if($rootScope.game.points >= maxRecord){
+			$scope.newRecord = true;
+		}
+
+
+
 		var el = document.querySelector('#points');
 
 		var od = new Odometer({
 		  el: el,
-		  value: $rootScope.oldPoints, //start with previous game points
+		  value: maxRecord, //start with previous game points
 		  format: 'd'
 		});
 
@@ -31,6 +43,7 @@ angular.module('zaninApp')
 		//allowing the view to fully charge and stay black for a while
 		$timeout(function(){
 			od.update($rootScope.game.points);
+			saveRecord($rootScope.game.points, maxRecord);
 		}, 4000);
 
 		//set previous game points
@@ -39,8 +52,13 @@ angular.module('zaninApp')
 		}
 
 
+		function saveRecord (record, maxRecord) {
 
+			if(record > maxRecord){
+				localStorageService.add('maxRecord', record);
+			}
 
+		}
 
 		/*
 		var data = [],

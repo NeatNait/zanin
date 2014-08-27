@@ -3,11 +3,12 @@
       <!--input class="" ng-model="userName" type="text">
 
       <input class="btn" type="buttom" value="change name" ng-click="updateUser()"-->
-      <div class="col-xs-6 col-xs-offset-1">
+      <div class="col-xs-6 col-xs-offset-1 list">
         records {{gameStats.length}}
-        <div ng-repeat="g in gameStats | orderBy: '-data.points'">
-          <div ng-if="g.data.points > 0">
-            <span ng-if="g.user === user._id">me</span>
+        <!--div ng-repeat="g in gameStats | orderBy: '-data.points'"-->
+        <div ng-repeat="g in gameStats">
+          <div ng-if="g.data.points > 0" id="score-{{$index}}">
+            <span ng-if="g.user === user._id">me</span> {{g.yeah}}
             {{g.data.points}}
           </div>
         </div>

@@ -5,6 +5,10 @@
   background: $red;
   text-shadow: 0px 0px 15px rgba(17, 17, 17, 0.26);
 
+  &.new-record{
+    background: $green;
+  }
+
   h3{
     margin-top: 10px;
 

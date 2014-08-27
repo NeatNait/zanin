@@ -14,9 +14,6 @@ angular.module('zaninApp')
 		//TODO : change to full user object
 		var userId = localStorageService.get('userId');
 
-
-		console.log('userID: ' + userId);
-
 		if(userId === null){
 			var u = new User();
 			$scope.nextView = '\'tutorial\'';
