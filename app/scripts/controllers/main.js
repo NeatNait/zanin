@@ -62,9 +62,30 @@ angular.module('zaninApp')
 					misses:{
 						count:0,
 						color:'#4D5360'
+					},
+					tap:{
+						count:0
+					},
+					doubleTap:{
+						count:0
+					},
+					swipeRight:{
+						count:0
+					},
+					swipeLeft:{
+						count:0
 					}
 				},
-				combos:[]
+				combos:[],
+				achievements:{
+					combo25,
+					combo50,
+					combo100,
+					combo250,
+					combo500,
+					failMaster,
+					FeelBalance
+				}
 			};
 
 
@@ -435,7 +456,7 @@ angular.module('zaninApp')
 			return new Action(actualGesture, actualColor);
 		};
 
-		$scope.aciertos = function(c){
+		$scope.aciertos = function(c,g){
 			$scope.game.points += Math.floor($scope.ratePoints * $scope.level);
 			$scope.timeLeft += ($scope.energy+1) * $scope.timeincrease;
 			$scope.combo++;
@@ -444,6 +465,7 @@ angular.module('zaninApp')
 			}
 			$scope.game.taps[c].count++;
 			$scope.game.taps.globalCount++;
+			$scope.game.taps[g].count++;
 
 			//console.log($scope.game.taps[c].color + ':' + $scope.game.taps[c].count);
 			$scope.createNewAction();
@@ -519,11 +541,11 @@ angular.module('zaninApp')
 			$scope.actions.push($scope.createRandomAction());
 		};
 
-		var checkColor = function(c){
+		var checkColor = function(c,g){
 
 			//if everything is equal we've got a valid move
 			if(c === $scope.actions[0].color){
-				$scope.aciertos(c);
+				$scope.aciertos(c,g);
 
 				//reset the action auto creation counter
 				//resetActionEraser();
@@ -603,7 +625,7 @@ angular.module('zaninApp')
 			}*/
 
 			if($scope.actions[0].gesture === g){
-				checkColor(c);
+				checkColor(c,g);
 			}
 			
 			else{
@@ -620,6 +642,12 @@ angular.module('zaninApp')
 			lastGesture = g;
 			lastColor = c;
 			prevEvent = $event;
+		};
+
+		$scope.checkAchievements = funtion(){
+
+			
+			
 		};
 
   });
