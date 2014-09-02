@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('zaninApp')
-	.controller('SplashCtrl', function ($scope, $interval, $timeout, $animate, $location, User, localStorageService) {
+	.controller('SplashCtrl', function ($rootScope, $scope, $interval, $timeout, $animate, $location, User, localStorageService) {
 
 		$scope.path = 'splash';
 
@@ -16,6 +16,7 @@ angular.module('zaninApp')
 
 		if(userId === null){
 			var u = new User();
+			$rootScope.tutorial = true;
 			$scope.nextView = '\'tutorial\'';
 
 			u.$save(function(u, putResponseHeaders) {
@@ -30,7 +31,8 @@ angular.module('zaninApp')
 		}
 
 		else{
-			$scope.nextView = '\'tutorial\'';
+			$scope.nextView = '\'game\'';
+			$rootScope.tutorial = false;
 
 //			$scope.nextView = '\'game\'';
 		}

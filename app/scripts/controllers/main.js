@@ -32,7 +32,7 @@ angular.module('zaninApp')
 
 		//sound.play();
 
-		$scope.tutorial = false;
+		$scope.tutorial = $rootScope.tutorial;
 
 
 		$scope.init = function(){
@@ -104,6 +104,7 @@ angular.module('zaninApp')
 			//TODO : change to game object
 			$scope.baselvl = 2;
 			$scope.game.points = 0;
+			$scope.game.MetAchievements = [];
 			//$scope.game.points = $scope.baselvl;
 			$scope.timeLeft = 0;
 			$scope.totalTimePlayed = 0;
@@ -273,7 +274,9 @@ angular.module('zaninApp')
 					}, 16000);
 
 					$timeout(function () {
+						// FIXME: scope or rootScope for tutorial
 						$scope.tutorial = false;
+						$rootScope.tutorial = false;
 						$scope.gameInit();
 						$scope.timeLeft = 50;
 						$scope.step++;
@@ -646,19 +649,43 @@ angular.module('zaninApp')
 			prevEvent = $event;
 		};
 
-		$scope.game.MetAchievements = [];
+		
 
 		$scope.checkAchievements = function(){
-
-			console.log($scope.game);
 
 			//Check all Achievements conditions
 
 			//ComboXX
-			if($scope.game.highestCombo > 25){
+			if($scope.game.highestCombo > 25 && $scope.checkPlayerAchievement('combo25')){
 				$scope.game.MetAchievements.push('combo25');
+			} else if($scope.game.highestCombo > 50 && $scope.checkPlayerAchievement('combo50')){
+				$scope.game.MetAchievements.push('combo50');
+			} else if($scope.game.highestCombo > 100 && $scope.checkPlayerAchievement('combo100')){
+				$scope.game.MetAchievements.push('combo100');
 			}
 
+			//Balance Master
+			if( ($scope.game.taps.swipeLeft.count === $scope.game.taps.swipeRight.count) && $scope.game.points > 2000){
+				$scope.game.MetAchievements.push('balanceMaster');
+			}
+
+			//Tap Engineer
+			if( ($scope.game.taps.tap.count === $scope.game.taps.doubleTap.count) && $scope.game.points > 2000){
+				$scope.game.MetAchievements.push('tapEngineer');
+			}
+
+			//Fail Master
+			if($scope.game.points === 0){
+				$scope.game.MetAchievements.push('failMaster');
+			}
+
+			//console.log($scope.game);
+		};
+
+		//check if the player has already met this achievement
+		$scope.checkPlayerAchievement = function(a){
+			// TO DO: check game center to check the achievement
+			return 1;
 		};
 
   });
