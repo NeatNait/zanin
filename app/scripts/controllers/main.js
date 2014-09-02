@@ -77,15 +77,15 @@ angular.module('zaninApp')
 					}
 				},
 				combos:[],
-				achievements:{
-					combo25,
-					combo50,
-					combo100,
-					combo250,
-					combo500,
-					failMaster,
-					FeelBalance
-				}
+				achievements:[
+					'combo25',
+					'combo50',
+					'combo100',
+					'combo250',
+					'combo500',
+					'failMaster',
+					'FeelBalance'
+				]
 			};
 
 
@@ -519,6 +519,8 @@ angular.module('zaninApp')
 			gameStat.$save();
 			//console.log($scope.game);
 
+			$scope.checkAchievements();
+			
 		}
 
 		function updateComboHistory(){
@@ -644,10 +646,19 @@ angular.module('zaninApp')
 			prevEvent = $event;
 		};
 
-		$scope.checkAchievements = funtion(){
+		$scope.game.MetAchievements = [];
 
-			
-			
+		$scope.checkAchievements = function(){
+
+			console.log($scope.game);
+
+			//Check all Achievements conditions
+
+			//ComboXX
+			if($scope.game.highestCombo > 25){
+				$scope.game.MetAchievements.push('combo25');
+			}
+
 		};
 
   });
