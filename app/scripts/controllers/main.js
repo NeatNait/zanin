@@ -456,6 +456,21 @@ angular.module('zaninApp')
 		$scope.createRandomAction = function(){
 			var actualColor = $scope.colors[Math.floor($scope.colors.length*Math.random())].color;
 			var actualGesture = $scope.gestures[Math.floor($scope.gestures.length*Math.random())].g;
+			
+			if($scope.actions.length === 0){
+				return new Action(actualGesture, actualColor);
+			}
+
+			//Fixes tap-doubletap error
+			if($scope.actions[$scope.actions.length-1].color === actualColor &&
+				($scope.actions[$scope.actions.length-1].gesture === 'tap' || $scope.actions[$scope.actions.length-1].gesture === 'doubleTap')){
+				if(actualGesture === 'tap' || actualGesture === 'doubleTap'){
+					while(actualColor === $scope.actions[$scope.actions.length-1].color){
+						actualColor = $scope.colors[Math.floor($scope.colors.length*Math.random())].color;
+					}
+				}
+			}
+
 			return new Action(actualGesture, actualColor);
 		};
 
