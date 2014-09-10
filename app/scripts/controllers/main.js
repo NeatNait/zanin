@@ -78,13 +78,13 @@ angular.module('zaninApp')
 				},
 				combos:[],
 				achievements:[
-					'combo25',
-					'combo50',
-					'combo100',
-					'combo250',
-					'combo500',
-					'failMaster',
-					'FeelBalance'
+					{name:'combo25', desc:'25 combo'},
+					{name:'combo50', desc:'50 combo'},
+					{name:'combo100', desc:'100 combo'},
+					{name:'combo250', desc:'250 combo'},
+					{name:'combo500', desc:'500 combo'},
+					{name:'failMaster', desc:'You are the fail master'},
+					{name:'feelBalance', desc:'feel the right balance'}
 				]
 			};
 
@@ -104,7 +104,7 @@ angular.module('zaninApp')
 			//TODO : change to game object
 			$scope.baselvl = 2;
 			$scope.game.points = 0;
-			$scope.game.MetAchievements = [];
+			$scope.game.metAchievements = [];
 			//$scope.game.points = $scope.baselvl;
 			$scope.timeLeft = 0;
 			$scope.totalTimePlayed = 0;
@@ -274,7 +274,7 @@ angular.module('zaninApp')
 					}, 16000);
 
 					$timeout(function () {
-						// FIXME: scope or rootScope for tutorial
+						//FIXME : scope or rootScope for tutorial
 						$scope.tutorial = false;
 						$rootScope.tutorial = false;
 						$scope.gameInit();
@@ -649,43 +649,73 @@ angular.module('zaninApp')
 			prevEvent = $event;
 		};
 
-		
+		//check if the player has already met this achievement
+		var checkPlayerAchievement = function(combo, ach){
+			// TO DO: check game center to check the achievement
+			if(ach.indexOf(combo) > -1){
+				return 0;
+			}
+
+			return 1;
+		};
+
 
 		$scope.checkAchievements = function(){
+
+			var achievements = localStorageService.get('achievements');
+			if(achievements === null){
+				achievements = [];
+			}
+
 
 			//Check all Achievements conditions
 
 			//ComboXX
-			if($scope.game.highestCombo > 25 && $scope.checkPlayerAchievement('combo25')){
-				$scope.game.MetAchievements.push('combo25');
-			} else if($scope.game.highestCombo > 50 && $scope.checkPlayerAchievement('combo50')){
-				$scope.game.MetAchievements.push('combo50');
-			} else if($scope.game.highestCombo > 100 && $scope.checkPlayerAchievement('combo100')){
-				$scope.game.MetAchievements.push('combo100');
+			if($scope.game.highestCombo >= 25 && checkPlayerAchievement('combo25',achievements)){
+				$scope.game.metAchievements.push('combo25');
+				achievements.push('combo25');
+			} else if($scope.game.highestCombo >= 50 && checkPlayerAchievement('combo50',achievements)){
+				$scope.game.metAchievements.push('combo50');
+				achievements.push('combo50');
+			} else if($scope.game.highestCombo >= 100 && checkPlayerAchievement('combo100',achievements)){
+				$scope.game.metAchievements.push('combo100');
+				achievements.push('combo100');
+			}else if($scope.game.highestCombo >= 250 && checkPlayerAchievement('combo250',achievements)){
+				$scope.game.metAchievements.push('combo250');
+				achievements.push('combo250');
+			}else if($scope.game.highestCombo >= 500 && checkPlayerAchievement('combo500',achievements)){
+				$scope.game.metAchievements.push('combo500');
+				achievements.push('combo500');
 			}
 
 			//Balance Master
-			if( ($scope.game.taps.swipeLeft.count === $scope.game.taps.swipeRight.count) && $scope.game.points > 2000){
-				$scope.game.MetAchievements.push('balanceMaster');
+			if( ($scope.game.taps.swipeLeft.count === $scope.game.taps.swipeRight.count) &&
+				$scope.game.points > 2000 &&
+				checkPlayerAchievement('balanceMaster',achievements)){
+				
+				$scope.game.metAchievements.push('balanceMaster');
+				achievements.push('balanceMaster');
 			}
 
 			//Tap Engineer
-			if( ($scope.game.taps.tap.count === $scope.game.taps.doubleTap.count) && $scope.game.points > 2000){
-				$scope.game.MetAchievements.push('tapEngineer');
+			if( ($scope.game.taps.tap.count === $scope.game.taps.doubleTap.count) &&
+				$scope.game.points > 2000 &&
+				checkPlayerAchievement('tapEngineer',achievements)){
+				
+				$scope.game.metAchievements.push('tapEngineer');
+				achievements.push('tapEngineer');
 			}
 
 			//Fail Master
-			if($scope.game.points === 0){
-				$scope.game.MetAchievements.push('failMaster');
+			if($scope.game.points === 0 && checkPlayerAchievement('failMaster',achievements)){
+				$scope.game.metAchievements.push('failMaster');
+				achievements.push('failMaster');
 			}
 
-			//console.log($scope.game);
+			console.log($scope.game);
+			//save achievements into localStorage
+			localStorageService.add('achievements', achievements);
 		};
 
-		//check if the player has already met this achievement
-		$scope.checkPlayerAchievement = function(a){
-			// TO DO: check game center to check the achievement
-			return 1;
-		};
-
+		
   });
