@@ -78,11 +78,17 @@ angular.module('zaninApp')
 				},
 				combos:[],
 				achievements:[
+					{name:'over9000', desc:'It\'s over 9000'},
 					{name:'combo25', desc:'25 combo'},
 					{name:'combo50', desc:'50 combo'},
 					{name:'combo100', desc:'100 combo'},
 					{name:'combo250', desc:'250 combo'},
 					{name:'combo500', desc:'500 combo'},
+					{name:'tps4', desc:'4 tps'},
+					{name:'tps5', desc:'5 tps'},
+					{name:'tps6', desc:'6 tps'},
+					{name:'tps8', desc:'8 tps'},
+					{name:'tps10', desc:'10 tps'},
 					{name:'failMaster', desc:'You are the fail master'},
 					{name:'feelBalance', desc:'feel the right balance'}
 				]
@@ -674,6 +680,24 @@ angular.module('zaninApp')
 			return 1;
 		};
 
+		var checkGestureColorBoringAchievements = function(a, achievements){
+			if($scope.game.taps[a].count >= 25 && checkPlayerAchievement(a+'25',achievements)){
+				$scope.game.metAchievements.push(a+'25');
+				achievements.push(a+'25');
+			} else if($scope.game.taps[a].count >= 50 && checkPlayerAchievement(a+'50',achievements)){
+				$scope.game.metAchievements.push(a+'50');
+				achievements.push(a+'50');
+			} else if($scope.game.taps[a].count >= 100 && checkPlayerAchievement(a+'100',achievements)){
+				$scope.game.metAchievements.push(a+'100');
+				achievements.push(a+'100');
+			}else if($scope.game.taps[a].count >= 250 && checkPlayerAchievement(a+'250',achievements)){
+				$scope.game.metAchievements.push(a+'250');
+				achievements.push(a+'250');
+			}else if($scope.game.taps[a].count >= 500 && checkPlayerAchievement(a+'500',achievements)){
+				$scope.game.metAchievements.push(a+'500');
+				achievements.push(a+'500');
+			}
+		};
 
 		$scope.checkAchievements = function(){
 
@@ -684,6 +708,12 @@ angular.module('zaninApp')
 
 
 			//Check all Achievements conditions
+
+			//Over 9000
+			if($scope.game.points > 9000 && checkPlayerAchievement('over9000',achievements)){
+				$scope.game.metAchievements.push('over9000');
+				achievements.push('over9000');
+			}
 
 			//ComboXX
 			if($scope.game.highestCombo >= 25 && checkPlayerAchievement('combo25',achievements)){
@@ -702,6 +732,25 @@ angular.module('zaninApp')
 				$scope.game.metAchievements.push('combo500');
 				achievements.push('combo500');
 			}
+
+			//Taps per second
+			if($scope.game.tapsPerSecond >= 4 && $scope.game.ponits >= 1000 && checkPlayerAchievement('tps4',achievements)){
+				$scope.game.metAchievements.push('tps4');
+				achievements.push('tps4');
+			} else if($scope.game.tapsPerSecond >= 5 && $scope.game.ponits >= 2000 && checkPlayerAchievement('tps5',achievements)){
+				$scope.game.metAchievements.push('tps5');
+				achievements.push('tps5');
+			} else if($scope.game.tapsPerSecond >= 6 && $scope.game.ponits >= 3000 && checkPlayerAchievement('tps6',achievements)){
+				$scope.game.metAchievements.push('tps6');
+				achievements.push('tps6');
+			}else if($scope.game.tapsPerSecond >= 8 && $scope.game.ponits >= 6000 && checkPlayerAchievement('tps8',achievements)){
+				$scope.game.metAchievements.push('tps8');
+				achievements.push('tps8');
+			}else if($scope.game.tapsPerSecond >= 10 && $scope.game.ponits >= 7000 && checkPlayerAchievement('tps10',achievements)){
+				$scope.game.metAchievements.push('tps10');
+				achievements.push('tps10');
+			}
+
 
 			//Balance Master
 			if( ($scope.game.taps.swipeLeft.count === $scope.game.taps.swipeRight.count) &&
@@ -726,6 +775,18 @@ angular.module('zaninApp')
 				$scope.game.metAchievements.push('failMaster');
 				achievements.push('failMaster');
 			}
+
+			//Boring color achievements
+			checkGestureColorBoringAchievements('red', achievements);
+			checkGestureColorBoringAchievements('blue', achievements);
+			checkGestureColorBoringAchievements('green', achievements);
+			checkGestureColorBoringAchievements('yellow', achievements);
+
+			//Boring gesture achievements
+			checkGestureColorBoringAchievements('tap', achievements);
+			checkGestureColorBoringAchievements('doubleTap', achievements);
+			checkGestureColorBoringAchievements('swipeLeft', achievements);
+			checkGestureColorBoringAchievements('swipeRight', achievements);
 
 			console.log($scope.game);
 			//save achievements into localStorage
