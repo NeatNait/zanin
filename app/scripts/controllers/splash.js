@@ -5,7 +5,7 @@ angular.module('zaninApp')
 
 		$scope.path = 'splash';
 
-		soundService.play();
+		soundService.intro.play();
 
 		$scope.go = function ( path ) {
 			$location.path( '/'+path );
