@@ -3,33 +3,28 @@
 angular.module('zaninApp')
 	.controller('MainCtrl', function ($rootScope, $scope, $interval, $timeout, $animate, $location, GameStat, localStorageService, soundService) {
 
-
 		//TODO :  create a factory for Actions
 		var Action = function(g, c){
 			this.gesture = g;
 			this.color   = c;
 		};
-
 		
 		var	endGameIntervalId,
-			lastPileGesture,
-			lastGesture,
-			lastColor,
-			pointsToChange,
-			pointsInterval,
-			warnInterval,
-			pointsToGesture;
-
-		var userId = localStorageService.get('userId');
+				lastPileGesture,
+				lastGesture,
+				lastColor,
+				pointsToChange,
+				pointsInterval,
+				warnInterval,
+				pointsToGesture,
+				userId = localStorageService.get('userId');
 
 		$scope.path = 'game';
 
 		//FIXME : sound not working correctly
 		soundService.stop();
 
-
 		$scope.tutorial = $rootScope.tutorial;
-
 
 		$scope.init = function(){
 
@@ -130,7 +125,6 @@ angular.module('zaninApp')
 				]
 			};
 
-
 			$scope.loaded = false;
 			$scope.firstClick = null;
 
@@ -163,7 +157,6 @@ angular.module('zaninApp')
 			warnInterval = 10;
 			pointsToGesture = 400;
 
-
 			//animation end delay
 			$timeout(function () {
 				start();
@@ -189,15 +182,14 @@ angular.module('zaninApp')
 			$scope.actions=[];
 			$scope.actions.push(action);
 			
-			$scope.actions.push($scope.createRandomAction());
-			$scope.actions.push($scope.createRandomAction());
-			$scope.actions.push($scope.createRandomAction());
+			$scope.actions.push(createRandomAction());
+			$scope.actions.push(createRandomAction());
+			$scope.actions.push(createRandomAction());
 		};
 
 		$scope.tutorialInit = function(){
 
 			/* Tutorial Step 1*/
-
 			$scope.timeLeft = 5000;
 			$scope.step = 1;
 			tutorialGoToStep($scope.step);
@@ -208,7 +200,7 @@ angular.module('zaninApp')
 			});
 		};
 
-		var tutorialGoToStep = function(step){
+		function tutorialGoToStep(step){
 			switch(step){
 				case 1:
 					$scope.colors = [
@@ -317,14 +309,13 @@ angular.module('zaninApp')
 				default:
 					$scope.instructionText = 'Zanin!';
 			}
-		};
+		}
 
 		$scope.getComboClass = function (){
 			return Math.ceil($scope.combo/20);
 		};
 
-		$scope.load = function ()
-		{
+		$scope.load = function (){
 			$scope.init();
 			
 			if($scope.tutorial){
@@ -370,22 +361,13 @@ angular.module('zaninApp')
 		function start () {
 
 			//$scope.timeLeft = 5;
-			
 
 			//FIXME : detect load animation end
 			$timeout(function(){
 				$scope.loaded = true;
 			}, 2000);
 
-
 			endGameIntervalId = $interval(function() {
-				//Comprobar Nivel
-				//Función logarítmica en función de los aciertos, con el máximo en MAXLVL
-				//$scope.level = function(){
-					
-				
-				
-			//}
 
 				if($scope.timeLeft <= 0){
 
@@ -409,8 +391,6 @@ angular.module('zaninApp')
 				else{
 					$scope.timeLeft -=  Math.floor($scope.level/$scope.ratetime);
 				}
-
-				
 			}, 1000);
 		}
 
@@ -436,7 +416,7 @@ angular.module('zaninApp')
 			$interval.cancel(intervalId);
 
 			var id = $interval(function() {
-				$scope.createNewAction();
+				createNewAction();
 			}, speed);
 
 			intervalId = id;
@@ -444,9 +424,7 @@ angular.module('zaninApp')
 			return id;
 		}*/
 
-
-
-		$scope.createRandomAction = function(){
+		function createRandomAction(){
 			var actualColor = $scope.colors[Math.floor($scope.colors.length*Math.random())].color;
 			var actualGesture = $scope.gestures[Math.floor($scope.gestures.length*Math.random())].g;
 			
@@ -465,9 +443,9 @@ angular.module('zaninApp')
 			}
 
 			return new Action(actualGesture, actualColor);
-		};
+		}
 
-		$scope.aciertos = function(c,g){
+		function success(c,g){
 			$scope.game.points += Math.floor($scope.ratePoints * $scope.level);
 			$scope.timeLeft += ($scope.energy+1) * $scope.timeincrease;
 			$scope.combo++;
@@ -479,7 +457,7 @@ angular.module('zaninApp')
 			$scope.game.taps[g].count++;
 
 			//console.log($scope.game.taps[c].color + ':' + $scope.game.taps[c].count);
-			$scope.createNewAction();
+			createNewAction();
 
 			setWarnToChange();
 			setLevel();
@@ -490,9 +468,9 @@ angular.module('zaninApp')
 			}
 
 			$scope.$broadcast('acierto', c);
-		};
+		}
 
-		$scope.fallos = function(){
+		function miss(){
 
 			updateComboHistory();
 
@@ -501,11 +479,7 @@ angular.module('zaninApp')
 			$scope.energy = 0;
 
 			$scope.game.taps.misses.count++;
-			//console.log($scope.game.taps.misses.count);
-
-			
-			//$scope.createNewAction();
-		};
+		}
 
 		function gameEnd(){
 
@@ -531,9 +505,9 @@ angular.module('zaninApp')
 			//console.log($scope.game);
 
 			var category = 'com.neatnait.zanin.leaderboard';
-		    gameCenter.reportScore(category, $scope.game.points, null, null);
+			gameCenter.reportScore(category, $scope.game.points, null, null);
 
-			$scope.checkAchievements();
+			checkAchievements();
 			
 		}
 
@@ -544,24 +518,18 @@ angular.module('zaninApp')
 			}
 
 			$scope.game.combos.push({combo:$scope.combo, lost:new Date()});
-
-			//console.log($scope.game);
-			//console.log($scope.game.combos);
-
-			//$rootScope.game.game.highestCombo = $scope.game.highestCombo;
-
 		}
 
-		$scope.createNewAction = function () {
+		function createNewAction() {
 			$scope.actions.splice(0, 1);
-			$scope.actions.push($scope.createRandomAction());
-		};
+			$scope.actions.push(createRandomAction());
+		}
 
-		var checkColor = function(c,g){
+		function checkColor(c,g){
 
 			//if everything is equal we've got a valid move
 			if(c === $scope.actions[0].color){
-				$scope.aciertos(c,g);
+				success(c,g);
 
 				//reset the action auto creation counter
 				//resetActionEraser();
@@ -576,24 +544,13 @@ angular.module('zaninApp')
 
 			}else{
 				//console.log('no');
-				$scope.fallos();
+				miss();
 			}
-		};
+		}
 
-	
+
 		var prevEvent,
-			checkDouble = 0;
-			//tapTimeOut;
-
-		/*var checkMove = function(g, c){
-
-			if($scope.actions[0].gesture === g){
-				checkColor(c);
-			}
-			else{
-				$scope.fallos();
-			}
-		};*/
+				checkDouble = 0;
 
 		//TODO : break into multiple functions again
 		$scope.checkGesture = function($event, c, g){
@@ -617,7 +574,7 @@ angular.module('zaninApp')
 			
 			if(g === 'tap' && $scope.actions[0].gesture === 'doubleTap'){
 				if(checkDouble){
-					$scope.fallos();
+					miss();
 					checkDouble = 0;
 					return;
 				}
@@ -627,7 +584,7 @@ angular.module('zaninApp')
 
 
 			if(checkDouble && g !== 'doubleTap'){
-				$scope.fallos();
+				miss();
 				checkDouble = 0;
 				return;
 			}
@@ -649,11 +606,9 @@ angular.module('zaninApp')
 			//	if(lastGesture === 'tap' && g === 'tap' && $scope.actions[0].gesture === 'doubleTap'){
 			//	}
 			//	else{
-				$scope.fallos();
+				miss();
 			//	}
 			}
-			
-
 			
 			lastGesture = g;
 			lastColor = c;
@@ -689,7 +644,7 @@ angular.module('zaninApp')
 			}
 		};
 
-		$scope.checkAchievements = function(){
+		function checkAchievements(){
 
 			var achievements = localStorageService.get('achievements');
 			if(achievements === null){
@@ -778,10 +733,9 @@ angular.module('zaninApp')
 			checkGestureColorBoringAchievements('swipeLeft', achievements);
 			checkGestureColorBoringAchievements('swipeRight', achievements);
 
-			console.log($scope.game);
 			//save achievements into localStorage
 			localStorageService.add('achievements', achievements);
-		};
+		}
 
 		
   });
