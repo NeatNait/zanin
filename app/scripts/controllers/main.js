@@ -25,8 +25,7 @@ angular.module('zaninApp')
 		$scope.path = 'game';
 
 		//FIXME : sound not working correctly
-		soundService.stop();
-
+		
 
 		$scope.tutorial = $rootScope.tutorial;
 
@@ -178,6 +177,9 @@ angular.module('zaninApp')
 
 		//FIXME : 1st action must be a dobletap to avoid the animation bug
 		$scope.gameInit = function(){
+
+			soundService.intro.fadeOut(0, 2000);
+			soundService.loop.fadeIn(1,2000);
 
 			$scope.colors = [
 				{color:'blue', side:'left'},
