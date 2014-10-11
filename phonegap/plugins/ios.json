@@ -3,7 +3,32 @@
         "installed": [],
         "uninstalled": []
     },
-    "config_munge": {},
-    "installed_plugins": {},
+    "config_munge": {
+        "framework": {
+            "GameKit.framework": {
+                "false": 1
+            },
+            "Social.framework": {
+                "true": 1
+            },
+            "MessageUI.framework": {
+                "true": 1
+            }
+        },
+        "config.xml": {
+            "/*": {
+                "<feature name=\"GameCenterPlugin\"><param name=\"ios-package\" value=\"GameCenterPlugin\" /><param name=\"onload\" value=\"true\" /></feature>": 1,
+                "<feature name=\"SocialSharing\"><param name=\"ios-package\" value=\"SocialSharing\" /></feature>": 1
+            }
+        }
+    },
+    "installed_plugins": {
+        "jp.wizcorp.phonegap.plugin.gameCenterPlugin": {
+            "PACKAGE_NAME": "com.neatnait.zanin"
+        },
+        "nl.x-services.plugins.socialsharing": {
+            "PACKAGE_NAME": "com.neatnait.zanin"
+        }
+    },
     "dependent_plugins": {}
 }

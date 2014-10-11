@@ -21,6 +21,8 @@
   "globals": {
     "angular": false,
     "Odometer": true,
-    "Howl": true
+    "Howl": true,
+    "gameCenter": true,
+    "onLoad": true
   }
 }

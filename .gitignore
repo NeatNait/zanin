@@ -3,6 +3,7 @@
 platforms
 phonegap/www/**
 phonegap/.cordova/config.json
+phonegap/plugins/**
 
 # Compiled source #
 ###################
@@ -54,3 +55,5 @@ dist
 .tmp
 .sass-cache
 app/bower_components
+
+zanin.sublime-workspace

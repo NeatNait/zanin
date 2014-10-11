@@ -24,8 +24,65 @@
     <!-- build:css({.tmp,app}) styles/main.css -->
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
+
   </head>
-  <body ng-app="zaninApp">
+  <body ng-app="zaninApp" onload="onLoad()">
+
+  <!-- unlike most apps Twitter doesn't like it when you use an array to pass multiple files as the second param -->
+  <!--br><br-->
+
+
+
+<!--button onclick="window.plugins.socialsharing.shareViaTwitter('Message via Twitter')">message via Twitter</button>
+<button onclick="window.plugins.socialsharing.shareViaTwitter('Message and link via Twitter', null /* img */, 'http://www.x-services.nl')">msg and link via Twitter</button>
+<button onclick="window.plugins.socialsharing.shareViaTwitter('I have just reached XXX points in #zanin', 'www/images/zanin.png', 'http://neatnait.com')">imagen</button-->
+
+<!--div id="container">
+            <section class="dialog">
+                <button onclick="authenticate();">Authenticate</button>
+                <button onclick="showLeaderboard();">Show</button>
+                <button onclick="showAchievements();">Show</button>
+                <button onclick="reportScore();">Report score</button>
+                <button onclick="reportAchievement();">Report achievement</button>
+            </section>
+        </div>
+        <script type="text/javascript">
+            /*function authenticate() {
+                gameCenter.authenticate(successCallback, failCallback);
+            }
+            */
+            function showLeaderboard() {
+                var category = prompt("What's the category?", "com.neatnait.zanin.leaderboard"); 
+                gameCenter.showLeaderboard(category, successCallback, failCallback);
+            }
+            
+            function showAchievements() {
+                gameCenter.showAchievements(successCallback, failCallback);
+            }
+            
+            function reportScore(category, score) {
+                var score = parseInt(prompt("What's the score?", "100")); 
+                var category = prompt("What's the category?", "com.neatnait.zanin.leaderboard"); 
+                gameCenter.reportScore(category, score, successCallback, failCallback);
+            }
+            
+            function reportAchievement() {
+                var category = prompt("What's the category?", "com.neatnait.zanin.achievement.combo100"); 
+                gameCenter.reportAchievement(category, successCallback, failCallback);
+            }
+            
+            function successCallback(result) {
+                setTimeout(function () {
+                    alert("Success " + JSON.stringify(result));            
+                }, 0);
+            }
+            
+            function failCallback(err) {
+                setTimeout(function () {
+                    alert("Error: " + err);          
+                }, 0);
+            }
+        </script-->
     <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
@@ -71,7 +128,10 @@
 
     <!-- endbuild -->
 
+        <script type="text/javascript" src="cordova.js"></script>
+
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
+        <script src="scripts/cordova-events.js"></script>
         <script src="scripts/gesture.js"></script>
         <script src="scripts/app.js"></script>
         <script src="scripts/controllers/main.js"></script>

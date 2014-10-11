@@ -32,7 +32,10 @@ module.exports = function (grunt) {
         config: 'config.xml',
         cordova: '.cordova',
         path: 'phonegap',
-        plugins: [],
+        plugins: [
+          'https://github.com/EddyVerbruggen/SocialSharing-PhoneGap-Plugin',
+          'https://github.com/Wizcorp/phonegap-plugin-gameCenter'
+        ],
         platforms: ['ios', 'android'],
         verbose: false
       }

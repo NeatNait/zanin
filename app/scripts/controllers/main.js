@@ -497,6 +497,9 @@ angular.module('zaninApp')
 			gameStat.$save();
 			//console.log($scope.game);
 
+			var category = 'com.neatnait.zanin.leaderboard';
+      gameCenter.reportScore(category, $scope.game.points, null, null);
+
 		}
 
 		function updateComboHistory(){
