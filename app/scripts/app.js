@@ -1,5 +1,19 @@
 'use strict';
 
+
+/* no phonegap fallback */
+if(window.gameCenter === undefined){
+  window.gameCenter = {
+    reportAchievement: function (category) {
+      console.log(category);
+    },
+    reportScore: function (category, score) {
+      console.log(category, ':', score);
+    }
+  };
+}
+
+
 angular.module('zaninApp', [
   'ngCookies',
   'ngResource',
