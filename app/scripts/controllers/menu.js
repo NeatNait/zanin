@@ -89,4 +89,8 @@ angular.module('zaninApp')
 			//return hours + ':' + minutes + ':' + seconds + '.' + milliseconds;
 			return minutes + '\' '  + seconds + '\'\' ' + milliseconds + '\'\'\'';
 		};
+
+		$scope.showGamecenter = function () {
+			gameCenter.showAchievements(null, null);
+		};
   });

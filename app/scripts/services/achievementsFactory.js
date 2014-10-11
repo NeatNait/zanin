@@ -188,8 +188,12 @@ angular.module('zaninApp')
 
       //save achievements into localStorage
       localStorageService.add('achievements', achievements);
-    }
 
+      for (var i=0; i<game.metAchievements.length; i++){
+        gameCenter.reportAchievement('com.neatnait.zanin.achievement.'+game.metAchievements[i], null, null);
+      }
+
+    }
 
     // Public API here
     return {

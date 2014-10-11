@@ -450,9 +450,7 @@ angular.module('zaninApp')
 			gameStat.$save();
 			//console.log($scope.game);
 
-			//var category = 'com.neatnait.zanin.leaderboard';
-			//gameCenter.reportScore(category, $scope.game.points, null, null);
-
+			gameCenter.reportScore('com.neatnait.zanin.leaderboard', $scope.game.points, null, null);
 			AchievementsFactory.check($scope.game);
 			
 		}
