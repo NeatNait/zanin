@@ -1,11 +1,11 @@
 'use strict';
 
 angular.module('zaninApp')
-	.controller('SplashCtrl', function ($rootScope, $scope, $interval, $timeout, $animate, $location, User, localStorageService) {
+	.controller('SplashCtrl', function ($rootScope, $scope, $interval, $timeout, $animate, $location, User, localStorageService, soundService) {
 
 		$scope.path = 'splash';
 
-		
+		soundService.play();
 
 		$scope.go = function ( path ) {
 			$location.path( '/'+path );

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('zaninApp')
-	.controller('MainCtrl', function ($rootScope, $scope, $interval, $timeout, $animate, $location, GameStat, localStorageService) {
+	.controller('MainCtrl', function ($rootScope, $scope, $interval, $timeout, $animate, $location, GameStat, localStorageService, soundService) {
 
 
 		//TODO :  create a factory for Actions
@@ -25,12 +25,8 @@ angular.module('zaninApp')
 		$scope.path = 'game';
 
 		//FIXME : sound not working correctly
-		var sound = new Howl({
-		  urls: ['audio/loop.wav'],
-		  loop: true
-		});
+		soundService.stop();
 
-		//sound.play();
 
 		$scope.tutorial = $rootScope.tutorial;
 
@@ -414,7 +410,7 @@ angular.module('zaninApp')
 					$interval.cancel(endGameIntervalId);
 
 					//FIXME : sound not working					
-					sound.fade(1,0,1000);
+					soundService.fade(1,0,1000);
 					gameEnd();
 
 					$location.path('/menu');
