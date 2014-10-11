@@ -10,12 +10,14 @@
 angular.module('zaninApp')
   .service('soundService', function soundService() {
 		var sounds = {
-			loop: new Howl({
-				urls: ['audio/loop4.wav'],
+			intro: new Howl({
+				urls: ['audio/intro.mp3'],
+				buffer: false,
 				loop: true
 			}),
-			intro: new Howl({
-				urls: ['audio/loop.wav'],
+			loop: new Howl({
+				urls: ['audio/loop4.mp3'],
+				buffer: false,
 				loop: true
 			})
 		};

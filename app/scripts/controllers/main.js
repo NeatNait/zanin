@@ -113,7 +113,7 @@ angular.module('zaninApp')
 		$scope.gameInit = function(){
 
 			soundService.intro.fadeOut(0, 2000);
-			soundService.loop.fadeIn(1,2000);
+			soundService.loop.fadeIn(1, 2000);
 
 			$scope.colors = [
 				{color:'blue', side:'left'},
@@ -321,7 +321,7 @@ angular.module('zaninApp')
 					$interval.cancel(endGameIntervalId);
 
 					//FIXME : sound not working					
-					soundService.fade(1,0,1000);
+					soundService.loop.fade(1,0.1,2000);
 					gameEnd();
 
 					$location.path('/menu');
