@@ -4,21 +4,42 @@
         "uninstalled": []
     },
     "config_munge": {
-        "framework": {
-            "GameKit.framework": {
-                "false": 1
+        "files": {
+            "framework": {
+                "parents": {
+                    "GameKit.framework": [
+                        {
+                            "xml": "false",
+                            "count": 1
+                        }
+                    ],
+                    "Social.framework": [
+                        {
+                            "xml": "true",
+                            "count": 1
+                        }
+                    ],
+                    "MessageUI.framework": [
+                        {
+                            "xml": "true",
+                            "count": 1
+                        }
+                    ]
+                }
             },
-            "Social.framework": {
-                "true": 1
-            },
-            "MessageUI.framework": {
-                "true": 1
-            }
-        },
-        "config.xml": {
-            "/*": {
-                "<feature name=\"GameCenterPlugin\"><param name=\"ios-package\" value=\"GameCenterPlugin\" /><param name=\"onload\" value=\"true\" /></feature>": 1,
-                "<feature name=\"SocialSharing\"><param name=\"ios-package\" value=\"SocialSharing\" /></feature>": 1
+            "config.xml": {
+                "parents": {
+                    "/*": [
+                        {
+                            "xml": "<feature name=\"GameCenterPlugin\"><param name=\"ios-package\" value=\"GameCenterPlugin\" /><param name=\"onload\" value=\"true\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"SocialSharing\"><param name=\"ios-package\" value=\"SocialSharing\" /><param name=\"onload\" value=\"true\" /></feature>",
+                            "count": 1
+                        }
+                    ]
+                }
             }
         }
     },

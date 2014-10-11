@@ -36,7 +36,8 @@ module.exports = function (grunt) {
           'https://github.com/EddyVerbruggen/SocialSharing-PhoneGap-Plugin',
           'https://github.com/Wizcorp/phonegap-plugin-gameCenter'
         ],
-        platforms: ['ios', 'android'],
+        //platforms: ['ios', 'android'],
+        platforms: ['ios'],
         verbose: false
       }
     },
