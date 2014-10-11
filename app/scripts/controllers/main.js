@@ -137,8 +137,6 @@ angular.module('zaninApp')
 			$scope.gestures = [
 				{g:'tap'},
 				{g:'doubleTap'}
-				//{g:'swipeLeft'},
-				//{g:'swipeRight'}
 			];
 
 			$scope.actions = [];
@@ -169,7 +167,6 @@ angular.module('zaninApp')
 			//animation end delay
 			$timeout(function () {
 				start();
-
 			}, 2000);
 
 			$scope.timeLeft = 5;
@@ -209,15 +206,6 @@ angular.module('zaninApp')
 				$scope.step++;
 				tutorialGoToStep($scope.step);
 			});
-
-			
-			/* Tutorial Step 2 */
-
-			/*
-			$scope.actions.push($scope.createRandomAction());
-			$scope.actions.push($scope.createRandomAction());
-			$scope.actions.push($scope.createRandomAction());
-			*/
 		};
 
 		var tutorialGoToStep = function(step){
@@ -329,9 +317,6 @@ angular.module('zaninApp')
 				default:
 					$scope.instructionText = 'Zanin!';
 			}
-			
-			
-			
 		};
 
 		$scope.getComboClass = function (){
@@ -400,8 +385,6 @@ angular.module('zaninApp')
 					
 				
 				
-				
-				
 			//}
 
 				if($scope.timeLeft <= 0){
@@ -431,49 +414,17 @@ angular.module('zaninApp')
 			}, 1000);
 		}
 
-	
-
-
-		/*$timeout(function() {
-			
-			$scope.colors = [
-				{color:'blue', side:'right'},
-				{color:'red', side:'right'},
-				{color:'green', side:'left'},
-				{color:'yellow', side:'left'}
-			];
-
-		}, 40000);*/
-
-
 		function changeRandomSide(){
 			$scope.colors.sort(function() { return 0.5 - Math.random(); });
 		}
 
-		
-		//FIXME cambiar a puntos
-		/*
-		$interval(function() {
-			
-			$scope.gestures = [
-				{g:'tap'},
-				{g:'doubleTap'},
-				{g:'swipeLeft'},
-				{g:'swipeRight'}
-			];
-
-		}, 20000);
-		*/
-
 		function includeGestures(){
-
 			$scope.gestures = [
 				{g:'tap'},
 				{g:'doubleTap'},
 				{g:'swipeLeft'},
 				{g:'swipeRight'}
 			];
-
 		}
 
 		//TODO : reset action at x interval
