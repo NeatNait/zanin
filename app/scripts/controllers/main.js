@@ -584,9 +584,14 @@ angular.module('zaninApp')
 			//console.log($scope.game);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			var category = 'com.neatnait.zanin.leaderboard';
       gameCenter.reportScore(category, $scope.game.points, null, null);
 
+=======
+			$scope.checkAchievements();
+			
+>>>>>>> FETCH_HEAD
 =======
 			$scope.checkAchievements();
 			
