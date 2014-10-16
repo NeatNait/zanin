@@ -246,6 +246,7 @@ angular.module('zaninApp')
 						$scope.gameInit();
 						$scope.timeLeft = 50;
 						$scope.step++;
+						localStorageService.add('tutorial',1);
 
 					}, 19000);
 
@@ -417,6 +418,21 @@ angular.module('zaninApp')
 			$scope.game.taps.misses.count++;
 		}
 
+		function userExp(){
+
+			var userLevel = localStorageService.get('userLevel');
+			if(userLevel === null){
+				/* This is an error, in this case exp is earned as a lvl 1 player */
+				userLevel = 1;
+			}
+
+			var exp = $scope.game.points * 0.4;
+			exp += $scope.game.highestCombo;
+			exp *= userLevel * 1.2;
+
+			return exp;
+		}
+
 		function gameEnd(){
 
 			updateComboHistory();
@@ -424,6 +440,7 @@ angular.module('zaninApp')
 			$scope.game.end = new Date();
 			$scope.game.timePlayed = $scope.game.end - $scope.game.start;
 			$scope.game.tapsPerSecond = $scope.game.taps.globalCount / ($scope.game.timePlayed / 1000);
+			$scope.game.userExpGained = userExp();
 
 			//let the game object be accesible for any controller
 			$rootScope.game = $scope.game;

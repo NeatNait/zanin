@@ -60,6 +60,54 @@ angular.module('zaninApp')
 
 		}
 
+		//TODO :Level functions should be in a game factory
+		function expToLevel(userLevel){
+			return Math.pow(userLevel, 1.5)/3 * 10000;
+		}
+
+
+		//TODO :Change for reverse level function when defined
+		function checkLevel(userLevel, userExp){
+
+			var lvl = userLevel;
+			var exp = expToLevel(lvl);
+
+			while(userExp > exp){
+				lvl = lvl + 1;
+				exp = expToLevel(lvl);
+			}
+
+			return lvl;
+		}
+
+
+		function checkPlayerLevel(){
+			var userLevel = localStorageService.get('userLevel');
+			if(userLevel === null){
+				/* This is an error*/
+				userLevel = 1;
+			}
+			var userExp = localStorageService.get('userExp');
+			if(userExp === null){
+				/* This is an error*/
+				userExp = 0;
+			}
+
+			userExp = parseInt(userExp);
+			userLevel = parseInt(userLevel);
+
+			$scope.oldLevel = userLevel;
+			$scope.newLevel = checkLevel(userLevel, userExp + $rootScope.game.userExpGained);
+			if(userLevel < $scope.newLevel){
+				localStorageService.add('userLevel',$scope.newLevel);
+			}
+
+			localStorageService.add('userExp', userExp + $rootScope.game.userExpGained);
+
+		}
+
+		checkPlayerLevel();
+
 		/*
 		var data = [],
 			taps = $rootScope.game.taps;
