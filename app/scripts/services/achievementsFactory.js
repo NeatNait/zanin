@@ -195,9 +195,94 @@ angular.module('zaninApp')
 
     }
 
+    /* Goals */
+
+    /* progress functions return a number between 0 and 1, showing the percentage of the goal. 
+      1 means that it is already fulfilled */
+    var allGoals = {
+      g1:{
+        g11: {
+          name: '20 red',
+          desc: 'Get 20 reds',
+          goal: 20,
+          progress: function(userGoals, game){
+            if(userGoals.red20 === null){
+              userGoals.red20 = game.taps.red.count;
+            } else if(userGoals.red20 >= 20){
+              return 1;
+            } else{
+              userGoals.red20 += game.taps.red.count;
+            }
+
+            if (userGoals.red20 >= 20){
+              return 1;
+            } else{
+              return userGoals.red20 / 20;
+            }
+          }
+        },
+        g12: {
+          name: '20 blue',
+          desc: 'Get 20 blues in just one game',
+          goal: 20,
+          progress: function(userGoals, game){
+            if(userGoals.blue20 !== null){
+              if(userGoals.blue20 >= 20){
+                return 1;
+              }
+            }
+
+            if(game.taps.blue.count >= 20){
+              userGoals.blue20 = game.taps.blue.count;
+            }
+
+            return userGoals.blue20 > 20 ? 1 : 0;
+          }
+        },
+        g13: {
+          name: '3 games',
+          desc: 'Play 3 games',
+          goal: 3,
+          progress: function(userGoals, game){
+            if(userGoals.games3 === null){
+              userGoals.games3 = 1;
+            } else if(userGoals.games3 >= 3){
+              return 1;
+            } else{
+              userGoals.games3 += 1;
+            }
+
+            if (userGoals.games3 >= 3){
+              return 1;
+            } else{
+              return userGoals.games3 / 3;
+            }
+          }
+        }
+
+        
+
+      },
+      g2:{
+
+      }
+
+    };
+
+    var getGoals = function(){
+
+      var userGoals = localStorageService.get('userGoals');
+      if(userGoals === null){
+        return allGoals.g1;
+      }
+      return 1;
+    };
+
+
     // Public API here
     return {
       check: check,
-      allAchivements: allAchivements
+      allAchivements: allAchivements,
+      getGoals: getGoals
     };
   });
