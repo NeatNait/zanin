@@ -43,8 +43,8 @@
         <div ng-repeat="action in actions" class="action" ng-class="{init:!loaded, yeah:step===11}">
           <div class="font-{{action.color}} mov mov-{{$index}}">
             <i ng-if="action.gesture == 'tap'" class="fa fa-circle-o"></i>
-            <i ng-if="action.gesture == 'doubleTap'" class="fa fa-circle-o"></i>
-            <i ng-if="action.gesture == 'doubleTap'" class="fa fa-circle-o"></i>
+            <!--i ng-if="action.gesture == 'doubleTap'" class="fa fa-circle-o"></i-->
+            <!--i ng-if="action.gesture == 'doubleTap'" class="fa fa-circle-o"></i-->
             <i ng-if="action.gesture == 'swipeLeft'" class="fa fa-long-arrow-left"></i>
             <i ng-if="action.gesture == 'swipeRight'" class="fa fa-long-arrow-right"></i>
           </div>

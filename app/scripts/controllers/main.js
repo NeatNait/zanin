@@ -75,6 +75,11 @@ angular.module('zaninApp')
 				{g:'doubleTap'}
 			];
 
+			$scope.gestures = [
+				{g:'tap'}
+			
+			];
+
 			$scope.actions = [];
 
 			//TODO : change to game object
@@ -93,6 +98,7 @@ angular.module('zaninApp')
 			$scope.energy = 0;
 			$scope.timeincrease = 1;
 			$scope.warnToChange = 0;
+			$scope.gameStarted = false;
 			pointsToChange = 300;
 			pointsInterval = 300;
 			warnInterval = 10;
@@ -111,7 +117,7 @@ angular.module('zaninApp')
 		$scope.gameInit = function(){
 
 			soundService.intro.fadeOut(0, 2000);
-			soundService.loop.fadeIn(1, 2000);
+			//soundService.loop.fadeIn(1, 2000);
 
 			$scope.colors = [
 				{color:'blue', side:'left'},
@@ -121,7 +127,8 @@ angular.module('zaninApp')
 			];
 
 			var color = $scope.colors[Math.floor($scope.colors.length*Math.random())].color;
-			var gesture = $scope.gestures[1].g;
+			//var gesture = $scope.gestures[1].g;
+			var gesture = $scope.gestures[0].g;
 			var action = new Action(gesture, color);
 			$scope.actions=[];
 			$scope.actions.push(action);
@@ -129,6 +136,11 @@ angular.module('zaninApp')
 			$scope.actions.push(createRandomAction());
 			$scope.actions.push(createRandomAction());
 			$scope.actions.push(createRandomAction());
+
+			$timeout(function () {
+				$scope.gameStarted = true;
+			}, 4000);
+
 		};
 
 		$scope.tutorialInit = function(){
@@ -339,7 +351,7 @@ angular.module('zaninApp')
 		function includeGestures(){
 			$scope.gestures = [
 				{g:'tap'},
-				{g:'doubleTap'},
+		//		{g:'doubleTap'},
 				{g:'swipeLeft'},
 				{g:'swipeRight'}
 			];
@@ -371,6 +383,7 @@ angular.module('zaninApp')
 			}
 
 			//Fixes tap-doubletap error
+			/*
 			if($scope.actions[$scope.actions.length-1].color === actualColor &&
 				($scope.actions[$scope.actions.length-1].gesture === 'tap' || $scope.actions[$scope.actions.length-1].gesture === 'doubleTap')){
 				if(actualGesture === 'tap' || actualGesture === 'doubleTap'){
@@ -379,6 +392,7 @@ angular.module('zaninApp')
 					}
 				}
 			}
+			*/
 
 			return new Action(actualGesture, actualColor);
 		}
@@ -483,22 +497,29 @@ angular.module('zaninApp')
 		}
 
 
-		var prevEvent,
-				checkDouble = 0;
+		var prevEvent;
+		//var checkDouble = 0;
 
 		//TODO : break into multiple functions again
 		$scope.checkGesture = function($event, c, g){
+
+			if($scope.gameStarted === false){
+				return;
+			}
 
 			//FIXME : detect animation end
 			$scope.loaded = true;
 
 			//fixes Tap-doubletap with just two taps error
+			/*
 			if(g === 'doubleTap' &&
 				lastPileGesture === 'tap' &&
 				$scope.actions[0].gesture === 'doubleTap') {
 				g = 'tap';
 			}
 
+			
+			console.log(g);
 			lastPileGesture = $scope.actions[0].gesture;
 			
 			if(g === 'tap' && $scope.actions[0].gesture === 'doubleTap'){
@@ -519,7 +540,9 @@ angular.module('zaninApp')
 			}
 
 			checkDouble = 0;
+			*/
 
+			console.log(g);
 			if($scope.actions[0].gesture === g){
 				checkColor(c,g);
 			}
