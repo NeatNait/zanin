@@ -10,10 +10,10 @@
       <!--div ng-repeat="color in colors | filter: isOdd" hm-doubletap="checkGesture($event, color.color, 'doubleTap');" hm-tap="checkGesture($event, color.color, 'tap');" ng-swipe-right="checkGesture($event, color.color, 'swipeRight');" ng-swipe-left="checkGesture($event, color.color, 'swipeLeft');" class="col-xs-12 color left {{color.color}}" ng-class="{push: colorOk == color.color}"
       hm-options="{drag: false, transform: false, tap_always:false}"
       >+{{energy}}</div-->
-      <div hm-doubletap="checkGesture($event, colors[0].color, 'doubleTap');" hm-tap="checkGesture($event, colors[0].color, 'tap');" ng-swipe-right="checkGesture($event, colors[0].color, 'swipeRight');" ng-swipe-left="checkGesture($event, colors[0].color, 'swipeLeft');" class="col-xs-12 color left {{colors[0].color}}" ng-class="{push: colorOk == colors[0].color, dimmed:colors[0].dimmed}"
+      <div ng-click="checkGesture($event, colors[0].color, 'tap');" ng-swipe-right="checkGesture($event, colors[0].color, 'swipeRight');" ng-swipe-left="checkGesture($event, colors[0].color, 'swipeLeft');" class="col-xs-12 color left {{colors[0].color}}" ng-class="{push: colorOk == colors[0].color, dimmed:colors[0].dimmed}"
       hm-options="{drag: false, transform: false, tap_always:false}"
       >+{{energy}}</div>
-      <div hm-doubletap="checkGesture($event, colors[1].color, 'doubleTap');" hm-tap="checkGesture($event, colors[1].color, 'tap');" ng-swipe-right="checkGesture($event, colors[1].color, 'swipeRight');" ng-swipe-left="checkGesture($event, colors[1].color, 'swipeLeft');" class="col-xs-12 color left {{colors[1].color}}" ng-class="{push: colorOk == colors[1].color, dimmed:colors[1].dimmed}"
+      <div ng-click="checkGesture($event, colors[1].color, 'tap');" ng-swipe-right="checkGesture($event, colors[1].color, 'swipeRight');" ng-swipe-left="checkGesture($event, colors[1].color, 'swipeLeft');" class="col-xs-12 color left {{colors[1].color}}" ng-class="{push: colorOk == colors[1].color, dimmed:colors[1].dimmed}"
       hm-options="{drag: false, transform: false, tap_always:false}"
       >+{{energy}}</div>
 
@@ -62,13 +62,13 @@
 
     <div class="col-xs-5 full-height colors right">
 
-      <!--div ng-repeat="color in colors | filter: isEven" hm-tap="checkGesture($event, color.color, 'tap');"  hm-doubletap="checkGesture($event, color.color, 'doubleTap');" ng-swipe-right="checkGesture($event, color.color, 'swipeRight');" ng-swipe-left="checkGesture($event, color.color, 'swipeLeft');" class="col-xs-12 color right {{color.color}}" ng-class="{push: colorOk == color.color}"
+      <!--div ng-repeat="color in colors | filter: isEven" ng-touch="checkGesture($event, color.color, 'tap');"  hm-doubletap="checkGesture($event, color.color, 'doubleTap');" ng-swipe-right="checkGesture($event, color.color, 'swipeRight');" ng-swipe-left="checkGesture($event, color.color, 'swipeLeft');" class="col-xs-12 color right {{color.color}}" ng-class="{push: colorOk == color.color}"
       hm-options="{drag: false, transform: false, tap_always:false}"
       >+{{energy}}</div-->
-      <div hm-doubletap="checkGesture($event, colors[2].color, 'doubleTap');" hm-tap="checkGesture($event, colors[2].color, 'tap');" ng-swipe-right="checkGesture($event, colors[2].color, 'swipeRight');" ng-swipe-left="checkGesture($event, colors[2].color, 'swipeLeft');" class="col-xs-12 color left {{colors[2].color}}" ng-class="{push: colorOk == colors[2].color, dimmed:colors[2].dimmed}"
+      <div ng-click="checkGesture($event, colors[2].color, 'tap');" ng-swipe-right="checkGesture($event, colors[2].color, 'swipeRight');" ng-swipe-left="checkGesture($event, colors[2].color, 'swipeLeft');" class="col-xs-12 color left {{colors[2].color}}" ng-class="{push: colorOk == colors[2].color, dimmed:colors[2].dimmed}"
       hm-options="{drag: false, transform: false, tap_always:false}"
       >+{{energy}}</div>
-      <div hm-doubletap="checkGesture($event, colors[3].color, 'doubleTap');" hm-tap="checkGesture($event, colors[3].color, 'tap');" ng-swipe-right="checkGesture($event, colors[3].color, 'swipeRight');" ng-swipe-left="checkGesture($event, colors[3].color, 'swipeLeft');" class="col-xs-12 color left {{colors[3].color}}" ng-class="{push: colorOk == colors[3].color, dimmed:colors[3].dimmed}"
+      <div ng-click="checkGesture($event, colors[3].color, 'tap');" ng-swipe-right="checkGesture($event, colors[3].color, 'swipeRight');" ng-swipe-left="checkGesture($event, colors[3].color, 'swipeLeft');" class="col-xs-12 color left {{colors[3].color}}" ng-class="{push: colorOk == colors[3].color, dimmed:colors[3].dimmed}"
       hm-options="{drag: false, transform: false, tap_always:false}"
       >+{{energy}}</div>
 
